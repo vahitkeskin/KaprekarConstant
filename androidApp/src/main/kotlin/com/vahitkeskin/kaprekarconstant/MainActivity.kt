@@ -1,6 +1,7 @@
 package com.vahitkeskin.kaprekarconstant
 
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
@@ -13,6 +14,11 @@ import androidx.core.view.WindowCompat
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
+        
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            window.isNavigationBarContrastEnforced = false
+        }
+        
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.auto(
                 Color.TRANSPARENT,
@@ -23,6 +29,7 @@ class MainActivity : ComponentActivity() {
                 Color.TRANSPARENT
             )
         )
+        
         super.onCreate(savedInstanceState)
 
         setContent {

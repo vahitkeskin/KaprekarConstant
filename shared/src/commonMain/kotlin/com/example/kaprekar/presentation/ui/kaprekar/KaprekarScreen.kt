@@ -235,9 +235,11 @@ fun KaprekarContent(
                     state = listState,
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(innerPadding)
                         .padding(horizontal = 16.dp),
-                    contentPadding = PaddingValues(top = 8.dp, bottom = 48.dp),
+                    contentPadding = PaddingValues(
+                        top = innerPadding.calculateTopPadding() + 8.dp,
+                        bottom = innerPadding.calculateBottomPadding() + 48.dp
+                    ),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
