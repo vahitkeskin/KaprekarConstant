@@ -30,6 +30,7 @@ import com.example.kaprekar.domain.model.ThemeMode
 import com.example.kaprekar.presentation.KaprekarUiIntent
 import com.example.kaprekar.presentation.KaprekarUiState
 import com.example.kaprekar.presentation.KaprekarViewModel
+import kotlinx.coroutines.delay
 
 val BrandPink = Color(0xFFFF2E93)
 val BrandCyan = Color(0xFF00F0FF)
@@ -54,13 +55,17 @@ fun KaprekarContent(
     val listState = rememberLazyListState()
     val strings = state.strings
 
+    // Yavaş animasyonlu adım kaydırma: Yeni adım açıldığında Compose'un çizmesini bekleyip ortalar
     LaunchedEffect(state.visibleStepCount) {
         if (state.visibleStepCount > 0) {
+            delay(120) // Yeni kartın Compose tarafından ölçülüp yerleşmesini bekler
             val targetIndex = 2 + state.visibleStepCount
-            listState.animateScrollToItem(
-                index = targetIndex,
-                scrollOffset = -120
-            )
+            if (targetIndex < listState.layoutInfo.totalItemsCount) {
+                listState.animateScrollToItem(
+                    index = targetIndex,
+                    scrollOffset = -100
+                )
+            }
         }
     }
 
@@ -99,7 +104,7 @@ fun KaprekarContent(
             Scaffold(
                 containerColor = Color.Transparent,
                 topBar = {
-                    // Ekran ortasında tam hizalanmış kibar ve yüksek kontrastlı TopBar
+                    // Ekran ortasında tam hizalanmış kibar ve her modda belirgin TopBar
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -111,7 +116,7 @@ fun KaprekarContent(
                         // Sol Taraf: Kibar 6174 Logosu Rozeti
                         Surface(
                             onClick = { onIntent(KaprekarUiIntent.OnToggleInfoDialog(true)) },
-                            shape = RoundedCornerShape(10.dp),
+                            shape = RoundedCornerShape(12.dp),
                             color = BrandPink.copy(alpha = 0.15f),
                             border = BorderStroke(
                                 width = 1.dp,
@@ -129,18 +134,28 @@ fun KaprekarContent(
                             )
                         }
 
-                        // Tam Ekran Ortası: Yüksek Kontrastlı Belirgin Başlık
-                        Text(
-                            text = strings.appTitle,
-                            style = MaterialTheme.typography.titleMedium.copy(
-                                color = MaterialTheme.colorScheme.onSurface,
-                                fontWeight = FontWeight.Black,
-                                letterSpacing = 0.4.sp
+                        // Tam Ekran Ortası: Yüksek Kontrastlı Kapsül İçinde Belirgin Başlık
+                        Surface(
+                            shape = RoundedCornerShape(20.dp),
+                            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.85f),
+                            border = BorderStroke(
+                                width = 1.dp,
+                                color = BrandPink.copy(alpha = 0.35f)
                             ),
-                            textAlign = TextAlign.Center,
-                            maxLines = 1,
                             modifier = Modifier.align(Alignment.Center)
-                        )
+                        ) {
+                            Text(
+                                text = strings.appTitle,
+                                modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                                style = MaterialTheme.typography.titleMedium.copy(
+                                    color = MaterialTheme.colorScheme.onSurface,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    letterSpacing = 0.3.sp
+                                ),
+                                textAlign = TextAlign.Center,
+                                maxLines = 1
+                            )
+                        }
 
                         // Sağ Taraf: Kibar Yuvarlak Dil ve Tema Butonları
                         Row(

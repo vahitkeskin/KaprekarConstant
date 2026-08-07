@@ -76,13 +76,12 @@ class KaprekarViewModel(
         val digitsOnly = rawInput.filter { it.isDigit() }.take(4)
         val strings = _uiState.value.strings
         
+        // Sadece 4 rakam tamamlandığında hata kontrolü yap (yazma esnasında yanlışlıkla kırmızı hata gösterilmez)
         val validationMsg = if (digitsOnly.length == 4) {
             when (calculateKaprekarUseCase.validateInput(digitsOnly)) {
                 is ValidationResult.Error -> strings.validationDistinctDigits
                 is ValidationResult.Success -> null
             }
-        } else if (digitsOnly.isNotEmpty()) {
-            strings.validationProgressHint
         } else {
             null
         }
@@ -133,7 +132,7 @@ class KaprekarViewModel(
             )
         }
 
-        // Animate sequential step reveal with slow delay (1000ms per step)
+        // Adım adım yavaş animasyonla gösterim (1000ms gecikme ile)
         animationJob = viewModelScope.launch {
             for (i in 1..computedSteps.size) {
                 delay(1000)
