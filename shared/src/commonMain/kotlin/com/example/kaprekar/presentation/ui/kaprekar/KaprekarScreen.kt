@@ -30,6 +30,9 @@ import com.example.kaprekar.presentation.KaprekarUiIntent
 import com.example.kaprekar.presentation.KaprekarUiState
 import com.example.kaprekar.presentation.KaprekarViewModel
 
+val BrandPink = Color(0xFFFF2E93)
+val BrandCyan = Color(0xFF00F0FF)
+
 @Composable
 fun KaprekarScreen(
     viewModel: KaprekarViewModel
@@ -61,11 +64,11 @@ fun KaprekarContent(
         }
     }
 
-    // Statusbar'ı da kapsayan geçişli şık arkaplan gradyanı
+    // Statusbar ve TopBar geçişini sağlayan BrandPink & BrandCyan renkli dinamik gradyan
     val backgroundGradient = Brush.verticalGradient(
         colors = listOf(
-            MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f),
-            MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.25f),
+            BrandPink.copy(alpha = 0.28f),
+            BrandCyan.copy(alpha = 0.18f),
             MaterialTheme.colorScheme.surface
         )
     )
@@ -86,10 +89,10 @@ fun KaprekarContent(
                         ) {
                             Surface(
                                 shape = CircleShape,
-                                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
+                                color = BrandPink.copy(alpha = 0.15f),
                                 border = BorderStroke(
                                     width = 1.dp,
-                                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)
+                                    color = BrandPink.copy(alpha = 0.4f)
                                 ),
                                 modifier = Modifier.size(34.dp)
                             ) {
@@ -99,7 +102,7 @@ fun KaprekarContent(
                                         fontFamily = FontFamily.Monospace,
                                         fontSize = 11.sp,
                                         fontWeight = FontWeight.ExtraBold,
-                                        color = MaterialTheme.colorScheme.primary
+                                        color = BrandPink
                                     )
                                 }
                             }
@@ -119,14 +122,14 @@ fun KaprekarContent(
                             horizontalArrangement = Arrangement.spacedBy(6.dp),
                             modifier = Modifier.padding(end = 12.dp)
                         ) {
-                            // Yuvarlak Kibar Dil Butonu
+                            // Yuvarlak Dil Butonu
                             Surface(
                                 onClick = { onIntent(KaprekarUiIntent.OnToggleLanguageDialog(true)) },
                                 shape = CircleShape,
-                                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.7f),
+                                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.75f),
                                 border = BorderStroke(
                                     width = 1.dp,
-                                    color = MaterialTheme.colorScheme.outline.copy(alpha = 0.25f)
+                                    color = BrandCyan.copy(alpha = 0.5f)
                                 ),
                                 modifier = Modifier.size(36.dp)
                             ) {
@@ -138,19 +141,19 @@ fun KaprekarContent(
                                 }
                             }
 
-                            // Yuvarlak Kibar Tema Butonu
+                            // Yuvarlak Tema Butonu
                             Surface(
                                 onClick = { onIntent(KaprekarUiIntent.OnToggleThemeMode) },
                                 shape = CircleShape,
                                 color = when (state.themeMode) {
-                                    ThemeMode.SYSTEM -> MaterialTheme.colorScheme.surface.copy(alpha = 0.7f)
+                                    ThemeMode.SYSTEM -> MaterialTheme.colorScheme.surface.copy(alpha = 0.75f)
                                     ThemeMode.LIGHT -> Color(0xFFFFF3E0).copy(alpha = 0.9f)
                                     ThemeMode.DARK -> Color(0xFF263238).copy(alpha = 0.9f)
                                 },
                                 border = BorderStroke(
                                     width = 1.dp,
                                     color = when (state.themeMode) {
-                                        ThemeMode.SYSTEM -> MaterialTheme.colorScheme.outline.copy(alpha = 0.25f)
+                                        ThemeMode.SYSTEM -> BrandPink.copy(alpha = 0.4f)
                                         ThemeMode.LIGHT -> Color(0xFFFFB74D).copy(alpha = 0.6f)
                                         ThemeMode.DARK -> Color(0xFF90CAF9).copy(alpha = 0.6f)
                                     }
@@ -161,7 +164,7 @@ fun KaprekarContent(
                                     val (icon, tint, desc) = when (state.themeMode) {
                                         ThemeMode.SYSTEM -> Triple(
                                             Icons.Default.SettingsBrightness,
-                                            MaterialTheme.colorScheme.onSurfaceVariant,
+                                            BrandPink,
                                             strings.systemTheme
                                         )
                                         ThemeMode.LIGHT -> Triple(

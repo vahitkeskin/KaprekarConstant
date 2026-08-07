@@ -7,6 +7,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.kaprekar.di.initKoin
 import com.example.kaprekar.domain.model.ThemeMode
@@ -14,6 +15,31 @@ import com.example.kaprekar.presentation.KaprekarViewModel
 import com.example.kaprekar.presentation.ui.kaprekar.KaprekarScreen
 import org.koin.compose.KoinContext
 import org.koin.compose.viewmodel.koinViewModel
+
+val BrandPink = Color(0xFFFF2E93)
+val BrandCyan = Color(0xFF00F0FF)
+
+private val LightColorScheme = lightColorScheme(
+    primary = BrandPink,
+    onPrimary = Color.White,
+    primaryContainer = Color(0xFFFFE4F0),
+    onPrimaryContainer = Color(0xFF8B0047),
+    secondary = BrandCyan,
+    onSecondary = Color(0xFF00363D),
+    secondaryContainer = Color(0xFFE0FAFF),
+    onSecondaryContainer = Color(0xFF004F59)
+)
+
+private val DarkColorScheme = darkColorScheme(
+    primary = BrandPink,
+    onPrimary = Color.White,
+    primaryContainer = Color(0xFF5C0030),
+    onPrimaryContainer = Color(0xFFFFD9E7),
+    secondary = BrandCyan,
+    onSecondary = Color(0xFF00363D),
+    secondaryContainer = Color(0xFF004F5A),
+    onSecondaryContainer = Color(0xFFC4F6FF)
+)
 
 @Composable
 @Preview
@@ -37,7 +63,7 @@ fun KaprekarAppContent(
         ThemeMode.DARK -> true
     }
 
-    val colorScheme = if (useDarkTheme) darkColorScheme() else lightColorScheme()
+    val colorScheme = if (useDarkTheme) DarkColorScheme else LightColorScheme
 
     MaterialTheme(colorScheme = colorScheme) {
         KaprekarScreen(viewModel = viewModel)
