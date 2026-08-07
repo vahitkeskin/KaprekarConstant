@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -60,132 +61,144 @@ fun KaprekarContent(
         }
     }
 
-    Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        Surface(
-                            shape = CircleShape,
-                            color = MaterialTheme.colorScheme.primaryContainer,
-                            modifier = Modifier.size(38.dp)
-                        ) {
-                            Box(contentAlignment = Alignment.Center) {
-                                Text(
-                                    text = "6174",
-                                    fontSize = 12.sp,
-                                    fontWeight = FontWeight.Black,
-                                    color = MaterialTheme.colorScheme.onPrimaryContainer
-                                )
-                            }
-                        }
-                        Spacer(modifier = Modifier.width(10.dp))
-                        Text(
-                            text = strings.appTitle,
-                            style = MaterialTheme.typography.titleLarge.copy(
-                                fontWeight = FontWeight.Bold
-                            )
-                        )
-                    }
-                },
-                actions = {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        modifier = Modifier.padding(end = 12.dp)
-                    ) {
-                        Surface(
-                            onClick = { onIntent(KaprekarUiIntent.OnToggleLanguageDialog(true)) },
-                            shape = CircleShape,
-                            color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.8f),
-                            border = BorderStroke(
-                                width = 1.dp,
-                                color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
-                            ),
-                            modifier = Modifier.size(40.dp)
-                        ) {
-                            Box(contentAlignment = Alignment.Center) {
-                                Text(
-                                    text = state.appLanguage.flagEmoji,
-                                    fontSize = 18.sp
-                                )
-                            }
-                        }
+    // Statusbar'ı da kapsayan geçişli şık arkaplan gradyanı
+    val backgroundGradient = Brush.verticalGradient(
+        colors = listOf(
+            MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f),
+            MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.25f),
+            MaterialTheme.colorScheme.surface
+        )
+    )
 
-                        Surface(
-                            onClick = { onIntent(KaprekarUiIntent.OnToggleThemeMode) },
-                            shape = CircleShape,
-                            color = when (state.themeMode) {
-                                ThemeMode.SYSTEM -> MaterialTheme.colorScheme.surfaceVariant
-                                ThemeMode.LIGHT -> Color(0xFFFFF3E0)
-                                ThemeMode.DARK -> Color(0xFF263238)
-                            },
-                            border = BorderStroke(
-                                width = 1.5.dp,
-                                color = when (state.themeMode) {
-                                    ThemeMode.SYSTEM -> MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)
-                                    ThemeMode.LIGHT -> Color(0xFFFFB74D)
-                                    ThemeMode.DARK -> Color(0xFF90CAF9)
-                                }
-                            ),
-                            modifier = Modifier.size(40.dp)
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(backgroundGradient)
+    ) {
+        Scaffold(
+            containerColor = Color.Transparent,
+            topBar = {
+                CenterAlignedTopAppBar(
+                    title = {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
                         ) {
-                            Box(contentAlignment = Alignment.Center) {
-                                val (icon, tint, desc) = when (state.themeMode) {
-                                    ThemeMode.SYSTEM -> Triple(
-                                        Icons.Default.SettingsBrightness,
-                                        MaterialTheme.colorScheme.onSurfaceVariant,
-                                        strings.systemTheme
-                                    )
-                                    ThemeMode.LIGHT -> Triple(
-                                        Icons.Default.LightMode,
-                                        Color(0xFFF57C00),
-                                        strings.lightTheme
-                                    )
-                                    ThemeMode.DARK -> Triple(
-                                        Icons.Default.DarkMode,
-                                        Color(0xFF90CAF9),
-                                        strings.darkTheme
+                            Surface(
+                                shape = CircleShape,
+                                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
+                                border = BorderStroke(
+                                    width = 1.dp,
+                                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)
+                                ),
+                                modifier = Modifier.size(34.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Text(
+                                        text = "6174",
+                                        fontFamily = FontFamily.Monospace,
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.ExtraBold,
+                                        color = MaterialTheme.colorScheme.primary
                                     )
                                 }
-                                Icon(
-                                    imageVector = icon,
-                                    contentDescription = desc,
-                                    tint = tint,
-                                    modifier = Modifier.size(20.dp)
+                            }
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = strings.appTitle,
+                                style = MaterialTheme.typography.titleMedium.copy(
+                                    fontWeight = FontWeight.Bold,
+                                    letterSpacing = 0.4.sp
                                 )
+                            )
+                        }
+                    },
+                    actions = {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            modifier = Modifier.padding(end = 12.dp)
+                        ) {
+                            // Yuvarlak Kibar Dil Butonu
+                            Surface(
+                                onClick = { onIntent(KaprekarUiIntent.OnToggleLanguageDialog(true)) },
+                                shape = CircleShape,
+                                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.7f),
+                                border = BorderStroke(
+                                    width = 1.dp,
+                                    color = MaterialTheme.colorScheme.outline.copy(alpha = 0.25f)
+                                ),
+                                modifier = Modifier.size(36.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Text(
+                                        text = state.appLanguage.flagEmoji,
+                                        fontSize = 16.sp
+                                    )
+                                }
+                            }
+
+                            // Yuvarlak Kibar Tema Butonu
+                            Surface(
+                                onClick = { onIntent(KaprekarUiIntent.OnToggleThemeMode) },
+                                shape = CircleShape,
+                                color = when (state.themeMode) {
+                                    ThemeMode.SYSTEM -> MaterialTheme.colorScheme.surface.copy(alpha = 0.7f)
+                                    ThemeMode.LIGHT -> Color(0xFFFFF3E0).copy(alpha = 0.9f)
+                                    ThemeMode.DARK -> Color(0xFF263238).copy(alpha = 0.9f)
+                                },
+                                border = BorderStroke(
+                                    width = 1.dp,
+                                    color = when (state.themeMode) {
+                                        ThemeMode.SYSTEM -> MaterialTheme.colorScheme.outline.copy(alpha = 0.25f)
+                                        ThemeMode.LIGHT -> Color(0xFFFFB74D).copy(alpha = 0.6f)
+                                        ThemeMode.DARK -> Color(0xFF90CAF9).copy(alpha = 0.6f)
+                                    }
+                                ),
+                                modifier = Modifier.size(36.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    val (icon, tint, desc) = when (state.themeMode) {
+                                        ThemeMode.SYSTEM -> Triple(
+                                            Icons.Default.SettingsBrightness,
+                                            MaterialTheme.colorScheme.onSurfaceVariant,
+                                            strings.systemTheme
+                                        )
+                                        ThemeMode.LIGHT -> Triple(
+                                            Icons.Default.LightMode,
+                                            Color(0xFFF57C00),
+                                            strings.lightTheme
+                                        )
+                                        ThemeMode.DARK -> Triple(
+                                            Icons.Default.DarkMode,
+                                            Color(0xFF90CAF9),
+                                            strings.darkTheme
+                                        )
+                                    }
+                                    Icon(
+                                        imageVector = icon,
+                                        contentDescription = desc,
+                                        tint = tint,
+                                        modifier = Modifier.size(18.dp)
+                                    )
+                                }
                             }
                         }
-                    }
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface
-                )
-            )
-        }
-    ) { innerPadding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .background(
-                    Brush.verticalGradient(
-                        colors = listOf(
-                            MaterialTheme.colorScheme.surface,
-                            MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)
-                        )
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = Color.Transparent,
+                        scrolledContainerColor = Color.Transparent
                     )
                 )
-        ) {
+            }
+        ) { innerPadding ->
             LazyColumn(
                 state = listState,
                 modifier = Modifier
                     .fillMaxSize()
+                    .padding(innerPadding)
                     .padding(horizontal = 16.dp),
-                contentPadding = PaddingValues(top = 12.dp, bottom = 48.dp),
+                contentPadding = PaddingValues(top = 8.dp, bottom = 48.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
