@@ -1,0 +1,25 @@
+package com.example.kaprekar.domain.model
+
+enum class MathScreen {
+    HOME,
+    KAPREKAR,
+    FIBONACCI,
+    SUPER_NUMBER,
+    GOLDEN_RATIO,
+    COLLATZ,
+    PRIME,
+    PASCAL,
+    PI,
+    EULER,
+    EUCLID_GCD,
+    TRIGONOMETRY,
+    QUADRATIC,
+    MODULAR,
+    STATISTICS,
+    FRACTAL,
+    PHYLLOTAXIS,
+    TRANSFORMATION,
+    FOURIER,
+    CHAOS_GAME,
+    NIM_GAME
+}

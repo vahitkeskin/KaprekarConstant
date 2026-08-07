@@ -2,6 +2,7 @@ package com.example.kaprekar.presentation
 
 import com.example.kaprekar.domain.model.AppLanguage
 import com.example.kaprekar.domain.model.KaprekarStep
+import com.example.kaprekar.domain.model.MathScreen
 import com.example.kaprekar.domain.model.ThemeMode
 import com.example.kaprekar.presentation.i18n.AppStrings
 import com.example.kaprekar.presentation.i18n.StringsProvider
@@ -10,6 +11,8 @@ import com.example.kaprekar.presentation.i18n.StringsProvider
  * UI State for Kaprekar Screen following UDF / MVI pattern.
  */
 data class KaprekarUiState(
+    val screenStack: List<MathScreen> = listOf(MathScreen.HOME),
+    val isNavigatingBack: Boolean = false,
     val inputNumber: String = "",
     val validationError: String? = null,
     val steps: List<KaprekarStep> = emptyList(),
@@ -23,6 +26,12 @@ data class KaprekarUiState(
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
     val appLanguage: AppLanguage = AppLanguage.getSystemDefault()
 ) {
+    val currentScreen: MathScreen
+        get() = screenStack.lastOrNull() ?: MathScreen.HOME
+
+    val canNavigateBack: Boolean
+        get() = screenStack.size > 1
+
     val strings: AppStrings
         get() = StringsProvider.getStrings(appLanguage)
 
@@ -34,6 +43,8 @@ data class KaprekarUiState(
  * UI Intents / User Actions.
  */
 sealed interface KaprekarUiIntent {
+    data class OnNavigateToScreen(val screen: MathScreen) : KaprekarUiIntent
+    data object OnNavigateBack : KaprekarUiIntent
     data class OnInputChanged(val newInput: String) : KaprekarUiIntent
     data object OnCalculateClicked : KaprekarUiIntent
     data class OnPresetSelected(val preset: String) : KaprekarUiIntent

@@ -17,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.kaprekar.presentation.KaprekarUiIntent
 import com.example.kaprekar.presentation.KaprekarUiState
 
@@ -173,5 +174,17 @@ fun InputSectionCard(
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun InputSectionCardPreview() {
+    MaterialTheme {
+        InputSectionCard(
+            state = KaprekarUiState(inputNumber = "6825"),
+            onIntent = {},
+            onCalculate = {}
+        )
     }
 }

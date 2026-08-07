@@ -12,6 +12,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
+import androidx.compose.ui.tooling.preview.Preview
+
 @Composable
 fun DigitBadge(label: String, value: String) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -29,5 +31,13 @@ fun DigitBadge(label: String, value: String) {
                 fontWeight = FontWeight.Bold
             )
         )
+    }
+}
+
+@Preview
+@Composable
+fun DigitBadgePreview() {
+    MaterialTheme {
+        DigitBadge(label = "Büyükten Küçüğe", value = "5432")
     }
 }

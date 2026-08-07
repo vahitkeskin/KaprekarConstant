@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.kaprekar.domain.model.AppLanguage
 import com.example.kaprekar.presentation.KaprekarUiState
 
@@ -80,4 +81,16 @@ fun LanguageSelectionDialog(
             }
         }
     )
+}
+
+@Preview
+@Composable
+fun LanguageSelectionDialogPreview() {
+    MaterialTheme {
+        LanguageSelectionDialog(
+            state = KaprekarUiState(),
+            onSelect = {},
+            onDismiss = {}
+        )
+    }
 }

@@ -3,6 +3,7 @@ package com.example.kaprekar.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kaprekar.domain.model.AppLanguage
+import com.example.kaprekar.domain.model.MathScreen
 import com.example.kaprekar.domain.repository.ThemeRepository
 import com.example.kaprekar.domain.usecase.CalculateKaprekarUseCase
 import com.example.kaprekar.domain.usecase.ValidationResult
@@ -43,6 +44,8 @@ class KaprekarViewModel(
 
     fun onIntent(intent: KaprekarUiIntent) {
         when (intent) {
+            is KaprekarUiIntent.OnNavigateToScreen -> navigateToScreen(intent.screen)
+            is KaprekarUiIntent.OnNavigateBack -> navigateBack()
             is KaprekarUiIntent.OnInputChanged -> handleInputChanged(intent.newInput)
             is KaprekarUiIntent.OnCalculateClicked -> calculateSteps()
             is KaprekarUiIntent.OnPresetSelected -> handlePresetSelected(intent.preset)
@@ -51,6 +54,29 @@ class KaprekarViewModel(
             is KaprekarUiIntent.OnToggleLanguageDialog -> handleToggleLanguageDialog(intent.show)
             is KaprekarUiIntent.OnToggleThemeMode -> toggleThemeMode()
             is KaprekarUiIntent.OnSelectLanguage -> selectLanguage(intent.language)
+        }
+    }
+
+    private fun navigateToScreen(screen: MathScreen) {
+        if (screen == _uiState.value.currentScreen) return
+        _uiState.update { currentState ->
+            currentState.copy(
+                screenStack = currentState.screenStack + screen,
+                isNavigatingBack = false
+            )
+        }
+    }
+
+    private fun navigateBack() {
+        _uiState.update { currentState ->
+            if (currentState.screenStack.size > 1) {
+                currentState.copy(
+                    screenStack = currentState.screenStack.dropLast(1),
+                    isNavigatingBack = true
+                )
+            } else {
+                currentState
+            }
         }
     }
 

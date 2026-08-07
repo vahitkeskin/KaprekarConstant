@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.kaprekar.domain.model.KaprekarStep
 import com.example.kaprekar.presentation.KaprekarUiState
 
@@ -143,5 +144,29 @@ fun AnimatedStepCard(
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun AnimatedStepCardPreview() {
+    val sampleStep = KaprekarStep(
+        stepNumber = 1,
+        inputNumber = "3524",
+        descending = "5432",
+        ascending = "2345",
+        descendingValue = 5432,
+        ascendingValue = 2345,
+        resultValue = 3087,
+        resultString = "3087",
+        formula = "5432 - 2345 = 3087",
+        isKaprekarConstant = false
+    )
+    MaterialTheme {
+        AnimatedStepCard(
+            state = KaprekarUiState(),
+            step = sampleStep,
+            isLastStep = false
+        )
     }
 }

@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.kaprekar.presentation.KaprekarUiState
 
 @Composable
@@ -54,5 +55,16 @@ fun SuccessBannerCard(state: KaprekarUiState, totalSteps: Int) {
                 textAlign = TextAlign.Center
             )
         }
+    }
+}
+
+@Preview
+@Composable
+fun SuccessBannerCardPreview() {
+    MaterialTheme {
+        SuccessBannerCard(
+            state = KaprekarUiState(),
+            totalSteps = 3
+        )
     }
 }
