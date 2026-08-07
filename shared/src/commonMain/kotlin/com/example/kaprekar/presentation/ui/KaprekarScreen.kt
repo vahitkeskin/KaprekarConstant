@@ -2,10 +2,13 @@ package com.example.kaprekar.presentation.ui
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
@@ -30,15 +33,16 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.kaprekar.domain.model.AppLanguage
 import com.example.kaprekar.domain.model.KaprekarStep
+import com.example.kaprekar.domain.model.ThemeMode
 import com.example.kaprekar.presentation.KaprekarUiIntent
 import com.example.kaprekar.presentation.KaprekarUiState
 import com.example.kaprekar.presentation.KaprekarViewModel
-import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun KaprekarScreen(
-    viewModel: KaprekarViewModel = koinViewModel()
+    viewModel: KaprekarViewModel
 ) {
     val state by viewModel.uiState.collectAsState()
     KaprekarContent(
@@ -55,11 +59,11 @@ fun KaprekarContent(
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val listState = rememberLazyListState()
+    val strings = state.strings
 
     // Animasyonlu Yavaş Ortalamam: Yeni her adım açıldığında aktif adımı ekran ortasına kaydırır
     LaunchedEffect(state.visibleStepCount) {
         if (state.visibleStepCount > 0) {
-            // Index 0: Header Banner, Index 1: Input Card, Index 2: Step Section Header, Index 2+N: Step N
             val targetIndex = 2 + state.visibleStepCount
             listState.animateScrollToItem(
                 index = targetIndex,
@@ -92,7 +96,7 @@ fun KaprekarContent(
                         }
                         Spacer(modifier = Modifier.width(10.dp))
                         Text(
-                            text = "Kaprekar Sabiti",
+                            text = strings.appTitle,
                             style = MaterialTheme.typography.titleLarge.copy(
                                 fontWeight = FontWeight.Bold
                             )
@@ -100,11 +104,79 @@ fun KaprekarContent(
                     }
                 },
                 actions = {
-                    IconButton(onClick = { onIntent(KaprekarUiIntent.OnToggleInfoDialog(true)) }) {
-                        Icon(
-                            imageVector = Icons.Outlined.Info,
-                            contentDescription = "Kaprekar Sabiti Hakkında"
-                        )
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = Modifier.padding(end = 12.dp)
+                    ) {
+                        // Yuvarlak Dil Seçim Butonu (Sadece Bayrak Gösterir, DataStore ile Kaydedilir)
+                        Surface(
+                            onClick = { onIntent(KaprekarUiIntent.OnToggleLanguageDialog(true)) },
+                            shape = CircleShape,
+                            color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.8f),
+                            border = BorderStroke(
+                                width = 1.dp,
+                                color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
+                            ),
+                            modifier = Modifier
+                                .size(40.dp)
+                                .shadow(2.dp, CircleShape)
+                        ) {
+                            Box(contentAlignment = Alignment.Center) {
+                                Text(
+                                    text = state.appLanguage.flagEmoji,
+                                    fontSize = 18.sp
+                                )
+                            }
+                        }
+
+                        // Sağ Üstte Yuvarlak Tema Değiştirme Butonu (Sistem, Açık, Kapalı, DataStore)
+                        Surface(
+                            onClick = { onIntent(KaprekarUiIntent.OnToggleThemeMode) },
+                            shape = CircleShape,
+                            color = when (state.themeMode) {
+                                ThemeMode.SYSTEM -> MaterialTheme.colorScheme.surfaceVariant
+                                ThemeMode.LIGHT -> Color(0xFFFFF3E0)
+                                ThemeMode.DARK -> Color(0xFF263238)
+                            },
+                            border = BorderStroke(
+                                width = 1.5.dp,
+                                color = when (state.themeMode) {
+                                    ThemeMode.SYSTEM -> MaterialTheme.colorScheme.outline.copy(alpha = 0.5f)
+                                    ThemeMode.LIGHT -> Color(0xFFFFB74D)
+                                    ThemeMode.DARK -> Color(0xFF90CAF9)
+                                }
+                            ),
+                            modifier = Modifier
+                                .size(40.dp)
+                                .shadow(2.dp, CircleShape)
+                        ) {
+                            Box(contentAlignment = Alignment.Center) {
+                                val (icon, tint, desc) = when (state.themeMode) {
+                                    ThemeMode.SYSTEM -> Triple(
+                                        Icons.Default.SettingsBrightness,
+                                        MaterialTheme.colorScheme.onSurfaceVariant,
+                                        strings.systemTheme
+                                    )
+                                    ThemeMode.LIGHT -> Triple(
+                                        Icons.Default.LightMode,
+                                        Color(0xFFF57C00),
+                                        strings.lightTheme
+                                    )
+                                    ThemeMode.DARK -> Triple(
+                                        Icons.Default.DarkMode,
+                                        Color(0xFF90CAF9),
+                                        strings.darkTheme
+                                    )
+                                }
+                                Icon(
+                                    imageVector = icon,
+                                    contentDescription = desc,
+                                    tint = tint,
+                                    modifier = Modifier.size(20.dp)
+                                )
+                            }
+                        }
                     }
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
@@ -137,7 +209,10 @@ fun KaprekarContent(
             ) {
                 // Bilgilendirme Kartı (Header Banner)
                 item {
-                    HeaderBannerCard()
+                    HeaderBannerCard(
+                        state = state,
+                        onInfoClick = { onIntent(KaprekarUiIntent.OnToggleInfoDialog(true)) }
+                    )
                 }
 
                 // Sayı Giriş Bölümü Kartı
@@ -163,7 +238,7 @@ fun KaprekarContent(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = "Adım Adım Hesaplama",
+                                text = strings.stepBreakdownTitle,
                                 style = MaterialTheme.typography.titleMedium.copy(
                                     fontWeight = FontWeight.Bold
                                 )
@@ -173,7 +248,7 @@ fun KaprekarContent(
                                 shape = RoundedCornerShape(12.dp)
                             ) {
                                 Text(
-                                    text = "${state.visibleStepCount} / ${state.steps.size} Adım",
+                                    text = "${state.visibleStepCount} / ${state.steps.size} ${strings.stepLabel}",
                                     modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
                                     style = MaterialTheme.typography.labelMedium.copy(
                                         color = MaterialTheme.colorScheme.onSecondaryContainer,
@@ -184,19 +259,18 @@ fun KaprekarContent(
                         }
                     }
 
-                    // Görünür olan adımları listele
                     val visibleSteps = state.steps.take(state.visibleStepCount)
                     itemsIndexed(visibleSteps) { index, step ->
                         AnimatedStepCard(
+                            state = state,
                             step = step,
                             isLastStep = index == state.steps.size - 1 && state.reachedConstant
                         )
                     }
 
-                    // Başarı Rozeti Kartı
                     if (state.isCompleted && state.reachedConstant) {
                         item {
-                            SuccessBannerCard(totalSteps = state.steps.size)
+                            SuccessBannerCard(state = state, totalSteps = state.steps.size)
                         }
                     }
                 }
@@ -204,14 +278,28 @@ fun KaprekarContent(
         }
     }
 
-    // Bilgilendirme İletişim Kutusu (Modal)
     if (state.showInfoDialog) {
-        KaprekarInfoDialog(onDismiss = { onIntent(KaprekarUiIntent.OnToggleInfoDialog(false)) })
+        KaprekarInfoDialog(
+            state = state,
+            onDismiss = { onIntent(KaprekarUiIntent.OnToggleInfoDialog(false)) }
+        )
+    }
+
+    if (state.showLanguageDialog) {
+        LanguageSelectionDialog(
+            state = state,
+            onSelect = { onIntent(KaprekarUiIntent.OnSelectLanguage(it)) },
+            onDismiss = { onIntent(KaprekarUiIntent.OnToggleLanguageDialog(false)) }
+        )
     }
 }
 
 @Composable
-fun HeaderBannerCard() {
+fun HeaderBannerCard(
+    state: KaprekarUiState,
+    onInfoClick: () -> Unit
+) {
+    val strings = state.strings
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -228,16 +316,25 @@ fun HeaderBannerCard() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = "6174'ün Sihri",
-                    style = MaterialTheme.typography.headlineSmall.copy(
-                        fontWeight = FontWeight.ExtraBold,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = strings.magicTitle,
+                        style = MaterialTheme.typography.headlineSmall.copy(
+                            fontWeight = FontWeight.ExtraBold,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
                     )
-                )
+                    IconButton(onClick = onInfoClick) {
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = strings.infoTitle,
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    }
+                }
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = "En az iki farklı rakam içeren herhangi 4 basamaklı bir sayı seçin. Rakamları büyükten küçüğe ve küçükten büyüğe sıralayıp çıkarın. Bu işlemi tekrarladığınızda EN FAZLA 7 adımda HER ZAMAN 6174 sayısına ulaşırsınız!",
+                    text = strings.magicDescription,
                     style = MaterialTheme.typography.bodySmall.copy(
                         color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.85f),
                         lineHeight = 16.sp
@@ -270,6 +367,7 @@ fun InputSectionCard(
     onIntent: (KaprekarUiIntent) -> Unit,
     onCalculate: () -> Unit
 ) {
+    val strings = state.strings
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -286,7 +384,7 @@ fun InputSectionCard(
             verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {
             Text(
-                text = "4 Basamaklı Sayı Girin",
+                text = strings.inputTitle,
                 style = MaterialTheme.typography.titleMedium.copy(
                     fontWeight = FontWeight.Bold
                 )
@@ -296,8 +394,8 @@ fun InputSectionCard(
                 value = state.inputNumber,
                 onValueChange = { onIntent(KaprekarUiIntent.OnInputChanged(it)) },
                 modifier = Modifier.fillMaxWidth(),
-                label = { Text("4 Basamaklı Sayı") },
-                placeholder = { Text("örn. 6825") },
+                label = { Text(strings.inputLabel) },
+                placeholder = { Text(strings.inputPlaceholder) },
                 singleLine = true,
                 isError = state.validationError != null,
                 keyboardOptions = KeyboardOptions(
@@ -312,7 +410,7 @@ fun InputSectionCard(
                         IconButton(onClick = { onIntent(KaprekarUiIntent.OnResetClicked) }) {
                             Icon(
                                 imageVector = Icons.Default.Close,
-                                contentDescription = "Temizle"
+                                contentDescription = strings.resetButton
                             )
                         }
                     }
@@ -323,7 +421,7 @@ fun InputSectionCard(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = state.validationError ?: "En az 2 farklı rakam içermelidir",
+                            text = state.validationError ?: strings.inputHint,
                             color = if (state.validationError != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.outline,
                             style = MaterialTheme.typography.bodySmall
                         )
@@ -337,10 +435,9 @@ fun InputSectionCard(
                 shape = RoundedCornerShape(14.dp)
             )
 
-            // Örnek Butonlar
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(
-                    text = "Örnek Sayıları Deneyin:",
+                    text = strings.presetsTitle,
                     style = MaterialTheme.typography.labelMedium.copy(
                         color = MaterialTheme.colorScheme.outline
                     )
@@ -388,7 +485,7 @@ fun InputSectionCard(
                             strokeWidth = 2.dp
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("Hesaplanıyor...")
+                        Text(strings.calculatingButton)
                     } else {
                         Icon(
                             imageVector = Icons.Default.PlayArrow,
@@ -396,7 +493,7 @@ fun InputSectionCard(
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "Adımları Hesapla",
+                            text = strings.calculateButton,
                             fontWeight = FontWeight.Bold
                         )
                     }
@@ -410,7 +507,7 @@ fun InputSectionCard(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Refresh,
-                            contentDescription = "Sıfırla"
+                            contentDescription = strings.resetButton
                         )
                     }
                 }
@@ -421,9 +518,11 @@ fun InputSectionCard(
 
 @Composable
 fun AnimatedStepCard(
+    state: KaprekarUiState,
     step: KaprekarStep,
     isLastStep: Boolean
 ) {
+    val strings = state.strings
     AnimatedVisibility(
         visible = true,
         enter = fadeIn(animationSpec = tween(600)) + slideInVertically(
@@ -464,7 +563,7 @@ fun AnimatedStepCard(
                         shape = RoundedCornerShape(8.dp)
                     ) {
                         Text(
-                            text = "Adım ${step.stepNumber}",
+                            text = "${strings.stepLabel} ${step.stepNumber}",
                             modifier = Modifier.padding(horizontal = 12.dp, vertical = 5.dp),
                             style = MaterialTheme.typography.labelLarge.copy(
                                 fontWeight = FontWeight.Bold,
@@ -490,7 +589,7 @@ fun AnimatedStepCard(
                                 )
                                 Spacer(modifier = Modifier.width(4.dp))
                                 Text(
-                                    text = "Hedef 6174",
+                                    text = strings.targetBadge,
                                     style = MaterialTheme.typography.labelMedium.copy(
                                         color = Color.White,
                                         fontWeight = FontWeight.Bold
@@ -501,20 +600,18 @@ fun AnimatedStepCard(
                     }
                 }
 
-                // Rakam Ayrımı Gösterimi
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    DigitBadge(label = "Girdi", value = step.inputNumber)
+                    DigitBadge(label = strings.digitInput, value = step.inputNumber)
                     Text("➜", color = MaterialTheme.colorScheme.outline, modifier = Modifier.align(Alignment.CenterVertically))
-                    DigitBadge(label = "Büyükten Küçüğe (B)", value = step.descending)
-                    DigitBadge(label = "Küçükten Büyüğe (K)", value = step.ascending)
+                    DigitBadge(label = strings.digitDescending, value = step.descending)
+                    DigitBadge(label = strings.digitAscending, value = step.ascending)
                 }
 
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
 
-                // Matematiksel Denklem
                 Surface(
                     color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
                     shape = RoundedCornerShape(12.dp),
@@ -570,7 +667,8 @@ fun DigitBadge(label: String, value: String) {
 }
 
 @Composable
-fun SuccessBannerCard(totalSteps: Int) {
+fun SuccessBannerCard(state: KaprekarUiState, totalSteps: Int) {
+    val strings = state.strings
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -594,7 +692,7 @@ fun SuccessBannerCard(totalSteps: Int) {
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Kaprekar Sabitine Ulaşıldı!",
+                text = strings.successTitle,
                 style = MaterialTheme.typography.titleLarge.copy(
                     fontWeight = FontWeight.Black,
                     color = MaterialTheme.colorScheme.onPrimary
@@ -603,7 +701,7 @@ fun SuccessBannerCard(totalSteps: Int) {
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = "$totalSteps adımda 6174 sayısına başarıyla ulaştınız! 🎉",
+                text = strings.successDescriptionFormat.format(totalSteps),
                 style = MaterialTheme.typography.bodyMedium.copy(
                     color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.9f)
                 ),
@@ -614,7 +712,11 @@ fun SuccessBannerCard(totalSteps: Int) {
 }
 
 @Composable
-fun KaprekarInfoDialog(onDismiss: () -> Unit) {
+fun KaprekarInfoDialog(
+    state: KaprekarUiState,
+    onDismiss: () -> Unit
+) {
+    val strings = state.strings
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
@@ -625,24 +727,83 @@ fun KaprekarInfoDialog(onDismiss: () -> Unit) {
                     tint = MaterialTheme.colorScheme.primary
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("Kaprekar Rutini Hakkında")
+                Text(strings.infoTitle)
             }
         },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                Text(
-                    text = "1949 yılında Hintli matematikçi D. R. Kaprekar tarafından keşfedilen 6174 sayısı, Kaprekar Sabiti olarak bilinir.",
-                    style = MaterialTheme.typography.bodyMedium
-                )
-                Text(
-                    text = "Kural:\n1. En az 2 farklı rakam içeren 4 basamaklı bir sayı girin.\n2. Rakamları büyükten küçüğe (B) ve küçükten büyüğe (K) sıralayın.\n3. Çıkarma işlemini yapın: Sonuç = B - K.\n4. Elde edilen sonuç ile aynı adımları tekrarlayın.\n\nEN FAZLA 7 adım sonra HER ZAMAN 6174 sayısına ulaşırsınız!",
-                    style = MaterialTheme.typography.bodySmall.copy(color = MaterialTheme.colorScheme.onSurfaceVariant)
-                )
+            Text(
+                text = strings.infoDescription,
+                style = MaterialTheme.typography.bodySmall.copy(color = MaterialTheme.colorScheme.onSurfaceVariant)
+            )
+        },
+        confirmButton = {
+            TextButton(onClick = onDismiss) {
+                Text("OK")
+            }
+        }
+    )
+}
+
+@Composable
+fun LanguageSelectionDialog(
+    state: KaprekarUiState,
+    onSelect: (AppLanguage) -> Unit,
+    onDismiss: () -> Unit
+) {
+    val strings = state.strings
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = {
+            Text(
+                text = strings.languageSelectTitle,
+                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+            )
+        },
+        text = {
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth().heightIn(max = 360.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                items(AppLanguage.entries) { lang ->
+                    val isSelected = state.appLanguage == lang
+                    Surface(
+                        onClick = { onSelect(lang) },
+                        shape = RoundedCornerShape(12.dp),
+                        color = if (isSelected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 14.dp, vertical = 10.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Text(text = lang.flagEmoji, fontSize = 20.sp)
+                                Spacer(modifier = Modifier.width(12.dp))
+                                Text(
+                                    text = lang.displayName,
+                                    fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
+                                    color = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface
+                                )
+                            }
+                            if (isSelected) {
+                                Icon(
+                                    imageVector = Icons.Default.Check,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                            }
+                        }
+                    }
+                }
             }
         },
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text("Anladım")
+                Text(strings.resetButton)
             }
         }
     )
