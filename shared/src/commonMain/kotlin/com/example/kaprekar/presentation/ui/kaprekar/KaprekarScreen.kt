@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
@@ -98,7 +99,7 @@ fun KaprekarContent(
             Scaffold(
                 containerColor = Color.Transparent,
                 topBar = {
-                    // Ekran ortasında tam hizalanmış kibar ve belirgin TopBar
+                    // Ekran ortasında tam hizalanmış kibar ve yüksek kontrastlı TopBar
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -107,42 +108,41 @@ fun KaprekarContent(
                             .padding(horizontal = 16.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        // Tam Ekran Ortasında Yüksek Kontrastlı Belirgin Başlık ve 6174 Rozeti
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center,
-                            modifier = Modifier.align(Alignment.Center)
+                        // Sol Taraf: Kibar 6174 Logosu Rozeti
+                        Surface(
+                            onClick = { onIntent(KaprekarUiIntent.OnToggleInfoDialog(true)) },
+                            shape = RoundedCornerShape(10.dp),
+                            color = BrandPink.copy(alpha = 0.15f),
+                            border = BorderStroke(
+                                width = 1.dp,
+                                color = BrandPink.copy(alpha = 0.4f)
+                            ),
+                            modifier = Modifier.align(Alignment.CenterStart)
                         ) {
-                            Surface(
-                                shape = RoundedCornerShape(8.dp),
-                                color = BrandPink.copy(alpha = 0.15f),
-                                border = BorderStroke(
-                                    width = 1.dp,
-                                    color = BrandPink.copy(alpha = 0.4f)
-                                )
-                            ) {
-                                Text(
-                                    text = "6174",
-                                    modifier = Modifier.padding(horizontal = 7.dp, vertical = 2.dp),
-                                    fontFamily = FontFamily.Monospace,
-                                    fontSize = 11.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = BrandPink
-                                )
-                            }
-                            Spacer(modifier = Modifier.width(8.dp))
                             Text(
-                                text = strings.appTitle,
-                                style = MaterialTheme.typography.titleMedium.copy(
-                                    color = MaterialTheme.colorScheme.onSurface,
-                                    fontWeight = FontWeight.ExtraBold,
-                                    letterSpacing = 0.3.sp
-                                ),
-                                maxLines = 1
+                                text = "6174",
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                                fontFamily = FontFamily.Monospace,
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Black,
+                                color = BrandPink
                             )
                         }
 
-                        // Sağ Tarafta Kibar Yuvarlak Dil ve Tema Butonları
+                        // Tam Ekran Ortası: Yüksek Kontrastlı Belirgin Başlık
+                        Text(
+                            text = strings.appTitle,
+                            style = MaterialTheme.typography.titleMedium.copy(
+                                color = MaterialTheme.colorScheme.onSurface,
+                                fontWeight = FontWeight.Black,
+                                letterSpacing = 0.4.sp
+                            ),
+                            textAlign = TextAlign.Center,
+                            maxLines = 1,
+                            modifier = Modifier.align(Alignment.Center)
+                        )
+
+                        // Sağ Taraf: Kibar Yuvarlak Dil ve Tema Butonları
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(6.dp),
@@ -152,17 +152,17 @@ fun KaprekarContent(
                             Surface(
                                 onClick = { onIntent(KaprekarUiIntent.OnToggleLanguageDialog(true)) },
                                 shape = CircleShape,
-                                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.65f),
+                                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.85f),
                                 border = BorderStroke(
                                     width = 1.dp,
-                                    color = BrandCyan.copy(alpha = 0.4f)
+                                    color = BrandCyan.copy(alpha = 0.5f)
                                 ),
-                                modifier = Modifier.size(32.dp)
+                                modifier = Modifier.size(34.dp)
                             ) {
                                 Box(contentAlignment = Alignment.Center) {
                                     Text(
                                         text = state.appLanguage.flagEmoji,
-                                        fontSize = 14.sp
+                                        fontSize = 15.sp
                                     )
                                 }
                             }
@@ -172,19 +172,19 @@ fun KaprekarContent(
                                 onClick = { onIntent(KaprekarUiIntent.OnToggleThemeMode) },
                                 shape = CircleShape,
                                 color = when (state.themeMode) {
-                                    ThemeMode.SYSTEM -> MaterialTheme.colorScheme.surface.copy(alpha = 0.65f)
-                                    ThemeMode.LIGHT -> Color(0xFFFFF3E0).copy(alpha = 0.85f)
-                                    ThemeMode.DARK -> Color(0xFF263238).copy(alpha = 0.85f)
+                                    ThemeMode.SYSTEM -> MaterialTheme.colorScheme.surface.copy(alpha = 0.85f)
+                                    ThemeMode.LIGHT -> Color(0xFFFFF3E0).copy(alpha = 0.95f)
+                                    ThemeMode.DARK -> Color(0xFF263238).copy(alpha = 0.95f)
                                 },
                                 border = BorderStroke(
                                     width = 1.dp,
                                     color = when (state.themeMode) {
-                                        ThemeMode.SYSTEM -> BrandPink.copy(alpha = 0.35f)
-                                        ThemeMode.LIGHT -> Color(0xFFFFB74D).copy(alpha = 0.5f)
-                                        ThemeMode.DARK -> Color(0xFF90CAF9).copy(alpha = 0.5f)
+                                        ThemeMode.SYSTEM -> BrandPink.copy(alpha = 0.45f)
+                                        ThemeMode.LIGHT -> Color(0xFFFFB74D).copy(alpha = 0.7f)
+                                        ThemeMode.DARK -> Color(0xFF90CAF9).copy(alpha = 0.7f)
                                     }
                                 ),
-                                modifier = Modifier.size(32.dp)
+                                modifier = Modifier.size(34.dp)
                             ) {
                                 Box(contentAlignment = Alignment.Center) {
                                     val (icon, tint, desc) = when (state.themeMode) {
@@ -208,7 +208,7 @@ fun KaprekarContent(
                                         imageVector = icon,
                                         contentDescription = desc,
                                         tint = tint,
-                                        modifier = Modifier.size(16.dp)
+                                        modifier = Modifier.size(17.dp)
                                     )
                                 }
                             }
