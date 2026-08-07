@@ -77,197 +77,217 @@ fun KaprekarContent(
             .fillMaxSize()
             .background(backgroundGradient)
     ) {
-        Scaffold(
-            containerColor = Color.Transparent,
-            topBar = {
-                // Ekran ortasında hizalanmış kibar TopBar
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .statusBarsPadding()
-                        .height(56.dp)
-                        .padding(horizontal = 16.dp),
-                    contentAlignment = Alignment.Center
+        if (state.isInitializingPreferences) {
+            // Dil ve Tema DataStore'dan yüklenene kadar ortada ProgressBar gösterilir
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    // Tam Ekran Ortasında Başlık ve Kibar 6174 Rozeti
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center,
-                        modifier = Modifier.align(Alignment.Center)
-                    ) {
-                        Surface(
-                            shape = RoundedCornerShape(8.dp),
-                            color = BrandPink.copy(alpha = 0.12f),
-                            border = BorderStroke(
-                                width = 1.dp,
-                                color = BrandPink.copy(alpha = 0.35f)
-                            )
-                        ) {
-                            Text(
-                                text = "6174",
-                                modifier = Modifier.padding(horizontal = 7.dp, vertical = 2.dp),
-                                fontFamily = FontFamily.Monospace,
-                                fontSize = 11.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = BrandPink
-                            )
-                        }
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            text = strings.appTitle,
-                            style = MaterialTheme.typography.titleSmall.copy(
-                                fontWeight = FontWeight.Bold,
-                                letterSpacing = 0.3.sp
-                            ),
-                            maxLines = 1
-                        )
-                    }
-
-                    // Sağ Tarafta Kibar Yuvarlak Dil ve Tema Butonları
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(6.dp),
-                        modifier = Modifier.align(Alignment.CenterEnd)
-                    ) {
-                        // Yuvarlak Kibar Dil Butonu
-                        Surface(
-                            onClick = { onIntent(KaprekarUiIntent.OnToggleLanguageDialog(true)) },
-                            shape = CircleShape,
-                            color = MaterialTheme.colorScheme.surface.copy(alpha = 0.65f),
-                            border = BorderStroke(
-                                width = 1.dp,
-                                color = BrandCyan.copy(alpha = 0.4f)
-                            ),
-                            modifier = Modifier.size(32.dp)
-                        ) {
-                            Box(contentAlignment = Alignment.Center) {
-                                Text(
-                                    text = state.appLanguage.flagEmoji,
-                                    fontSize = 14.sp
-                                )
-                            }
-                        }
-
-                        // Yuvarlak Kibar Tema Butonu
-                        Surface(
-                            onClick = { onIntent(KaprekarUiIntent.OnToggleThemeMode) },
-                            shape = CircleShape,
-                            color = when (state.themeMode) {
-                                ThemeMode.SYSTEM -> MaterialTheme.colorScheme.surface.copy(alpha = 0.65f)
-                                ThemeMode.LIGHT -> Color(0xFFFFF3E0).copy(alpha = 0.85f)
-                                ThemeMode.DARK -> Color(0xFF263238).copy(alpha = 0.85f)
-                            },
-                            border = BorderStroke(
-                                width = 1.dp,
-                                color = when (state.themeMode) {
-                                    ThemeMode.SYSTEM -> BrandPink.copy(alpha = 0.35f)
-                                    ThemeMode.LIGHT -> Color(0xFFFFB74D).copy(alpha = 0.5f)
-                                    ThemeMode.DARK -> Color(0xFF90CAF9).copy(alpha = 0.5f)
-                                }
-                            ),
-                            modifier = Modifier.size(32.dp)
-                        ) {
-                            Box(contentAlignment = Alignment.Center) {
-                                val (icon, tint, desc) = when (state.themeMode) {
-                                    ThemeMode.SYSTEM -> Triple(
-                                        Icons.Default.SettingsBrightness,
-                                        BrandPink,
-                                        strings.systemTheme
-                                    )
-                                    ThemeMode.LIGHT -> Triple(
-                                        Icons.Default.LightMode,
-                                        Color(0xFFF57C00),
-                                        strings.lightTheme
-                                    )
-                                    ThemeMode.DARK -> Triple(
-                                        Icons.Default.DarkMode,
-                                        Color(0xFF90CAF9),
-                                        strings.darkTheme
-                                    )
-                                }
-                                Icon(
-                                    imageVector = icon,
-                                    contentDescription = desc,
-                                    tint = tint,
-                                    modifier = Modifier.size(16.dp)
-                                )
-                            }
-                        }
-                    }
+                    CircularProgressIndicator(
+                        color = BrandPink,
+                        strokeWidth = 3.dp,
+                        modifier = Modifier.size(40.dp)
+                    )
                 }
             }
-        ) { innerPadding ->
-            LazyColumn(
-                state = listState,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-                    .padding(horizontal = 16.dp),
-                contentPadding = PaddingValues(top = 8.dp, bottom = 48.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                item {
-                    HeaderBannerCard(
-                        state = state,
-                        onInfoClick = { onIntent(KaprekarUiIntent.OnToggleInfoDialog(true)) }
-                    )
-                }
-
-                item {
-                    InputSectionCard(
-                        state = state,
-                        onIntent = onIntent,
-                        onCalculate = {
-                            keyboardController?.hide()
-                            onIntent(KaprekarUiIntent.OnCalculateClicked)
-                        }
-                    )
-                }
-
-                if (state.steps.isNotEmpty()) {
-                    item {
+        } else {
+            Scaffold(
+                containerColor = Color.Transparent,
+                topBar = {
+                    // Ekran ortasında tam hizalanmış kibar ve belirgin TopBar
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .statusBarsPadding()
+                            .height(56.dp)
+                            .padding(horizontal = 16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        // Tam Ekran Ortasında Yüksek Kontrastlı Belirgin Başlık ve 6174 Rozeti
                         Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 4.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center,
+                            modifier = Modifier.align(Alignment.Center)
                         ) {
-                            Text(
-                                text = strings.stepBreakdownTitle,
-                                style = MaterialTheme.typography.titleMedium.copy(
-                                    fontWeight = FontWeight.Bold
-                                )
-                            )
                             Surface(
-                                color = MaterialTheme.colorScheme.secondaryContainer,
-                                shape = RoundedCornerShape(12.dp)
+                                shape = RoundedCornerShape(8.dp),
+                                color = BrandPink.copy(alpha = 0.15f),
+                                border = BorderStroke(
+                                    width = 1.dp,
+                                    color = BrandPink.copy(alpha = 0.4f)
+                                )
                             ) {
                                 Text(
-                                    text = "${state.visibleStepCount} / ${state.steps.size} ${strings.stepLabel}",
-                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
-                                    style = MaterialTheme.typography.labelMedium.copy(
-                                        color = MaterialTheme.colorScheme.onSecondaryContainer,
-                                        fontWeight = FontWeight.SemiBold
-                                    )
+                                    text = "6174",
+                                    modifier = Modifier.padding(horizontal = 7.dp, vertical = 2.dp),
+                                    fontFamily = FontFamily.Monospace,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = BrandPink
                                 )
+                            }
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = strings.appTitle,
+                                style = MaterialTheme.typography.titleMedium.copy(
+                                    color = MaterialTheme.colorScheme.onSurface,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    letterSpacing = 0.3.sp
+                                ),
+                                maxLines = 1
+                            )
+                        }
+
+                        // Sağ Tarafta Kibar Yuvarlak Dil ve Tema Butonları
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            modifier = Modifier.align(Alignment.CenterEnd)
+                        ) {
+                            // Yuvarlak Kibar Dil Butonu
+                            Surface(
+                                onClick = { onIntent(KaprekarUiIntent.OnToggleLanguageDialog(true)) },
+                                shape = CircleShape,
+                                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.65f),
+                                border = BorderStroke(
+                                    width = 1.dp,
+                                    color = BrandCyan.copy(alpha = 0.4f)
+                                ),
+                                modifier = Modifier.size(32.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Text(
+                                        text = state.appLanguage.flagEmoji,
+                                        fontSize = 14.sp
+                                    )
+                                }
+                            }
+
+                            // Yuvarlak Kibar Tema Butonu
+                            Surface(
+                                onClick = { onIntent(KaprekarUiIntent.OnToggleThemeMode) },
+                                shape = CircleShape,
+                                color = when (state.themeMode) {
+                                    ThemeMode.SYSTEM -> MaterialTheme.colorScheme.surface.copy(alpha = 0.65f)
+                                    ThemeMode.LIGHT -> Color(0xFFFFF3E0).copy(alpha = 0.85f)
+                                    ThemeMode.DARK -> Color(0xFF263238).copy(alpha = 0.85f)
+                                },
+                                border = BorderStroke(
+                                    width = 1.dp,
+                                    color = when (state.themeMode) {
+                                        ThemeMode.SYSTEM -> BrandPink.copy(alpha = 0.35f)
+                                        ThemeMode.LIGHT -> Color(0xFFFFB74D).copy(alpha = 0.5f)
+                                        ThemeMode.DARK -> Color(0xFF90CAF9).copy(alpha = 0.5f)
+                                    }
+                                ),
+                                modifier = Modifier.size(32.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    val (icon, tint, desc) = when (state.themeMode) {
+                                        ThemeMode.SYSTEM -> Triple(
+                                            Icons.Default.SettingsBrightness,
+                                            BrandPink,
+                                            strings.systemTheme
+                                        )
+                                        ThemeMode.LIGHT -> Triple(
+                                            Icons.Default.LightMode,
+                                            Color(0xFFF57C00),
+                                            strings.lightTheme
+                                        )
+                                        ThemeMode.DARK -> Triple(
+                                            Icons.Default.DarkMode,
+                                            Color(0xFF90CAF9),
+                                            strings.darkTheme
+                                        )
+                                    }
+                                    Icon(
+                                        imageVector = icon,
+                                        contentDescription = desc,
+                                        tint = tint,
+                                        modifier = Modifier.size(16.dp)
+                                    )
+                                }
                             }
                         }
                     }
-
-                    val visibleSteps = state.steps.take(state.visibleStepCount)
-                    itemsIndexed(visibleSteps) { index, step ->
-                        AnimatedStepCard(
+                }
+            ) { innerPadding ->
+                LazyColumn(
+                    state = listState,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding)
+                        .padding(horizontal = 16.dp),
+                    contentPadding = PaddingValues(top = 8.dp, bottom = 48.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    item {
+                        HeaderBannerCard(
                             state = state,
-                            step = step,
-                            isLastStep = index == state.steps.size - 1 && state.reachedConstant
+                            onInfoClick = { onIntent(KaprekarUiIntent.OnToggleInfoDialog(true)) }
                         )
                     }
 
-                    if (state.isCompleted && state.reachedConstant) {
+                    item {
+                        InputSectionCard(
+                            state = state,
+                            onIntent = onIntent,
+                            onCalculate = {
+                                keyboardController?.hide()
+                                onIntent(KaprekarUiIntent.OnCalculateClicked)
+                            }
+                        )
+                    }
+
+                    if (state.steps.isNotEmpty()) {
                         item {
-                            SuccessBannerCard(state = state, totalSteps = state.steps.size)
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 4.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = strings.stepBreakdownTitle,
+                                    style = MaterialTheme.typography.titleMedium.copy(
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                )
+                                Surface(
+                                    color = MaterialTheme.colorScheme.secondaryContainer,
+                                    shape = RoundedCornerShape(12.dp)
+                                ) {
+                                    Text(
+                                        text = "${state.visibleStepCount} / ${state.steps.size} ${strings.stepLabel}",
+                                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+                                        style = MaterialTheme.typography.labelMedium.copy(
+                                            color = MaterialTheme.colorScheme.onSecondaryContainer,
+                                            fontWeight = FontWeight.SemiBold
+                                        )
+                                    )
+                                }
+                            }
+                        }
+
+                        val visibleSteps = state.steps.take(state.visibleStepCount)
+                        itemsIndexed(visibleSteps) { index, step ->
+                            AnimatedStepCard(
+                                state = state,
+                                step = step,
+                                isLastStep = index == state.steps.size - 1 && state.reachedConstant
+                            )
+                        }
+
+                        if (state.isCompleted && state.reachedConstant) {
+                            item {
+                                SuccessBannerCard(state = state, totalSteps = state.steps.size)
+                            }
                         }
                     }
                 }
@@ -296,6 +316,7 @@ fun KaprekarContent(
 fun KaprekarScreenPreview() {
     val sampleState = KaprekarUiState(
         inputNumber = "3524",
+        isInitializingPreferences = false,
         steps = listOf(
             KaprekarStep(
                 stepNumber = 1,

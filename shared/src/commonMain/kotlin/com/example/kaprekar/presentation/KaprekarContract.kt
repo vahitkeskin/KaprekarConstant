@@ -19,6 +19,7 @@ data class KaprekarUiState(
     val reachedConstant: Boolean = false,
     val showInfoDialog: Boolean = false,
     val showLanguageDialog: Boolean = false,
+    val isInitializingPreferences: Boolean = true,
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
     val appLanguage: AppLanguage = AppLanguage.SYSTEM
 ) {

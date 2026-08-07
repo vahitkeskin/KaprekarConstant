@@ -11,6 +11,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
@@ -27,17 +28,17 @@ class KaprekarViewModel(
     private var animationJob: Job? = null
 
     init {
-        themeRepository.themeMode
-            .onEach { mode ->
-                _uiState.update { it.copy(themeMode = mode) }
+        combine(themeRepository.themeMode, themeRepository.appLanguage) { mode, lang ->
+            mode to lang
+        }.onEach { (mode, lang) ->
+            _uiState.update {
+                it.copy(
+                    themeMode = mode,
+                    appLanguage = lang,
+                    isInitializingPreferences = false
+                )
             }
-            .launchIn(viewModelScope)
-
-        themeRepository.appLanguage
-            .onEach { lang ->
-                _uiState.update { it.copy(appLanguage = lang) }
-            }
-            .launchIn(viewModelScope)
+        }.launchIn(viewModelScope)
     }
 
     fun onIntent(intent: KaprekarUiIntent) {
