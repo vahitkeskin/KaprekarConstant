@@ -1,19 +1,11 @@
 package com.example.kaprekar.presentation.i18n
 
 import com.example.kaprekar.domain.model.AppLanguage
-import com.example.kaprekar.domain.util.getSystemLanguageCode
 
 object StringsProvider {
 
     fun getStrings(language: AppLanguage): AppStrings {
-        val targetLanguage = if (language == AppLanguage.SYSTEM) {
-            val systemCode = getSystemLanguageCode()
-            AppLanguage.entries.firstOrNull { it != AppLanguage.SYSTEM && it.code.equals(systemCode, ignoreCase = true) } ?: AppLanguage.EN
-        } else {
-            language
-        }
-
-        return when (targetLanguage) {
+        return when (language) {
             AppLanguage.TR -> TrStrings
             AppLanguage.EN -> EnStrings
             AppLanguage.JA -> JaStrings
@@ -33,7 +25,6 @@ object StringsProvider {
             AppLanguage.VI -> ViStrings
             AppLanguage.TH -> ThStrings
             AppLanguage.PL -> PlStrings
-            AppLanguage.SYSTEM -> EnStrings
         }
     }
 }

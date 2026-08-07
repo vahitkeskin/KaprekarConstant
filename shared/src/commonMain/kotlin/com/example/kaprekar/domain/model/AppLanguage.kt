@@ -1,7 +1,8 @@
 package com.example.kaprekar.domain.model
 
+import com.example.kaprekar.domain.util.getSystemLanguageCode
+
 enum class AppLanguage(val code: String, val displayName: String, val flagEmoji: String) {
-    SYSTEM("system", "System", "🌐"),
     TR("tr", "Türkçe", "🇹🇷"),
     EN("en", "English", "🇬🇧"),
     JA("ja", "日本語", "🇯🇵"),
@@ -23,8 +24,13 @@ enum class AppLanguage(val code: String, val displayName: String, val flagEmoji:
     PL("pl", "Polski", "🇵🇱");
 
     companion object {
+        fun getSystemDefault(): AppLanguage {
+            val systemCode = getSystemLanguageCode()
+            return entries.firstOrNull { it.code.equals(systemCode, ignoreCase = true) } ?: EN
+        }
+
         fun fromCode(code: String): AppLanguage {
-            return entries.firstOrNull { it.code.equals(code, ignoreCase = true) } ?: SYSTEM
+            return entries.firstOrNull { it.code.equals(code, ignoreCase = true) } ?: getSystemDefault()
         }
     }
 }

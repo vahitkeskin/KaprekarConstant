@@ -21,7 +21,7 @@ data class KaprekarUiState(
     val showLanguageDialog: Boolean = false,
     val isInitializingPreferences: Boolean = true,
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
-    val appLanguage: AppLanguage = AppLanguage.SYSTEM
+    val appLanguage: AppLanguage = AppLanguage.getSystemDefault()
 ) {
     val strings: AppStrings
         get() = StringsProvider.getStrings(appLanguage)

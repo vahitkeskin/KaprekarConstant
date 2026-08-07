@@ -27,7 +27,7 @@ class ThemeRepositoryImpl(
     }
 
     override val appLanguage: Flow<AppLanguage> = dataStore.data.map { preferences ->
-        val langCode = preferences[languageKey] ?: AppLanguage.SYSTEM.code
+        val langCode = preferences[languageKey] ?: ""
         AppLanguage.fromCode(langCode)
     }
 
