@@ -22,7 +22,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -109,7 +108,7 @@ fun KaprekarContent(
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                         modifier = Modifier.padding(end = 12.dp)
                     ) {
-                        // Yuvarlak Dil Seçim Butonu (Sadece Bayrak Gösterir, DataStore ile Kaydedilir)
+                        // Yuvarlak Dil Seçim Butonu (Düz Tasarım - Gölge / Elevation Yok)
                         Surface(
                             onClick = { onIntent(KaprekarUiIntent.OnToggleLanguageDialog(true)) },
                             shape = CircleShape,
@@ -118,9 +117,7 @@ fun KaprekarContent(
                                 width = 1.dp,
                                 color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
                             ),
-                            modifier = Modifier
-                                .size(40.dp)
-                                .shadow(2.dp, CircleShape)
+                            modifier = Modifier.size(40.dp)
                         ) {
                             Box(contentAlignment = Alignment.Center) {
                                 Text(
@@ -130,7 +127,7 @@ fun KaprekarContent(
                             }
                         }
 
-                        // Sağ Üstte Yuvarlak Tema Değiştirme Butonu (Sistem, Açık, Kapalı, DataStore)
+                        // Sağ Üstte Yuvarlak Tema Değiştirme Butonu (Düz Tasarım - Gölge / Elevation Yok)
                         Surface(
                             onClick = { onIntent(KaprekarUiIntent.OnToggleThemeMode) },
                             shape = CircleShape,
@@ -147,9 +144,7 @@ fun KaprekarContent(
                                     ThemeMode.DARK -> Color(0xFF90CAF9)
                                 }
                             ),
-                            modifier = Modifier
-                                .size(40.dp)
-                                .shadow(2.dp, CircleShape)
+                            modifier = Modifier.size(40.dp)
                         ) {
                             Box(contentAlignment = Alignment.Center) {
                                 val (icon, tint, desc) = when (state.themeMode) {
@@ -207,7 +202,7 @@ fun KaprekarContent(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // Bilgilendirme Kartı (Header Banner)
+                // Bilgilendirme Kartı (Header Banner) - Gölgeler Kaldırıldı
                 item {
                     HeaderBannerCard(
                         state = state,
@@ -215,7 +210,7 @@ fun KaprekarContent(
                     )
                 }
 
-                // Sayı Giriş Bölümü Kartı
+                // Sayı Giriş Bölümü Kartı - Gölgeler Kaldırıldı
                 item {
                     InputSectionCard(
                         state = state,
@@ -301,10 +296,9 @@ fun HeaderBannerCard(
 ) {
     val strings = state.strings
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .shadow(4.dp, RoundedCornerShape(20.dp)),
+        modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer
         )
@@ -369,10 +363,9 @@ fun InputSectionCard(
 ) {
     val strings = state.strings
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .shadow(2.dp, RoundedCornerShape(20.dp)),
+        modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface
         )
@@ -476,6 +469,7 @@ fun InputSectionCard(
                     onClick = onCalculate,
                     modifier = Modifier.weight(1f).height(50.dp),
                     enabled = state.isValidInput && !state.isCalculating,
+                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 0.dp),
                     shape = RoundedCornerShape(14.dp)
                 ) {
                     if (state.isCalculating) {
@@ -531,14 +525,12 @@ fun AnimatedStepCard(
         )
     ) {
         Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .shadow(if (isLastStep) 8.dp else 3.dp, RoundedCornerShape(16.dp))
-                .border(
-                    width = if (isLastStep) 2.dp else 0.dp,
-                    color = if (isLastStep) MaterialTheme.colorScheme.primary else Color.Transparent,
-                    shape = RoundedCornerShape(16.dp)
-                ),
+            modifier = Modifier.fillMaxWidth(),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+            border = BorderStroke(
+                width = if (isLastStep) 2.dp else 1.dp,
+                color = if (isLastStep) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
+            ),
             shape = RoundedCornerShape(16.dp),
             colors = CardDefaults.cardColors(
                 containerColor = if (isLastStep)
@@ -670,10 +662,9 @@ fun DigitBadge(label: String, value: String) {
 fun SuccessBannerCard(state: KaprekarUiState, totalSteps: Int) {
     val strings = state.strings
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .shadow(6.dp, RoundedCornerShape(20.dp)),
+        modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(20.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary
         )
