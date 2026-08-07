@@ -11,7 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.kaprekar.di.initKoin
 import com.example.kaprekar.domain.model.ThemeMode
 import com.example.kaprekar.presentation.KaprekarViewModel
-import com.example.kaprekar.presentation.ui.KaprekarScreen
+import com.example.kaprekar.presentation.ui.kaprekar.KaprekarScreen
 import org.koin.compose.KoinContext
 import org.koin.compose.viewmodel.koinViewModel
 
