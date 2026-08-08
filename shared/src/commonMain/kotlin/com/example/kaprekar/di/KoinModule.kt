@@ -22,6 +22,16 @@ import com.example.kaprekar.domain.usecase.CalculateStatisticsUseCase
 import com.example.kaprekar.domain.usecase.CalculateSuperNumberUseCase
 import com.example.kaprekar.domain.usecase.CalculateTransformationUseCase
 import com.example.kaprekar.domain.usecase.CalculateTrigonometryUseCase
+import com.example.kaprekar.domain.usecase.CalculateLogarithmUseCase
+import com.example.kaprekar.domain.usecase.CalculateArfInvariantUseCase
+import com.example.kaprekar.domain.usecase.CalculateThalesUseCase
+import com.example.kaprekar.domain.usecase.CalculateKeplerUseCase
+import com.example.kaprekar.domain.usecase.CalculateBrachistochroneUseCase
+import com.example.kaprekar.domain.usecase.CalculateCantorUseCase
+import com.example.kaprekar.domain.usecase.CalculateEratosthenesUseCase
+import com.example.kaprekar.domain.usecase.CalculateCubicUseCase
+import com.example.kaprekar.domain.usecase.CalculateSphericalTrigUseCase
+import com.example.kaprekar.domain.usecase.CalculateGodelUseCase
 import com.example.kaprekar.presentation.KaprekarViewModel
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
@@ -51,6 +61,16 @@ val appModule = module {
     factoryOf(::CalculateFourierUseCase)
     factoryOf(::CalculateChaosGameUseCase)
     factoryOf(::CalculateNimGameUseCase)
+    factoryOf(::CalculateLogarithmUseCase)
+    factoryOf(::CalculateArfInvariantUseCase)
+    factoryOf(::CalculateThalesUseCase)
+    factoryOf(::CalculateKeplerUseCase)
+    factoryOf(::CalculateBrachistochroneUseCase)
+    factoryOf(::CalculateCantorUseCase)
+    factoryOf(::CalculateEratosthenesUseCase)
+    factoryOf(::CalculateCubicUseCase)
+    factoryOf(::CalculateSphericalTrigUseCase)
+    factoryOf(::CalculateGodelUseCase)
 
     singleOf(::ThemeRepositoryImpl) bind ThemeRepository::class
     viewModelOf(::KaprekarViewModel)

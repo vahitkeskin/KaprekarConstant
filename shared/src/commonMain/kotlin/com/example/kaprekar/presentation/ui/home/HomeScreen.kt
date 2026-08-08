@@ -77,10 +77,20 @@ fun HomeScreen(
         MathTopicCardItem(MathScreen.TRANSFORMATION, strings.topicTransformationTitle, strings.topicTransformationDesc, "2x2 M", "Cebir", Color(0xFF1E88E5)),
         MathTopicCardItem(MathScreen.FOURIER, strings.topicFourierTitle, strings.topicFourierDesc, "∑sin", "Diziler", Color(0xFF00ACC1)),
         MathTopicCardItem(MathScreen.CHAOS_GAME, strings.topicChaosGameTitle, strings.topicChaosGameDesc, "Kaos", "Fraktallar", Color(0xFF43A047)),
-        MathTopicCardItem(MathScreen.NIM_GAME, strings.topicNimGameTitle, strings.topicNimGameDesc, "XOR", "Oyun Teorisi", Color(0xFFF4511E))
+        MathTopicCardItem(MathScreen.NIM_GAME, strings.topicNimGameTitle, strings.topicNimGameDesc, "XOR", "Oyun Teorisi", Color(0xFFF4511E)),
+        MathTopicCardItem(MathScreen.LOGARITHM, "Logaritma & Ölçekler", "Napier logaritması, Richter, dB ve pH hesaplama.", "log_b", "Aritmetik", Color(0xFFE65100)),
+        MathTopicCardItem(MathScreen.ARF_INVARIANT, "Arf Değişmezi (Cahit Arf)", "10 TL üzerindeki Cahit Arf kuadratik form sabiti.", "Arf(Q)", "Cebir", Color(0xFFC2185B)),
+        MathTopicCardItem(MathScreen.THALES, "Thales Teoremi & Gölge", "Antik Mısır piramit yükseklik hesabı ve üçgen oranı.", "△/△", "Geometri", Color(0xFF00796B)),
+        MathTopicCardItem(MathScreen.KEPLER_LAWS, "Kepler Yörünge Yasaları", "Eliptik yörüngeler, T²=a³ ve alan hızları simülasyonu.", "T²/a³", "Astronomi", Color(0xFF5E35B1)),
+        MathTopicCardItem(MathScreen.BRACHISTOCHRONE, "Brachistochrone İniş Eğrisi", "Sikloid eğrisinde en hızlı iniş yarışı simülasyonu.", "Sikloid", "Fizik", Color(0xFFD81B60)),
+        MathTopicCardItem(MathScreen.CANTOR_SET, "Cantor Kümesi & Sonsuzluk", "D=ln2/ln3 Hausdorff boyutu ve fraktal küme adımları.", "ℵ₀", "Kümeler", Color(0xFF0288D1)),
+        MathTopicCardItem(MathScreen.ERATOSTHENES, "Eratosthenes Dünya Çevresi", "İskenderiye-Syene gölge açısıyla Dünya yarıçapı hesabı.", "C=2πr", "Geometri", Color(0xFFF57C00)),
+        MathTopicCardItem(MathScreen.CUBIC_EQUATION, "3. Derece Kübik Denklem", "Cardano-Tartaglia formülü ile ax³+bx²+cx+d=0 kökleri.", "x³+px", "Cebir", Color(0xFF7B1FA2)),
+        MathTopicCardItem(MathScreen.SPHERICAL_TRIG, "Küresel Trigonometri", "El-Battani kosinüs yasası & Haversine en kısa uçuş rotası.", "cos(a)", "Geometri", Color(0xFF0097A7)),
+        MathTopicCardItem(MathScreen.GODEL_NUMBERING, "Gödel Sayılaması", "Kurt Gödel asal sayı üsleri ile sembol dizisi kodlama.", "2ᵃ3ᵇ", "Kriptografi", Color(0xFF388E3C))
     )
 
-    val categories = listOf("Hepsi", "Sabitler", "Cebir", "Geometri", "Diziler", "Aritmetik", "Kombinatorik", "Kriptografi", "İstatistik", "Fraktallar", "Oyun Teorisi")
+    val categories = listOf("Hepsi", "Sabitler", "Cebir", "Geometri", "Diziler", "Aritmetik", "Kombinatorik", "Kriptografi", "İstatistik", "Fraktallar", "Oyun Teorisi", "Astronomi", "Fizik", "Kümeler")
 
     val categoryListState = rememberLazyListState()
     val homeListState = rememberLazyListState()

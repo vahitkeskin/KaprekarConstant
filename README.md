@@ -4,19 +4,19 @@
 [![Compose Multiplatform](https://img.shields.io/badge/Compose_Multiplatform-1.11.1-4285F4.svg?logo=jetpackcompose)](https://www.jetbrains.com/lp/compose-multiplatform/)
 [![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Desktop-green.svg)](#-platforms-support)
 [![Architecture](https://img.shields.io/badge/Architecture-Clean%20%7C%20MVI--MVVM-orange.svg)](#-architecture--tech-stack)
-[![Solvers](https://img.shields.io/badge/Math_Solvers-20_Interactive_Modules-magenta.svg)](#-20-interactive-math-solvers--visualizers)
+[![Solvers](https://img.shields.io/badge/Math_Solvers-30_Interactive_Modules-magenta.svg)](#-30-interactive-math-solvers--visualizers)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 **Kaprekar's Constant (6174) & Math Lab** is a modern, production-ready, highly interactive Kotlin Multiplatform (KMP) application built with **Compose Multiplatform**, **Material 3**, **Koin DI**, and **DataStore Preferences**.
 
-It demonstrates the fascinating mathematical phenomenon of **Kaprekar's Routine** alongside **20 interactive mathematical solvers and visualizers** across **Android**, **iOS**, and **Desktop (JVM)** with real-time step calculations, slow reveal animations, auto-scroll step centering, home search filtering, 19 international languages, custom 3D Pi branding, and persistent settings! 🌟
+It demonstrates the fascinating mathematical phenomenon of **Kaprekar's Routine** alongside **30 interactive mathematical solvers and visualizers** across **Android**, **iOS**, and **Desktop (JVM)** with real-time step calculations, slow reveal animations, auto-scroll step centering, home search filtering, 19 international languages, custom 3D Pi branding, and persistent settings! 🌟
 
 ---
 
 ## 🌟 Key Features (Öne Çıkan Özellikler)
 
-- 🧮 **20 Interactive Math Solvers & Visualizers**: Includes Kaprekar Routine, Fibonacci, Collatz Conjecture, Fractals, Fourier Transform, Chaos Game, Nim Game, and more!
-- 🔍 **Home Search & Live Filtering**: Instant search filtering across all 20 math modules on the home dashboard.
+- 🧮 **30 Interactive Math Solvers & Visualizers**: Includes Kaprekar Routine, Fibonacci, Collatz, Arf Invariant, Thales, Kepler Laws, Brachistochrone, Cantor Set, Eratosthenes, Cardano Cubic, Spherical Trig, Gödel Numbering, and more!
+- 🔍 **Home Search & Live Filtering**: Instant search filtering across all 30 math modules on the home dashboard.
 - 🎨 **Minimalist Solid 3D Pi App Icon**: Uniform brand icon across Android (`mipmap-*`), iOS (`AppIcon.appiconset`), and Desktop (`desktopApp`).
 - 🌐 **19 International Languages (19 Dil Desteği)**: Full multi-language support with instant switching (`tr`, `en`, `ja`, `de`, `ru`, `fr`, `es`, `hi`, `ar`, `az`, `zh`, `pt`, `id`, `ko`, `it`, `nl`, `vi`, `th`, `pl`). Automatically detects system locale and defaults to **English (`en`)** if unlisted!
 - 🎨 **Dynamic Theme Modes (Sistem, Açık, Kapalı)**: Smooth switching between System Default (Default), Light, and Dark themes with custom Material 3 color palettes and circular action button.
@@ -26,30 +26,40 @@ It demonstrates the fascinating mathematical phenomenon of **Kaprekar's Routine*
 
 ---
 
-## 🔢 20 Interactive Math Solvers & Visualizers (20 Matematiksel Hesaplayıcı)
+## 🔢 30 Interactive Math Solvers & Visualizers (30 Matematiksel Hesaplayıcı)
 
-| # | Solver / Feature | Description |
-| :-: | :--- | :--- |
-| **1** | 🔮 **Kaprekar Routine (6174)** | Interactive step-by-step 4-digit Kaprekar constant calculator with slow reveal animation. |
-| **2** | 🌀 **Fibonacci & Golden Ratio** | Fibonacci sequence generation & golden spiral ratio visualization. |
-| **3** | 🌟 **Super Number (Armstrong)** | Narcissistic number verifier & step-by-step power-sum calculations. |
-| **4** | 📐 **Golden Ratio ($\phi$)** | Golden ratio calculation ($\phi \approx 1.6180339887...$) with geometric proportions. |
-| **5** | 📈 **Collatz Conjecture ($3n+1$)** | Hailstone sequence path graph & step count visualization. |
-| **6** | 🔢 **Prime Numbers (Sieve)** | Sieve of Eratosthenes prime generator, primality test & factorization. |
-| **7** | 🔺 **Pascal's Triangle** | Dynamic Pascal triangle generator with combination values. |
-| **8** | 🥧 **Pi ($\pi$) Calculator** | Multi-algorithm Pi estimation (Leibniz series & Nilakantha series). |
-| **9** | ℯ **Euler's Constant ($e$)** | Calculation of $e \approx 2.71828...$ via infinite sum Taylor expansion. |
-| **10** | 🧮 **Euclid GCD & LCM** | Greatest Common Divisor & Least Common Multiple step-by-step Euclidean algorithm. |
-| **11** | 📐 **Trigonometry & Unit Circle** | Interactive unit circle, Sine, Cosine, Tangent values and radian/degree conversion. |
-| **12** | 📉 **Quadratic Equation Solver** | $ax^2 + bx + c = 0$ solver with real and complex discriminant ($\Delta$) roots. |
-| **13** | 🔢 **Modular Arithmetic** | Congruence relations, modulo addition, multiplication and power steps. |
-| **14** | 📊 **Statistics & Data Analysis** | Mean, median, mode, variance, standard deviation & min/max summary. |
-| **15** | ❄️ **Fractal Explorer** | Interactive Mandelbrot and Julia set fractal rendering. |
-| **16** | 🌻 **Phyllotaxis Simulation** | Golden ratio sunflower seed spiral growth patterns. |
-| **17** | 🔄 **Transformation Geometry** | Translation, rotation, scaling & reflection coordinate calculations. |
-| **18** | 🌊 **Fourier Transform** | Waveform decomposition & frequency spectrum visualizer. |
-| **19** | 🎲 **Chaos Game** | Sierpinski triangle fractal generation using random vertex play. |
-| **20** | 🎯 **Nim Game** | Interactive Game Theory strategy game vs AI opponent. |
+| # | Solver / Feature | Description | Reference / Inspired By |
+| :-: | :--- | :--- | :--- |
+| **1** | 🔮 **Kaprekar Routine (6174)** | Interactive step-by-step 4-digit Kaprekar constant calculator with slow reveal animation. | D. R. Kaprekar (1949) |
+| **2** | 🌀 **Fibonacci & Golden Ratio** | Fibonacci sequence generation & golden spiral ratio visualization. | Leonardo Fibonacci |
+| **3** | 🌟 **Super Number (Armstrong)** | Narcissistic number verifier & step-by-step power-sum calculations. | Number Theory |
+| **4** | 📐 **Golden Ratio ($\phi$)** | Golden ratio calculation ($\phi \approx 1.6180339887...$) with geometric proportions. | Euclid & Phidias |
+| **5** | 📈 **Collatz Conjecture ($3n+1$)** | Hailstone sequence path graph & step count visualization. | Lothar Collatz |
+| **6** | 🔢 **Prime Numbers (Sieve)** | Sieve of Eratosthenes prime generator, primality test & factorization. | Eratosthenes |
+| **7** | 🔺 **Pascal's Triangle** | Dynamic Pascal triangle generator with combination values. | Blaise Pascal |
+| **8** | 🥧 **Pi ($\pi$) Calculator** | Multi-algorithm Pi estimation (Leibniz series & Nilakantha series). | Gottfried Leibniz |
+| **9** | ℯ **Euler's Constant ($e$)** | Calculation of $e \approx 2.71828...$ via infinite sum Taylor expansion. | Leonhard Euler |
+| **10** | 🧮 **Euclid GCD & LCM** | Greatest Common Divisor & Least Common Multiple step-by-step Euclidean algorithm. | Euclid |
+| **11** | 📐 **Trigonometry & Unit Circle** | Interactive unit circle, Sine, Cosine, Tangent values and radian/degree conversion. | Hipparchus & Ptolemy |
+| **12** | 📉 **Quadratic Equation Solver** | $ax^2 + bx + c = 0$ solver with real and complex discriminant ($\Delta$) roots. | Al-Khwarizmi |
+| **13** | 🔢 **Modular Arithmetic** | Congruence relations, modulo addition, multiplication and power steps. | Carl Friedrich Gauss |
+| **14** | 📊 **Statistics & Data Analysis** | Mean, median, mode, variance, standard deviation & min/max summary. | Carl Friedrich Gauss |
+| **15** | ❄️ **Fractal Explorer** | Interactive Mandelbrot and Julia set fractal rendering. | Benoit Mandelbrot |
+| **16** | 🌻 **Phyllotaxis Simulation** | Golden ratio sunflower seed spiral growth patterns. | Phyllotaxis Geometry |
+| **17** | 🔄 **Transformation Geometry** | Translation, rotation, scaling & reflection coordinate calculations. | Linear Algebra |
+| **18** | 🌊 **Fourier Transform** | Waveform decomposition & frequency spectrum visualizer. | Joseph Fourier |
+| **19** | 🎲 **Chaos Game** | Sierpinski triangle fractal generation using random vertex play. | Wacław Sierpiński |
+| **20** | 🎯 **Nim Game** | Interactive Game Theory strategy game vs AI opponent. | Charles L. Bouton |
+| **21** | 📐 **Logarithm & Scales** | Logarithm $\log_b(x)$, $\ln(x)$, Richter scale, Decibel sound & pH calculation. | John Napier |
+| **22** | 🇹🇷 **Arf Invariant** | Binary quadratic form invariant $Arf(Q) \in \mathbb{Z}_2$ & knot theory invariant. | Cahit Arf (10 TL) |
+| **23** | 📐 **Thales Intercept Theorem** | Pyramid height calculation ($H = h \cdot S/s$) & triangle proportionality. | Thales of Miletus |
+| **24** | 🪐 **Kepler's Planetary Laws** | Elliptical orbit simulator ($r(\theta)$, $T^2=a^3$) & perihelion/aphelion speed ratio. | Johannes Kepler |
+| **25** | 🏎️ **Brachistochrone Curve** | Cycloid fastest descent curve race vs straight line ($T_{\text{cycloid}} = \pi \sqrt{h/g}$). | Bernoulli Brothers |
+| **26** | ♾️ **Cantor Set & Infinities** | Cantor set middle-third fractal step removal & Hausdorff dimension ($D \approx 0.6309$). | Georg Cantor |
+| **27** | 🌍 **Eratosthenes Earth Radius** | Alexandria-Syene shadow angle ($\theta = 7.2^\circ$) Earth circumference calculation. | Eratosthenes |
+| **28** | 🧩 **Cardano-Tartaglia Cubic** | $ax^3+bx^2+cx+d=0$ depressed cubic substitution ($t^3+pt+q=0$) & 3 roots. | Tartaglia & Cardano |
+| **29** | ✈️ **Spherical Trigonometry** | Spherical law of cosines & Haversine great-circle flight distance calculator. | Al-Battani |
+| **30** | 🔒 **Gödel Numbering** | Prime exponent encoding ($G = 2^{a_1} \cdot 3^{a_2} \cdot 5^{a_3} \cdots$) of math formulas. | Kurt Gödel |
 
 ---
 

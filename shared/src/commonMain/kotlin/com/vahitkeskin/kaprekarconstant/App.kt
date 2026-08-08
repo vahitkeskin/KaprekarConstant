@@ -141,6 +141,16 @@ fun KaprekarAppContent(
                     MathScreen.FOURIER -> FourierScreen(state = state, onIntent = viewModel::onIntent)
                     MathScreen.CHAOS_GAME -> ChaosGameScreen(state = state, onIntent = viewModel::onIntent)
                     MathScreen.NIM_GAME -> NimGameScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.LOGARITHM -> com.example.kaprekar.presentation.ui.logarithm.LogarithmScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.ARF_INVARIANT -> com.example.kaprekar.presentation.ui.arf.ArfInvariantScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.THALES -> com.example.kaprekar.presentation.ui.thales.ThalesScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.KEPLER_LAWS -> com.example.kaprekar.presentation.ui.kepler.KeplerScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.BRACHISTOCHRONE -> com.example.kaprekar.presentation.ui.brachistochrone.BrachistochroneScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.CANTOR_SET -> com.example.kaprekar.presentation.ui.cantor.CantorScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.ERATOSTHENES -> com.example.kaprekar.presentation.ui.eratosthenes.EratosthenesScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.CUBIC_EQUATION -> com.example.kaprekar.presentation.ui.cubic.CubicScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.SPHERICAL_TRIG -> com.example.kaprekar.presentation.ui.sphericaltrig.SphericalTrigScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.GODEL_NUMBERING -> com.example.kaprekar.presentation.ui.godel.GodelScreen(state = state, onIntent = viewModel::onIntent)
                 }
             }
         }
