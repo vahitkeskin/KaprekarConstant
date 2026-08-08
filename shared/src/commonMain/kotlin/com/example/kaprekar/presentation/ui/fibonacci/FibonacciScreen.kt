@@ -17,6 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.animation.core.*
+import androidx.compose.ui.geometry.Offset
 import com.example.kaprekar.domain.usecase.CalculateFibonacciUseCase
 import com.example.kaprekar.domain.usecase.FibonacciResult
 import com.example.kaprekar.presentation.KaprekarUiIntent
@@ -122,6 +124,38 @@ fun FibonacciScreen(
                                     activeTrackColor = BrandCyan
                                 )
                             )
+
+                            // Canvas Animated Golden Spiral
+                            Box(modifier = Modifier.fillMaxWidth().height(180.dp)) {
+                                val infiniteTransition = rememberInfiniteTransition(label = "spiral")
+                                val spiralRot by infiniteTransition.animateFloat(
+                                    initialValue = 0f,
+                                    targetValue = 360f,
+                                    animationSpec = infiniteRepeatable(tween(10000, easing = LinearEasing), RepeatMode.Restart),
+                                    label = "rot"
+                                )
+
+                                androidx.compose.foundation.Canvas(modifier = Modifier.fillMaxSize()) {
+                                    val cx = size.width / 2
+                                    val cy = size.height / 2
+                                    val path = androidx.compose.ui.graphics.Path()
+                                    val b = 0.15f
+                                    var first = true
+
+                                    for (angle in 0..(360 * 3) step 10) {
+                                        val rad = kotlin.math.PI * (angle + spiralRot) / 180.0
+                                        val r = (2.0 * kotlin.math.exp(b * (angle * kotlin.math.PI / 180.0))).toFloat()
+                                        val px = cx + r * kotlin.math.cos(rad).toFloat()
+                                        val py = cy + r * kotlin.math.sin(rad).toFloat()
+
+                                        if (first) { path.moveTo(px, py); first = false }
+                                        else { path.lineTo(px, py) }
+                                    }
+
+                                    drawPath(path, color = BrandCyan, style = androidx.compose.ui.graphics.drawscope.Stroke(width = 3.dp.toPx()))
+                                    drawCircle(color = BrandPink, radius = 6.dp.toPx(), center = Offset(cx, cy))
+                                }
+                            }
 
                             // Summary Info
                             Surface(

@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.animation.core.*
 import com.example.kaprekar.domain.usecase.CalculateFourierUseCase
 import com.example.kaprekar.presentation.KaprekarUiIntent
 import com.example.kaprekar.presentation.KaprekarUiState
@@ -72,6 +73,14 @@ fun FourierScreen(
                         ) {
                             val pinkColor = MaterialTheme.colorScheme.primary
 
+                            val infiniteTransition = rememberInfiniteTransition(label = "fourier")
+                            val phaseShift by infiniteTransition.animateFloat(
+                                initialValue = 0f,
+                                targetValue = 6.28f,
+                                animationSpec = infiniteRepeatable(tween(2500, easing = LinearEasing), RepeatMode.Restart),
+                                label = "phase"
+                            )
+
                             Canvas(modifier = Modifier.fillMaxSize().padding(12.dp)) {
                                 val w = size.width
                                 val h = size.height
@@ -82,7 +91,8 @@ fun FourierScreen(
 
                                 result.wavePoints.forEachIndexed { index, yVal ->
                                     val px = (index / result.wavePoints.size.toFloat()) * w
-                                    val py = centerY - (yVal * h * 0.35f).toFloat()
+                                    val animatedY = yVal * kotlin.math.cos((index.toFloat() / result.wavePoints.size.toFloat() * 10f + phaseShift).toDouble())
+                                    val py = centerY - (animatedY * h * 0.35f).toFloat()
 
                                     if (first) {
                                         path.moveTo(px, py)

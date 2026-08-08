@@ -1,5 +1,6 @@
 package com.example.kaprekar.presentation.ui.cantor
 
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,14 +11,16 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.kaprekar.domain.usecase.CalculateCantorUseCase
 import com.example.kaprekar.presentation.KaprekarUiIntent
 import com.example.kaprekar.presentation.KaprekarUiState
+import com.example.kaprekar.presentation.ui.common.BrandPink
 import com.example.kaprekar.presentation.ui.common.TopGradientAppBar
-import kotlin.math.pow
 
 @Composable
 fun CantorScreen(
@@ -56,9 +59,10 @@ fun CantorScreen(
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
                             text = "D = ln(2)/ln(3) ≈ ${round(result.hausdorffDimension)}",
-                            fontSize = 26.sp,
+                            fontSize = 28.sp,
                             fontWeight = FontWeight.ExtraBold,
-                            color = MaterialTheme.colorScheme.primary
+                            fontFamily = FontFamily.Monospace,
+                            color = BrandPink
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text("Sonsuz adımda toplam uzunluğu 0 olan ama sayılamaz sonsuzlukta nokta içeren küme!")
@@ -76,11 +80,9 @@ fun CantorScreen(
                     Column(modifier = Modifier.padding(12.dp)) {
                         Text("Adım ${step.step}: Parça Sayısı = ${step.segmentCount} | Kalan Uzunluk = ${round(step.totalRemainingLength)}", fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
-                        Box(modifier = Modifier.fillMaxWidth().height(20.dp)) {
+                        Box(modifier = Modifier.fillMaxWidth().height(24.dp)) {
                             Canvas(modifier = Modifier.fillMaxSize()) {
-                                val w = size.width
-                                val segs = step.segmentCount
-                                drawCantorLine(0f, w, step.step, size.height / 2)
+                                drawCantorLine(0f, size.width, step.step, size.height / 2)
                             }
                         }
                     }
@@ -92,7 +94,7 @@ fun CantorScreen(
 
 private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawCantorLine(x: Float, width: Float, depth: Int, y: Float) {
     if (depth == 0) {
-        drawLine(color = Color(0xFFFF2E93), start = Offset(x, y), end = Offset(x + width, y), strokeWidth = 8f)
+        drawLine(color = BrandPink, start = Offset(x, y), end = Offset(x + width, y), strokeWidth = 10f)
     } else {
         val w3 = width / 3f
         drawCantorLine(x, w3, depth - 1, y)
@@ -101,3 +103,11 @@ private fun androidx.compose.ui.graphics.drawscope.DrawScope.drawCantorLine(x: F
 }
 
 private fun round(v: Double): Double = (kotlin.math.round(v * 10000.0)) / 10000.0
+
+@Preview
+@Composable
+fun CantorScreenPreview() {
+    MaterialTheme {
+        CantorScreen(state = KaprekarUiState(), onIntent = {})
+    }
+}

@@ -1,17 +1,27 @@
 package com.example.kaprekar.presentation.ui.sphericaltrig
 
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.kaprekar.domain.usecase.CalculateSphericalTrigUseCase
 import com.example.kaprekar.presentation.KaprekarUiIntent
 import com.example.kaprekar.presentation.KaprekarUiState
+import com.example.kaprekar.presentation.ui.common.BrandCyan
+import com.example.kaprekar.presentation.ui.common.BrandPink
 import com.example.kaprekar.presentation.ui.common.TopGradientAppBar
 
 @Composable
@@ -28,6 +38,13 @@ fun SphericalTrigScreen(
     val result = remember(lat1, lon1, lat2, lon2) {
         useCase(lat1.toDouble(), lon1.toDouble(), lat2.toDouble(), lon2.toDouble())
     }
+
+    val infiniteTransition = rememberInfiniteTransition()
+    val pulseProgress by infiniteTransition.animateFloat(
+        initialValue = 0.2f,
+        targetValue = 1.0f,
+        animationSpec = infiniteRepeatable(tween(2000, easing = LinearEasing), RepeatMode.Reverse)
+    )
 
     Scaffold(
         topBar = {
@@ -59,10 +76,44 @@ fun SphericalTrigScreen(
                             text = "En Kısa Uçuş Mesafesi: ${round(result.distanceKm)} km",
                             fontSize = 24.sp,
                             fontWeight = FontWeight.ExtraBold,
-                            color = MaterialTheme.colorScheme.primary
+                            fontFamily = FontFamily.Monospace,
+                            color = BrandPink
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text("Başlangıç Rotası (Açı): ${round(result.initialBearingDeg)}°")
+                    }
+                }
+            }
+
+            item {
+                Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text("🌐 Küre Üzerinde Büyük Daire Rota Çizimi", fontWeight = FontWeight.Bold)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Box(modifier = Modifier.fillMaxWidth().height(180.dp)) {
+                            Canvas(modifier = Modifier.fillMaxSize()) {
+                                val cx = size.width / 2
+                                val cy = size.height / 2
+                                val r = 60.dp.toPx()
+
+                                drawCircle(color = BrandCyan.copy(0.4f), radius = r, center = Offset(cx, cy), style = Stroke(width = 3.dp.toPx()))
+
+                                val p1x = cx + r * kotlin.math.cos(lat1 * Math.PI / 180).toFloat() * 0.7f
+                                val p1y = cy - r * kotlin.math.sin(lat1 * Math.PI / 180).toFloat() * 0.7f
+
+                                val p2x = cx + r * kotlin.math.cos(lat2 * Math.PI / 180).toFloat() * 0.7f
+                                val p2y = cy - r * kotlin.math.sin(lat2 * Math.PI / 180).toFloat() * 0.7f
+
+                                val routePath = Path().apply {
+                                    moveTo(p1x, p1y)
+                                    quadraticTo(cx, cy - r * 1.1f, p2x, p2y)
+                                }
+                                drawPath(routePath, color = BrandPink, style = Stroke(width = 4.dp.toPx()))
+
+                                drawCircle(color = BrandPink, radius = 7.dp.toPx(), center = Offset(p1x, p1y))
+                                drawCircle(color = Color.Yellow, radius = 7.dp.toPx(), center = Offset(p2x, p2y))
+                            }
+                        }
                     }
                 }
             }
@@ -91,3 +142,11 @@ fun SphericalTrigScreen(
 }
 
 private fun round(v: Double): Double = (kotlin.math.round(v * 10.0)) / 10.0
+
+@Preview
+@Composable
+fun SphericalTrigScreenPreview() {
+    MaterialTheme {
+        SphericalTrigScreen(state = KaprekarUiState(), onIntent = {})
+    }
+}
