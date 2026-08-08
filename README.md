@@ -1,26 +1,55 @@
-# 🔮 Kaprekar's Constant (6174) — Multiplatform App 🚀
+# 🔮 Kaprekar's Constant (6174) & Math Lab — Multiplatform App 🚀
 
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.4.10-7F52FF.svg?logo=kotlin)](https://kotlinlang.org)
 [![Compose Multiplatform](https://img.shields.io/badge/Compose_Multiplatform-1.11.1-4285F4.svg?logo=jetpackcompose)](https://www.jetbrains.com/lp/compose-multiplatform/)
 [![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Desktop-green.svg)](#-platforms-support)
 [![Architecture](https://img.shields.io/badge/Architecture-Clean%20%7C%20MVI--MVVM-orange.svg)](#-architecture--tech-stack)
+[![Solvers](https://img.shields.io/badge/Math_Solvers-20_Interactive_Modules-magenta.svg)](#-20-interactive-math-solvers--visualizers)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-**Kaprekar's Constant (6174)** is a modern, production-ready, highly interactive Kotlin Multiplatform (KMP) application built with **Compose Multiplatform**, **Material 3**, **Koin DI**, and **DataStore Preferences**. 
+**Kaprekar's Constant (6174) & Math Lab** is a modern, production-ready, highly interactive Kotlin Multiplatform (KMP) application built with **Compose Multiplatform**, **Material 3**, **Koin DI**, and **DataStore Preferences**.
 
-It demonstrates the fascinating mathematical phenomenon of **Kaprekar's Routine** across **Android**, **iOS**, and **Desktop (JVM)** with real-time step calculations, slow step-by-step reveal animations, auto-scroll step centering, 19 international languages, and persistent theme settings! 🌟
+It demonstrates the fascinating mathematical phenomenon of **Kaprekar's Routine** alongside **20 interactive mathematical solvers and visualizers** across **Android**, **iOS**, and **Desktop (JVM)** with real-time step calculations, slow reveal animations, auto-scroll step centering, home search filtering, 19 international languages, custom 3D Pi branding, and persistent settings! 🌟
 
 ---
 
 ## 🌟 Key Features (Öne Çıkan Özellikler)
 
-- 🧮 **Pure Kotlin Domain Algorithm**: Calculates Kaprekar's Routine step-by-step for any valid 4-digit number (with at least 2 distinct digits). Automatically handles intermediate 4-digit leading zero padding ($D - A = Result$).
+- 🧮 **20 Interactive Math Solvers & Visualizers**: Includes Kaprekar Routine, Fibonacci, Collatz Conjecture, Fractals, Fourier Transform, Chaos Game, Nim Game, and more!
+- 🔍 **Home Search & Live Filtering**: Instant search filtering across all 20 math modules on the home dashboard.
+- 🎨 **Minimalist Solid 3D Pi App Icon**: Uniform brand icon across Android (`mipmap-*`), iOS (`AppIcon.appiconset`), and Desktop (`desktopApp`).
 - 🌐 **19 International Languages (19 Dil Desteği)**: Full multi-language support with instant switching (`tr`, `en`, `ja`, `de`, `ru`, `fr`, `es`, `hi`, `ar`, `az`, `zh`, `pt`, `id`, `ko`, `it`, `nl`, `vi`, `th`, `pl`). Automatically detects system locale and defaults to **English (`en`)** if unlisted!
 - 🎨 **Dynamic Theme Modes (Sistem, Açık, Kapalı)**: Smooth switching between System Default (Default), Light, and Dark themes with custom Material 3 color palettes and circular action button.
 - 💾 **KMP DataStore Preferences Persistence**: Preferences (`theme_mode`, `app_language`) are saved cross-platform using `androidx.datastore` and restored seamlessly on app startup.
-- 🎬 **Animated Slow Reveal & Auto-Centering**: Steps are revealed smoothly with a 1000ms delay per step. The active step automatically scrolls to center focus on screen (`animateScrollToItem`).
-- 🔘 **Circular TopBar Action Buttons**: Custom circular flag button for language selection and circular theme toggle button in top right.
-- 📱 **Multiplatform Native Performance**: Runs natively on Android, iOS (SwiftUI host), and Desktop JVM (Mac, Windows, Linux).
+- 🎬 **Smooth Fade Screen Transitions**: Clean fade transitions (`fadeIn` + `fadeOut`) without screen movement clutter.
+- 📱 **Multiplatform Native Edge-to-Edge**: 100% transparent navigation bar and edge-to-edge support across Android, iOS (SwiftUI host), and Desktop JVM.
+
+---
+
+## 🔢 20 Interactive Math Solvers & Visualizers (20 Matematiksel Hesaplayıcı)
+
+| # | Solver / Feature | Description |
+| :-: | :--- | :--- |
+| **1** | 🔮 **Kaprekar Routine (6174)** | Interactive step-by-step 4-digit Kaprekar constant calculator with slow reveal animation. |
+| **2** | 🌀 **Fibonacci & Golden Ratio** | Fibonacci sequence generation & golden spiral ratio visualization. |
+| **3** | 🌟 **Super Number (Armstrong)** | Narcissistic number verifier & step-by-step power-sum calculations. |
+| **4** | 📐 **Golden Ratio ($\phi$)** | Golden ratio calculation ($\phi \approx 1.6180339887...$) with geometric proportions. |
+| **5** | 📈 **Collatz Conjecture ($3n+1$)** | Hailstone sequence path graph & step count visualization. |
+| **6** | 🔢 **Prime Numbers (Sieve)** | Sieve of Eratosthenes prime generator, primality test & factorization. |
+| **7** | 🔺 **Pascal's Triangle** | Dynamic Pascal triangle generator with combination values. |
+| **8** | 🥧 **Pi ($\pi$) Calculator** | Multi-algorithm Pi estimation (Leibniz series & Nilakantha series). |
+| **9** | ℯ **Euler's Constant ($e$)** | Calculation of $e \approx 2.71828...$ via infinite sum Taylor expansion. |
+| **10** | 🧮 **Euclid GCD & LCM** | Greatest Common Divisor & Least Common Multiple step-by-step Euclidean algorithm. |
+| **11** | 📐 **Trigonometry & Unit Circle** | Interactive unit circle, Sine, Cosine, Tangent values and radian/degree conversion. |
+| **12** | 📉 **Quadratic Equation Solver** | $ax^2 + bx + c = 0$ solver with real and complex discriminant ($\Delta$) roots. |
+| **13** | 🔢 **Modular Arithmetic** | Congruence relations, modulo addition, multiplication and power steps. |
+| **14** | 📊 **Statistics & Data Analysis** | Mean, median, mode, variance, standard deviation & min/max summary. |
+| **15** | ❄️ **Fractal Explorer** | Interactive Mandelbrot and Julia set fractal rendering. |
+| **16** | 🌻 **Phyllotaxis Simulation** | Golden ratio sunflower seed spiral growth patterns. |
+| **17** | 🔄 **Transformation Geometry** | Translation, rotation, scaling & reflection coordinate calculations. |
+| **18** | 🌊 **Fourier Transform** | Waveform decomposition & frequency spectrum visualizer. |
+| **19** | 🎲 **Chaos Game** | Sierpinski triangle fractal generation using random vertex play. |
+| **20** | 🎯 **Nim Game** | Interactive Game Theory strategy game vs AI opponent. |
 
 ---
 
@@ -43,7 +72,7 @@ The application follows strict **Clean Architecture** principles and **Unidirect
                                 ▼
            ┌─────────────────────────────────────────┐
            │              Domain Layer               │
-           │ (CalculateKaprekarUseCase & KaprekarStep)│
+           │   (Domain UseCases & Math Models)       │
            └────────────────────┬────────────────────┘
                                 │ Reads / Writes
                                 ▼
@@ -54,7 +83,7 @@ The application follows strict **Clean Architecture** principles and **Unidirect
 ```
 
 ### 🛠️ Core Technologies
-- **UI Framework**: Compose Multiplatform (Material 3)
+- **UI Framework**: Compose Multiplatform 1.11.1 (Material 3)
 - **State Management**: Kotlin Coroutines & `StateFlow`
 - **Dependency Injection**: Koin 4.0.2 (KMP ready with platform modules)
 - **Data Persistence**: AndroidX DataStore Preferences Core 1.1.3
@@ -113,15 +142,19 @@ Discovered in 1949 by Indian mathematician **D. R. Kaprekar**, the number **6174
 ```text
 KaprekarConstant/
 ├── androidApp/                       # Android Target Module
-│   └── src/main/kotlin/
-│       └── com/vahitkeskin/kaprekarconstant/
+│   └── src/main/
+│       ├── res/                      # Android Launcher Icons (mipmap-*)
+│       └── kotlin/com/vahitkeskin/kaprekarconstant/
 │           ├── KaprekarApplication.kt # Koin Context & Application Class
 │           └── MainActivity.kt       # Activity Entry Point
 ├── desktopApp/                       # Desktop JVM Target Module
-│   └── src/main/kotlin/
-│       └── com/vahitkeskin/kaprekarconstant/main.kt # Desktop Entry Point
+│   └── src/main/
+│       ├── resources/                # Desktop Icon (icon.png)
+│       └── kotlin/com/vahitkeskin/kaprekarconstant/main.kt # Desktop Entry Point
 ├── iosApp/                           # iOS Target Module (SwiftUI)
-│   └── iosApp/iOSApp.swift           # iOS Entry Point
+│   └── iosApp/
+│       ├── Assets.xcassets/AppIcon.appiconset/ # iOS App Icon Assets
+│       └── iOSApp.swift              # iOS Entry Point
 └── shared/                           # KMP Shared Logic & UI
     └── src/
         ├── commonMain/kotlin/com/example/kaprekar/
@@ -130,16 +163,15 @@ KaprekarConstant/
         │   │   └── repository/       # ThemeRepositoryImpl (DataStore)
         │   ├── di/                   # Koin DI Modules & initKoin()
         │   ├── domain/
-        │   │   ├── model/            # KaprekarStep, ThemeMode, AppLanguage
+        │   │   ├── model/            # KaprekarStep, ThemeMode, AppLanguage, MathScreen
         │   │   ├── repository/       # ThemeRepository Interface
-        │   │   ├── usecase/          # CalculateKaprekarUseCase Pure Domain Logic
+        │   │   ├── usecase/          # 20 Math Domain UseCases
         │   │   └── util/             # SystemLanguage expect fun
         │   └── presentation/
         │       ├── KaprekarContract.kt # MVI State & Actions
         │       ├── KaprekarViewModel.kt # ViewModel with StateFlow
         │       ├── i18n/              # AppStrings & 19 Language Files
-        │       └── ui/
-        │           └── KaprekarScreen.kt # Compose Multiplatform UI
+        │       └── ui/               # 20 Interactive Screen UIs & Navigation
         ├── androidMain/               # Android Platform Actual Implementations
         ├── iosMain/                   # iOS Platform Actual Implementations
         └── jvmMain/                   # Desktop Platform Actual Implementations
