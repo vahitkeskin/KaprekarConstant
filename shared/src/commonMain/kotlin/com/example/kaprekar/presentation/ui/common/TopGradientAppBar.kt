@@ -32,6 +32,7 @@ fun TopGradientAppBar(
     state: KaprekarUiState,
     onIntent: (KaprekarUiIntent) -> Unit,
     showBackButton: Boolean = false,
+    showRightActions: Boolean = !showBackButton,
     badgeText: String? = null
 ) {
     Box(
@@ -113,73 +114,75 @@ fun TopGradientAppBar(
         }
 
         // Right Side: Language & Theme buttons
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
-            modifier = Modifier.align(Alignment.CenterEnd)
-        ) {
-            // Language Button
-            Surface(
-                onClick = { onIntent(KaprekarUiIntent.OnToggleLanguageDialog(true)) },
-                shape = CircleShape,
-                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.85f),
-                border = BorderStroke(
-                    width = 1.dp,
-                    color = BrandCyan.copy(alpha = 0.5f)
-                ),
-                modifier = Modifier.size(34.dp)
+        if (showRightActions) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                modifier = Modifier.align(Alignment.CenterEnd)
             ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Text(
-                        text = state.appLanguage.flagEmoji,
-                        fontSize = 15.sp
-                    )
+                // Language Button
+                Surface(
+                    onClick = { onIntent(KaprekarUiIntent.OnToggleLanguageDialog(true)) },
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.85f),
+                    border = BorderStroke(
+                        width = 1.dp,
+                        color = BrandCyan.copy(alpha = 0.5f)
+                    ),
+                    modifier = Modifier.size(34.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Text(
+                            text = state.appLanguage.flagEmoji,
+                            fontSize = 15.sp
+                        )
+                    }
                 }
-            }
 
-            // Theme Button
-            Surface(
-                onClick = { onIntent(KaprekarUiIntent.OnToggleThemeMode) },
-                shape = CircleShape,
-                color = when (state.themeMode) {
-                    ThemeMode.SYSTEM -> MaterialTheme.colorScheme.surface.copy(alpha = 0.85f)
-                    ThemeMode.LIGHT -> Color(0xFFFFF3E0).copy(alpha = 0.95f)
-                    ThemeMode.DARK -> Color(0xFF263238).copy(alpha = 0.95f)
-                },
-                border = BorderStroke(
-                    width = 1.dp,
+                // Theme Button
+                Surface(
+                    onClick = { onIntent(KaprekarUiIntent.OnToggleThemeMode) },
+                    shape = CircleShape,
                     color = when (state.themeMode) {
-                        ThemeMode.SYSTEM -> BrandPink.copy(alpha = 0.45f)
-                        ThemeMode.LIGHT -> Color(0xFFFFB74D).copy(alpha = 0.7f)
-                        ThemeMode.DARK -> Color(0xFF90CAF9).copy(alpha = 0.7f)
+                        ThemeMode.SYSTEM -> MaterialTheme.colorScheme.surface.copy(alpha = 0.85f)
+                        ThemeMode.LIGHT -> Color(0xFFFFF3E0).copy(alpha = 0.95f)
+                        ThemeMode.DARK -> Color(0xFF263238).copy(alpha = 0.95f)
+                    },
+                    border = BorderStroke(
+                        width = 1.dp,
+                        color = when (state.themeMode) {
+                            ThemeMode.SYSTEM -> BrandPink.copy(alpha = 0.45f)
+                            ThemeMode.LIGHT -> Color(0xFFFFB74D).copy(alpha = 0.7f)
+                            ThemeMode.DARK -> Color(0xFF90CAF9).copy(alpha = 0.7f)
+                        }
+                    ),
+                    modifier = Modifier.size(34.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        val (icon, tint, desc) = when (state.themeMode) {
+                            ThemeMode.SYSTEM -> Triple(
+                                Icons.Default.SettingsBrightness,
+                                BrandPink,
+                                state.strings.systemTheme
+                            )
+                            ThemeMode.LIGHT -> Triple(
+                                Icons.Default.LightMode,
+                                Color(0xFFF57C00),
+                                state.strings.lightTheme
+                            )
+                            ThemeMode.DARK -> Triple(
+                                Icons.Default.DarkMode,
+                                Color(0xFF90CAF9),
+                                state.strings.darkTheme
+                            )
+                        }
+                        Icon(
+                            imageVector = icon,
+                            contentDescription = desc,
+                            tint = tint,
+                            modifier = Modifier.size(17.dp)
+                        )
                     }
-                ),
-                modifier = Modifier.size(34.dp)
-            ) {
-                Box(contentAlignment = Alignment.Center) {
-                    val (icon, tint, desc) = when (state.themeMode) {
-                        ThemeMode.SYSTEM -> Triple(
-                            Icons.Default.SettingsBrightness,
-                            BrandPink,
-                            state.strings.systemTheme
-                        )
-                        ThemeMode.LIGHT -> Triple(
-                            Icons.Default.LightMode,
-                            Color(0xFFF57C00),
-                            state.strings.lightTheme
-                        )
-                        ThemeMode.DARK -> Triple(
-                            Icons.Default.DarkMode,
-                            Color(0xFF90CAF9),
-                            state.strings.darkTheme
-                        )
-                    }
-                    Icon(
-                        imageVector = icon,
-                        contentDescription = desc,
-                        tint = tint,
-                        modifier = Modifier.size(17.dp)
-                    )
                 }
             }
         }

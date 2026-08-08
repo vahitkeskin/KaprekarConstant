@@ -48,6 +48,8 @@ import com.example.kaprekar.presentation.ui.trigonometry.TrigonometryScreen
 import org.koin.compose.KoinContext
 import org.koin.compose.viewmodel.koinViewModel
 
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
+
 val BrandPink = Color(0xFFFF2E93)
 val BrandCyan = Color(0xFF00F0FF)
 
@@ -96,6 +98,7 @@ fun KaprekarAppContent(
 ) {
     val state by viewModel.uiState.collectAsState()
     val isSystemDark = isSystemInDarkTheme()
+    val saveableStateHolder = rememberSaveableStateHolder()
 
     // System Back Gesture / Button Handler
     BackHandler(enabled = state.canNavigateBack) {
@@ -128,28 +131,30 @@ fun KaprekarAppContent(
                 }
             }
         ) { targetScreen ->
-            when (targetScreen) {
-                MathScreen.HOME -> HomeScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.KAPREKAR -> KaprekarScreen(viewModel = viewModel)
-                MathScreen.FIBONACCI -> FibonacciScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.SUPER_NUMBER -> SuperNumberScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.GOLDEN_RATIO -> GoldenRatioScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.COLLATZ -> CollatzScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.PRIME -> PrimeScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.PASCAL -> PascalScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.PI -> PiScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.EULER -> EulerScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.EUCLID_GCD -> EuclidGcdScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.TRIGONOMETRY -> TrigonometryScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.QUADRATIC -> QuadraticScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.MODULAR -> ModularScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.STATISTICS -> StatisticsScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.FRACTAL -> FractalScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.PHYLLOTAXIS -> PhyllotaxisScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.TRANSFORMATION -> TransformationScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.FOURIER -> FourierScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.CHAOS_GAME -> ChaosGameScreen(state = state, onIntent = viewModel::onIntent)
-                MathScreen.NIM_GAME -> NimGameScreen(state = state, onIntent = viewModel::onIntent)
+            saveableStateHolder.SaveableStateProvider(targetScreen) {
+                when (targetScreen) {
+                    MathScreen.HOME -> HomeScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.KAPREKAR -> KaprekarScreen(viewModel = viewModel)
+                    MathScreen.FIBONACCI -> FibonacciScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.SUPER_NUMBER -> SuperNumberScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.GOLDEN_RATIO -> GoldenRatioScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.COLLATZ -> CollatzScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.PRIME -> PrimeScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.PASCAL -> PascalScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.PI -> PiScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.EULER -> EulerScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.EUCLID_GCD -> EuclidGcdScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.TRIGONOMETRY -> TrigonometryScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.QUADRATIC -> QuadraticScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.MODULAR -> ModularScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.STATISTICS -> StatisticsScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.FRACTAL -> FractalScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.PHYLLOTAXIS -> PhyllotaxisScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.TRANSFORMATION -> TransformationScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.FOURIER -> FourierScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.CHAOS_GAME -> ChaosGameScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.NIM_GAME -> NimGameScreen(state = state, onIntent = viewModel::onIntent)
+                }
             }
         }
     }

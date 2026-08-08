@@ -21,6 +21,7 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -53,8 +54,8 @@ fun HomeScreen(
     onIntent: (KaprekarUiIntent) -> Unit
 ) {
     val strings = state.strings
-    var searchQuery by remember { mutableStateOf("") }
-    var selectedCategory by remember { mutableStateOf("Hepsi") }
+    var searchQuery by rememberSaveable { mutableStateOf("") }
+    var selectedCategory by rememberSaveable { mutableStateOf("Hepsi") }
 
     val allTopics = listOf(
         MathTopicCardItem(MathScreen.KAPREKAR, strings.topicKaprekarTitle, strings.topicKaprekarDesc, "6174", "Sabitler", BrandPink),
@@ -82,6 +83,7 @@ fun HomeScreen(
     val categories = listOf("Hepsi", "Sabitler", "Cebir", "Geometri", "Diziler", "Aritmetik", "Kombinatorik", "Kriptografi", "İstatistik", "Fraktallar", "Oyun Teorisi")
 
     val categoryListState = rememberLazyListState()
+    val homeListState = rememberLazyListState()
 
     LaunchedEffect(selectedCategory) {
         val index = categories.indexOf(selectedCategory)
@@ -143,6 +145,7 @@ fun HomeScreen(
             }
         ) { innerPadding ->
             LazyColumn(
+                state = homeListState,
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 16.dp),
