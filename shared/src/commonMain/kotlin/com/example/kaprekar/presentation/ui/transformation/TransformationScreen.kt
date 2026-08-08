@@ -34,6 +34,7 @@ fun TransformationScreen(
     val result = remember(m00, m01, m10, m11) {
         useCase(m00.toDouble(), m01.toDouble(), m10.toDouble(), m11.toDouble())
     }
+    val strings = state.strings
 
     Scaffold(
         topBar = {
@@ -60,7 +61,7 @@ fun TransformationScreen(
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
-                            text = "2D Matris Lineer Dönüşümü",
+                            text = strings.topicTransformationTitle,
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold
                         )
@@ -104,13 +105,13 @@ fun TransformationScreen(
                         }
 
                         Spacer(modifier = Modifier.height(12.dp))
-                        Text("Determinant det(M) = ${(result.determinant * 100).toInt() / 100.0}", fontWeight = FontWeight.Bold)
+                        Text("det(M) = ${(result.determinant * 100).toInt() / 100.0}", fontWeight = FontWeight.Bold)
 
                         Spacer(modifier = Modifier.height(8.dp))
                         Text("m00: ${m00.toInt()}", style = MaterialTheme.typography.labelSmall)
                         Slider(value = m00, onValueChange = { m00 = it }, valueRange = -2f..2f)
 
-                        Text("m01 (Shear X): ${m01.toInt()}", style = MaterialTheme.typography.labelSmall)
+                        Text("m01: ${m01.toInt()}", style = MaterialTheme.typography.labelSmall)
                         Slider(value = m01, onValueChange = { m01 = it }, valueRange = -2f..2f)
                     }
                 }

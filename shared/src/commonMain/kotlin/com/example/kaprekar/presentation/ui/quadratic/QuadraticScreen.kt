@@ -57,7 +57,7 @@ fun QuadraticScreen(
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
-                            text = "ax² + bx + c = 0 Katsayıları",
+                            text = state.strings.labelCoefficient,
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold
                         )
@@ -106,7 +106,7 @@ fun QuadraticScreen(
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
                         Text(
-                            text = "Diskriminant (Δ = b² - 4ac)",
+                            text = "Δ = b² - 4ac",
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.Bold
                         )

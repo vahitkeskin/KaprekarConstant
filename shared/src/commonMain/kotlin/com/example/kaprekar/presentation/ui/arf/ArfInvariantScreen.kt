@@ -43,10 +43,12 @@ fun ArfInvariantScreen(
         animationSpec = infiniteRepeatable(tween(8000, easing = LinearEasing), RepeatMode.Restart)
     )
 
+    val strings = state.strings
+
     Scaffold(
         topBar = {
             TopGradientAppBar(
-                title = "Arf Değişmezi (Cahit Arf)",
+                title = strings.topicArfTitle,
                 state = state,
                 onIntent = onIntent,
                 showBackButton = true
@@ -77,7 +79,7 @@ fun ArfInvariantScreen(
             item {
                 Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text("Kuadratik Form: Q(x, y) = a·x² + b·x·y + c·y² (mod 2)", fontWeight = FontWeight.Bold)
+                        Text("Q(x, y) = a·x² + b·x·y + c·y² (mod 2)", fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Text("Arf(Q) = ${result.arfValue}", fontSize = 36.sp, fontWeight = FontWeight.ExtraBold, fontFamily = FontFamily.Monospace, color = BrandPink)
                         Spacer(modifier = Modifier.height(4.dp))
@@ -89,7 +91,7 @@ fun ArfInvariantScreen(
             item {
                 Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text("🧬 Düğüm & Symplectic Form Görselleştirici", fontWeight = FontWeight.Bold)
+                        Text("🧬 ${strings.labelGraph}", fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Box(modifier = Modifier.fillMaxWidth().height(160.dp)) {
                             Canvas(modifier = Modifier.fillMaxSize()) {
@@ -118,7 +120,7 @@ fun ArfInvariantScreen(
             }
 
             item {
-                Text("Katsayı Seçimleri (0 veya 1):", fontWeight = FontWeight.Bold)
+                Text("${strings.labelCoefficient}:", fontWeight = FontWeight.Bold)
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Button(onClick = { coeffA = 1 - coeffA }) { Text("a = $coeffA") }
                     Button(onClick = { coeffB = 1 - coeffB }) { Text("b = $coeffB") }

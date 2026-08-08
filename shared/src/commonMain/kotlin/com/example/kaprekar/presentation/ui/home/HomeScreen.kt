@@ -55,42 +55,46 @@ fun HomeScreen(
 ) {
     val strings = state.strings
     var searchQuery by rememberSaveable { mutableStateOf("") }
-    var selectedCategory by rememberSaveable { mutableStateOf("Hepsi") }
+    var selectedCategory by rememberSaveable { mutableStateOf(strings.catAll) }
+
+    LaunchedEffect(strings.catAll) {
+        selectedCategory = strings.catAll
+    }
 
     val allTopics = listOf(
-        MathTopicCardItem(MathScreen.KAPREKAR, strings.topicKaprekarTitle, strings.topicKaprekarDesc, "6174", "Sabitler", BrandPink),
-        MathTopicCardItem(MathScreen.FIBONACCI, strings.topicFibonacciTitle, strings.topicFibonacciDesc, "Fn", "Diziler", BrandCyan),
-        MathTopicCardItem(MathScreen.SUPER_NUMBER, strings.topicSuperNumberTitle, strings.topicSuperNumberDesc, "∑", "Cebir", Color(0xFFFFB74D)),
-        MathTopicCardItem(MathScreen.GOLDEN_RATIO, strings.topicGoldenRatioTitle, strings.topicGoldenRatioDesc, "Φ", "Geometri", Color(0xFFAB47BC)),
-        MathTopicCardItem(MathScreen.COLLATZ, strings.topicCollatzTitle, strings.topicCollatzDesc, "3n+1", "Diziler", Color(0xFF43A047)),
-        MathTopicCardItem(MathScreen.PRIME, strings.topicPrimeTitle, strings.topicPrimeDesc, "P(n)", "Aritmetik", Color(0xFF29B6F6)),
-        MathTopicCardItem(MathScreen.PASCAL, strings.topicPascalTitle, strings.topicPascalDesc, "C(n,k)", "Kombinatorik", Color(0xFFFF7043)),
-        MathTopicCardItem(MathScreen.PI, strings.topicPiTitle, strings.topicPiDesc, "π", "Sabitler", Color(0xFFE91E63)),
-        MathTopicCardItem(MathScreen.EULER, strings.topicEulerTitle, strings.topicEulerDesc, "e", "Sabitler", Color(0xFF3F51B5)),
-        MathTopicCardItem(MathScreen.EUCLID_GCD, strings.topicEuclidTitle, strings.topicEuclidDesc, "GCD", "Aritmetik", Color(0xFF009688)),
-        MathTopicCardItem(MathScreen.TRIGONOMETRY, strings.topicTrigTitle, strings.topicTrigDesc, "sin/cos", "Geometri", Color(0xFFFF9800)),
-        MathTopicCardItem(MathScreen.QUADRATIC, strings.topicQuadraticTitle, strings.topicQuadraticDesc, "ax²+bx", "Cebir", Color(0xFF9C27B0)),
-        MathTopicCardItem(MathScreen.MODULAR, strings.topicModularTitle, strings.topicModularDesc, "a^b mod", "Kriptografi", Color(0xFF673AB7)),
-        MathTopicCardItem(MathScreen.STATISTICS, strings.topicStatsTitle, strings.topicStatsDesc, "σ", "İstatistik", Color(0xFF00BCD4)),
-        MathTopicCardItem(MathScreen.FRACTAL, strings.topicFractalTitle, strings.topicFractalDesc, "z²+c", "Fraktallar", Color(0xFFD81B60)),
-        MathTopicCardItem(MathScreen.PHYLLOTAXIS, strings.topicPhyllotaxisTitle, strings.topicPhyllotaxisDesc, "137.5°", "Geometri", Color(0xFF8E24AA)),
-        MathTopicCardItem(MathScreen.TRANSFORMATION, strings.topicTransformationTitle, strings.topicTransformationDesc, "2x2 M", "Cebir", Color(0xFF1E88E5)),
-        MathTopicCardItem(MathScreen.FOURIER, strings.topicFourierTitle, strings.topicFourierDesc, "∑sin", "Diziler", Color(0xFF00ACC1)),
-        MathTopicCardItem(MathScreen.CHAOS_GAME, strings.topicChaosGameTitle, strings.topicChaosGameDesc, "Kaos", "Fraktallar", Color(0xFF43A047)),
-        MathTopicCardItem(MathScreen.NIM_GAME, strings.topicNimGameTitle, strings.topicNimGameDesc, "XOR", "Oyun Teorisi", Color(0xFFF4511E)),
-        MathTopicCardItem(MathScreen.LOGARITHM, "Logaritma & Ölçekler", "Napier logaritması, Richter, dB ve pH hesaplama.", "log_b", "Aritmetik", Color(0xFFE65100)),
-        MathTopicCardItem(MathScreen.ARF_INVARIANT, "Arf Değişmezi (Cahit Arf)", "10 TL üzerindeki Cahit Arf kuadratik form sabiti.", "Arf(Q)", "Cebir", Color(0xFFC2185B)),
-        MathTopicCardItem(MathScreen.THALES, "Thales Teoremi & Gölge", "Antik Mısır piramit yükseklik hesabı ve üçgen oranı.", "△/△", "Geometri", Color(0xFF00796B)),
-        MathTopicCardItem(MathScreen.KEPLER_LAWS, "Kepler Yörünge Yasaları", "Eliptik yörüngeler, T²=a³ ve alan hızları simülasyonu.", "T²/a³", "Astronomi", Color(0xFF5E35B1)),
-        MathTopicCardItem(MathScreen.BRACHISTOCHRONE, "Brachistochrone İniş Eğrisi", "Sikloid eğrisinde en hızlı iniş yarışı simülasyonu.", "Sikloid", "Fizik", Color(0xFFD81B60)),
-        MathTopicCardItem(MathScreen.CANTOR_SET, "Cantor Kümesi & Sonsuzluk", "D=ln2/ln3 Hausdorff boyutu ve fraktal küme adımları.", "ℵ₀", "Kümeler", Color(0xFF0288D1)),
-        MathTopicCardItem(MathScreen.ERATOSTHENES, "Eratosthenes Dünya Çevresi", "İskenderiye-Syene gölge açısıyla Dünya yarıçapı hesabı.", "C=2πr", "Geometri", Color(0xFFF57C00)),
-        MathTopicCardItem(MathScreen.CUBIC_EQUATION, "3. Derece Kübik Denklem", "Cardano-Tartaglia formülü ile ax³+bx²+cx+d=0 kökleri.", "x³+px", "Cebir", Color(0xFF7B1FA2)),
-        MathTopicCardItem(MathScreen.SPHERICAL_TRIG, "Küresel Trigonometri", "El-Battani kosinüs yasası & Haversine en kısa uçuş rotası.", "cos(a)", "Geometri", Color(0xFF0097A7)),
-        MathTopicCardItem(MathScreen.GODEL_NUMBERING, "Gödel Sayılaması", "Kurt Gödel asal sayı üsleri ile sembol dizisi kodlama.", "2ᵃ3ᵇ", "Kriptografi", Color(0xFF388E3C))
+        MathTopicCardItem(MathScreen.KAPREKAR, strings.topicKaprekarTitle, strings.topicKaprekarDesc, "6174", strings.catConstants, BrandPink),
+        MathTopicCardItem(MathScreen.FIBONACCI, strings.topicFibonacciTitle, strings.topicFibonacciDesc, "Fn", strings.catSequences, BrandCyan),
+        MathTopicCardItem(MathScreen.SUPER_NUMBER, strings.topicSuperNumberTitle, strings.topicSuperNumberDesc, "∑", strings.catAlgebra, Color(0xFFFFB74D)),
+        MathTopicCardItem(MathScreen.GOLDEN_RATIO, strings.topicGoldenRatioTitle, strings.topicGoldenRatioDesc, "Φ", strings.catGeometry, Color(0xFFAB47BC)),
+        MathTopicCardItem(MathScreen.COLLATZ, strings.topicCollatzTitle, strings.topicCollatzDesc, "3n+1", strings.catSequences, Color(0xFF43A047)),
+        MathTopicCardItem(MathScreen.PRIME, strings.topicPrimeTitle, strings.topicPrimeDesc, "P(n)", strings.catArithmetic, Color(0xFF29B6F6)),
+        MathTopicCardItem(MathScreen.PASCAL, strings.topicPascalTitle, strings.topicPascalDesc, "C(n,k)", strings.catCombinatorics, Color(0xFFFF7043)),
+        MathTopicCardItem(MathScreen.PI, strings.topicPiTitle, strings.topicPiDesc, "π", strings.catConstants, Color(0xFFE91E63)),
+        MathTopicCardItem(MathScreen.EULER, strings.topicEulerTitle, strings.topicEulerDesc, "e", strings.catConstants, Color(0xFF3F51B5)),
+        MathTopicCardItem(MathScreen.EUCLID_GCD, strings.topicEuclidTitle, strings.topicEuclidDesc, "GCD", strings.catArithmetic, Color(0xFF009688)),
+        MathTopicCardItem(MathScreen.TRIGONOMETRY, strings.topicTrigTitle, strings.topicTrigDesc, "sin/cos", strings.catGeometry, Color(0xFFFF9800)),
+        MathTopicCardItem(MathScreen.QUADRATIC, strings.topicQuadraticTitle, strings.topicQuadraticDesc, "ax²+bx", strings.catAlgebra, Color(0xFF9C27B0)),
+        MathTopicCardItem(MathScreen.MODULAR, strings.topicModularTitle, strings.topicModularDesc, "a^b mod", strings.catCryptography, Color(0xFF673AB7)),
+        MathTopicCardItem(MathScreen.STATISTICS, strings.topicStatsTitle, strings.topicStatsDesc, "σ", strings.catStatistics, Color(0xFF00BCD4)),
+        MathTopicCardItem(MathScreen.FRACTAL, strings.topicFractalTitle, strings.topicFractalDesc, "z²+c", strings.catFractals, Color(0xFFD81B60)),
+        MathTopicCardItem(MathScreen.PHYLLOTAXIS, strings.topicPhyllotaxisTitle, strings.topicPhyllotaxisDesc, "137.5°", strings.catGeometry, Color(0xFF8E24AA)),
+        MathTopicCardItem(MathScreen.TRANSFORMATION, strings.topicTransformationTitle, strings.topicTransformationDesc, "2x2 M", strings.catAlgebra, Color(0xFF1E88E5)),
+        MathTopicCardItem(MathScreen.FOURIER, strings.topicFourierTitle, strings.topicFourierDesc, "∑sin", strings.catSequences, Color(0xFF00ACC1)),
+        MathTopicCardItem(MathScreen.CHAOS_GAME, strings.topicChaosGameTitle, strings.topicChaosGameDesc, "Kaos", strings.catFractals, Color(0xFF43A047)),
+        MathTopicCardItem(MathScreen.NIM_GAME, strings.topicNimGameTitle, strings.topicNimGameDesc, "XOR", strings.catGameTheory, Color(0xFFF4511E)),
+        MathTopicCardItem(MathScreen.LOGARITHM, strings.topicLogarithmTitle, strings.topicLogarithmDesc, "log_b", strings.catArithmetic, Color(0xFFE65100)),
+        MathTopicCardItem(MathScreen.ARF_INVARIANT, strings.topicArfTitle, strings.topicArfDesc, "Arf(Q)", strings.catAlgebra, Color(0xFFC2185B)),
+        MathTopicCardItem(MathScreen.THALES, strings.topicThalesTitle, strings.topicThalesDesc, "△/△", strings.catGeometry, Color(0xFF00796B)),
+        MathTopicCardItem(MathScreen.KEPLER_LAWS, strings.topicKeplerTitle, strings.topicKeplerDesc, "T²/a³", strings.catAstronomy, Color(0xFF5E35B1)),
+        MathTopicCardItem(MathScreen.BRACHISTOCHRONE, strings.topicBrachistochroneTitle, strings.topicBrachistochroneDesc, "Sikloid", strings.catPhysics, Color(0xFFD81B60)),
+        MathTopicCardItem(MathScreen.CANTOR_SET, strings.topicCantorTitle, strings.topicCantorDesc, "ℵ₀", strings.catSets, Color(0xFF0288D1)),
+        MathTopicCardItem(MathScreen.ERATOSTHENES, strings.topicEratosthenesTitle, strings.topicEratosthenesDesc, "C=2πr", strings.catGeometry, Color(0xFFF57C00)),
+        MathTopicCardItem(MathScreen.CUBIC_EQUATION, strings.topicCubicTitle, strings.topicCubicDesc, "x³+px", strings.catAlgebra, Color(0xFF7B1FA2)),
+        MathTopicCardItem(MathScreen.SPHERICAL_TRIG, strings.topicSphericalTrigTitle, strings.topicSphericalTrigDesc, "cos(a)", strings.catGeometry, Color(0xFF0097A7)),
+        MathTopicCardItem(MathScreen.GODEL_NUMBERING, strings.topicGodelTitle, strings.topicGodelDesc, "2ᵃ3ᵇ", strings.catCryptography, Color(0xFF388E3C))
     )
 
-    val categories = listOf("Hepsi", "Sabitler", "Cebir", "Geometri", "Diziler", "Aritmetik", "Kombinatorik", "Kriptografi", "İstatistik", "Fraktallar", "Oyun Teorisi", "Astronomi", "Fizik", "Kümeler")
+    val categories = listOf(strings.catAll, strings.catConstants, strings.catAlgebra, strings.catGeometry, strings.catSequences, strings.catArithmetic, strings.catCombinatorics, strings.catCryptography, strings.catStatistics, strings.catFractals, strings.catGameTheory, strings.catAstronomy, strings.catPhysics, strings.catSets)
 
     val categoryListState = rememberLazyListState()
     val homeListState = rememberLazyListState()
@@ -120,7 +124,7 @@ fun HomeScreen(
 
     val filteredTopics = remember(searchQuery, selectedCategory) {
         allTopics.filter { topic ->
-            val matchesCategory = (selectedCategory == "Hepsi" || topic.categoryTag == selectedCategory)
+            val matchesCategory = (selectedCategory == strings.catAll || topic.categoryTag == selectedCategory)
             val matchesSearch = searchQuery.isBlank() ||
                     topic.title.contains(searchQuery, ignoreCase = true) ||
                     topic.description.contains(searchQuery, ignoreCase = true) ||
@@ -150,7 +154,7 @@ fun HomeScreen(
                     state = state,
                     onIntent = onIntent,
                     showBackButton = false,
-                    badgeText = "20 MATH"
+                    badgeText = "${allTopics.size} MATH"
                 )
             }
         ) { innerPadding ->
@@ -232,7 +236,7 @@ fun HomeScreen(
                         modifier = Modifier.fillMaxWidth(),
                         placeholder = {
                             Text(
-                                "Formül veya konu ara...",
+                                strings.inputHint,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                             )
                         },

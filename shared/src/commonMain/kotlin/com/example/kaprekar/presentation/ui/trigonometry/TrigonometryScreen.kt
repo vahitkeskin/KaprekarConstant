@@ -55,7 +55,7 @@ fun TrigonometryScreen(
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
-                            text = "İnteraktif Birim Çember (Unit Circle)",
+                            text = state.strings.topicTrigTitle,
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.primary
@@ -104,7 +104,7 @@ fun TrigonometryScreen(
                         Spacer(modifier = Modifier.height(16.dp))
 
                         Text(
-                            text = "Açı (θ): ${degreeAngle.toInt()}° (${(result.radians * 100).toInt() / 100.0} rad)",
+                            text = "${state.strings.labelAngle} (θ): ${degreeAngle.toInt()}° (${(result.radians * 100).toInt() / 100.0} rad)",
                             style = MaterialTheme.typography.labelLarge,
                             fontWeight = FontWeight.Bold
                         )
@@ -128,14 +128,14 @@ fun TrigonometryScreen(
                         modifier = Modifier.padding(16.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Text("Trigonometrik Değerler", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
+                        Text(state.strings.labelResult, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
                         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                             Text("sin(θ) = ${(result.sinVal * 10000).toInt() / 10000.0}", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.secondary)
                             Text("cos(θ) = ${(result.cosVal * 10000).toInt() / 10000.0}", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
                         }
                         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                            Text("tan(θ) = ${result.tanVal?.let { (it * 10000).toInt() / 10000.0 } ?: "Tanımsız"}")
-                            Text("cot(θ) = ${result.cotVal?.let { (it * 10000).toInt() / 10000.0 } ?: "Tanımsız"}")
+                            Text("tan(θ) = ${result.tanVal?.let { (it * 10000).toInt() / 10000.0 } ?: "∞"}")
+                            Text("cot(θ) = ${result.cotVal?.let { (it * 10000).toInt() / 10000.0 } ?: "∞"}")
                         }
                     }
                 }

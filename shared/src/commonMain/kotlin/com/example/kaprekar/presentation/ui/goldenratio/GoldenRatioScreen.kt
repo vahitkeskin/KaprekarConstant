@@ -116,7 +116,7 @@ fun GoldenRatioScreen(
                                         modifier = Modifier.padding(12.dp),
                                         horizontalAlignment = Alignment.CenterHorizontally
                                     ) {
-                                        Text("Büyük Parça (A)", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                                        Text(state.strings.labelValue, fontSize = 11.sp, fontWeight = FontWeight.Bold)
                                         Text(
                                             text = "${(result.segmentA * 100).toLong() / 100.0}",
                                             fontFamily = FontFamily.Monospace,
@@ -137,7 +137,7 @@ fun GoldenRatioScreen(
                                         modifier = Modifier.padding(12.dp),
                                         horizontalAlignment = Alignment.CenterHorizontally
                                     ) {
-                                        Text("Küçük Parça (B)", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                                        Text(state.strings.labelValue, fontSize = 11.sp, fontWeight = FontWeight.Bold)
                                         Text(
                                             text = "${(result.segmentB * 100).toLong() / 100.0}",
                                             fontFamily = FontFamily.Monospace,

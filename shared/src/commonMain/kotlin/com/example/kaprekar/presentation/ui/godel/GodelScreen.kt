@@ -39,10 +39,12 @@ fun GodelScreen(
         animationSpec = infiniteRepeatable(tween(3000, easing = LinearEasing), RepeatMode.Restart)
     )
 
+    val strings = state.strings
+
     Scaffold(
         topBar = {
             TopGradientAppBar(
-                title = "Gödel Sayılaması & Asal Kodlama",
+                title = strings.topicGodelTitle,
                 state = state,
                 onIntent = onIntent,
                 showBackButton = true
@@ -63,7 +65,7 @@ fun GodelScreen(
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f))
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text("🔒 Kurt Gödel - Asal Sayı Üs Kodlaması", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text("🔒 G(s) ${strings.labelResult}", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = "G = ${result.godelNumberRepresentation}",
@@ -73,7 +75,7 @@ fun GodelScreen(
                             color = BrandPink
                         )
                         Spacer(modifier = Modifier.height(4.dp))
-                        Text("G(s) = 2^a1 × 3^a2 × 5^a3 × 7^a4 ... asal üs çarpımı")
+                        Text("G(s) = 2^a1 × 3^a2 × 5^a3 × 7^a4 ...")
                     }
                 }
             }
@@ -81,7 +83,7 @@ fun GodelScreen(
             item {
                 Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text("🌐 Asal Sayı Zirveleri & Üs Ağı", fontWeight = FontWeight.Bold)
+                        Text("🌐 ${strings.labelExponent} ${strings.labelGraph}", fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Box(modifier = Modifier.fillMaxWidth().height(150.dp)) {
                             Canvas(modifier = Modifier.fillMaxSize()) {
@@ -115,13 +117,13 @@ fun GodelScreen(
                 OutlinedTextField(
                     value = formulaInput,
                     onValueChange = { formulaInput = it },
-                    label = { Text("Matematiksel Sembol / İfade") },
+                    label = { Text(strings.labelFormula) },
                     modifier = Modifier.fillMaxWidth()
                 )
             }
 
             item {
-                Text("Sembol Asal Üs Çarpanları:", fontWeight = FontWeight.Bold)
+                Text("${strings.labelExponent}:", fontWeight = FontWeight.Bold)
             }
 
             items(result.primeFactors) { item ->
@@ -130,7 +132,7 @@ fun GodelScreen(
                         modifier = Modifier.fillMaxWidth().padding(16.dp),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text("Sembol: '${item.symbolChar}' (ASCII: ${item.asciiValue})", fontWeight = FontWeight.Bold)
+                        Text("'${item.symbolChar}' (ASCII: ${item.asciiValue})", fontWeight = FontWeight.Bold)
                         Text(item.termPower, fontWeight = FontWeight.ExtraBold, fontFamily = FontFamily.Monospace, color = MaterialTheme.colorScheme.secondary)
                     }
                 }

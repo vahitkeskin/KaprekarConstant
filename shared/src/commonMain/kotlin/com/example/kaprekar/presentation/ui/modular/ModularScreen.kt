@@ -31,6 +31,7 @@ fun ModularScreen(
     val exp = expInput.toLongOrNull() ?: 13L
     val mod = modInput.toLongOrNull() ?: 19L
     val result = remember(base, exp, mod) { useCase(base, exp, mod) }
+    val strings = state.strings
 
     Scaffold(
         topBar = {
@@ -69,7 +70,7 @@ fun ModularScreen(
                             OutlinedTextField(
                                 value = baseInput,
                                 onValueChange = { baseInput = it },
-                                label = { Text("Taban (a)") },
+                                label = { Text(strings.labelBase) },
                                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                 modifier = Modifier.weight(1f),
                                 singleLine = true
@@ -77,7 +78,7 @@ fun ModularScreen(
                             OutlinedTextField(
                                 value = expInput,
                                 onValueChange = { expInput = it },
-                                label = { Text("Üs (b)") },
+                                label = { Text(strings.labelExponent) },
                                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                 modifier = Modifier.weight(1f),
                                 singleLine = true
@@ -85,7 +86,7 @@ fun ModularScreen(
                             OutlinedTextField(
                                 value = modInput,
                                 onValueChange = { modInput = it },
-                                label = { Text("Mod (m)") },
+                                label = { Text(strings.labelModulus) },
                                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                 modifier = Modifier.weight(1f),
                                 singleLine = true

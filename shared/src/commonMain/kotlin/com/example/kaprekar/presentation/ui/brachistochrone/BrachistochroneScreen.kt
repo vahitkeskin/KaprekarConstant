@@ -43,10 +43,12 @@ fun BrachistochroneScreen(
         animationSpec = infiniteRepeatable(tween(3000, easing = LinearEasing), RepeatMode.Restart)
     )
 
+    val strings = state.strings
+
     Scaffold(
         topBar = {
             TopGradientAppBar(
-                title = "Brachistochrone İniş Eğrisi (Bernoulli)",
+                title = strings.topicBrachistochroneTitle,
                 state = state,
                 onIntent = onIntent,
                 showBackButton = true
@@ -67,18 +69,18 @@ fun BrachistochroneScreen(
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f))
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text("🏎️ En Hızlı İniş Eğrisi (Sikloid)", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text("🏎️ ${strings.labelResult}", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "Sikloid İniş Süresi: ${round(result.cycloidTime)} sn ⚡",
+                            text = "${round(result.cycloidTime)} s",
                             fontSize = 26.sp,
                             fontWeight = FontWeight.ExtraBold,
                             fontFamily = FontFamily.Monospace,
                             color = BrandPink
                         )
                         Spacer(modifier = Modifier.height(4.dp))
-                        Text("Düz Çizgi İniş Süresi: ${round(result.straightLineTime)} sn")
-                        Text("Fark (Kazanılan Süre): ${round(result.timeDifference)} sn daha hızlı!")
+                        Text("${round(result.straightLineTime)} s")
+                        Text("Δ = ${round(result.timeDifference)} s")
                     }
                 }
             }
@@ -86,7 +88,7 @@ fun BrachistochroneScreen(
             item {
                 Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text("🏁 Canlı İniş Yarışı Simülatörü", fontWeight = FontWeight.Bold)
+                        Text("🏁 ${strings.labelSimulation}", fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Box(modifier = Modifier.fillMaxWidth().height(180.dp)) {
                             Canvas(modifier = Modifier.fillMaxSize()) {
@@ -126,10 +128,10 @@ fun BrachistochroneScreen(
             }
 
             item {
-                Text("Düşme Yüksekliği (h): ${dropH.toInt()} m", fontWeight = FontWeight.Bold)
+                Text("${strings.labelHeight} (h): ${dropH.toInt()} m", fontWeight = FontWeight.Bold)
                 Slider(value = dropH, onValueChange = { dropH = it }, valueRange = 2f..50f)
 
-                Text("Yatay Mesafe (d): ${distD.toInt()} m", fontWeight = FontWeight.Bold)
+                Text("${strings.labelDistance} (d): ${distD.toInt()} m", fontWeight = FontWeight.Bold)
                 Slider(value = distD, onValueChange = { distD = it }, valueRange = 2f..50f)
             }
         }

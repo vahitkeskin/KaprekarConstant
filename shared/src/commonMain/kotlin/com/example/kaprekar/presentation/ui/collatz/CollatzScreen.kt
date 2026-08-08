@@ -48,6 +48,7 @@ fun CollatzScreen(
             MaterialTheme.colorScheme.surface
         )
     )
+    val strings = state.strings
 
     Box(
         modifier = Modifier
@@ -92,14 +93,14 @@ fun CollatzScreen(
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             Text(
-                                text = "Collatz Sanısı (3n + 1)",
+                                text = strings.topicCollatzTitle,
                                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                             )
 
                             OutlinedTextField(
                                 value = inputStr,
                                 onValueChange = { inputStr = it.filter { c -> c.isDigit() }.take(6) },
-                                label = { Text("Başlangıç Sayısı (N)") },
+                                label = { Text(strings.labelNumberInput) },
                                 singleLine = true,
                                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                 modifier = Modifier.fillMaxWidth(),
@@ -137,7 +138,7 @@ fun CollatzScreen(
                                         modifier = Modifier.padding(10.dp),
                                         horizontalAlignment = Alignment.CenterHorizontally
                                     ) {
-                                        Text("Toplam Adım", fontSize = 10.sp, fontWeight = FontWeight.Bold)
+                                        Text(strings.labelStep, fontSize = 10.sp, fontWeight = FontWeight.Bold)
                                         Text(
                                             text = "${result.stepCount}",
                                             fontFamily = FontFamily.Monospace,
@@ -157,7 +158,7 @@ fun CollatzScreen(
                                         modifier = Modifier.padding(10.dp),
                                         horizontalAlignment = Alignment.CenterHorizontally
                                     ) {
-                                        Text("Zirve Değer (Peak)", fontSize = 10.sp, fontWeight = FontWeight.Bold)
+                                        Text(strings.labelValue, fontSize = 10.sp, fontWeight = FontWeight.Bold)
                                         Text(
                                             text = "${result.peakValue}",
                                             fontFamily = FontFamily.Monospace,

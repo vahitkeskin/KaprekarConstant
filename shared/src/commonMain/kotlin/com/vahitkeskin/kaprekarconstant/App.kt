@@ -29,6 +29,7 @@ import com.example.kaprekar.presentation.ui.fourier.FourierScreen
 import com.example.kaprekar.presentation.ui.fractal.FractalScreen
 import com.example.kaprekar.presentation.ui.goldenratio.GoldenRatioScreen
 import com.example.kaprekar.presentation.ui.home.HomeScreen
+import com.example.kaprekar.presentation.ui.kaprekar.LanguageSelectionDialog
 import com.example.kaprekar.presentation.ui.kaprekar.KaprekarScreen
 import com.example.kaprekar.presentation.ui.modular.ModularScreen
 import com.example.kaprekar.presentation.ui.nimgame.NimGameScreen
@@ -110,6 +111,14 @@ fun KaprekarAppContent(
     val colorScheme = if (useDarkTheme) DarkColorScheme else LightColorScheme
 
     MaterialTheme(colorScheme = colorScheme) {
+        if (state.showLanguageDialog) {
+            LanguageSelectionDialog(
+                state = state,
+                onSelect = { viewModel.onIntent(KaprekarUiIntent.OnSelectLanguage(it)) },
+                onDismiss = { viewModel.onIntent(KaprekarUiIntent.OnToggleLanguageDialog(false)) }
+            )
+        }
+
         val fadeSpec = tween<Float>(durationMillis = 300)
 
         AnimatedContent(

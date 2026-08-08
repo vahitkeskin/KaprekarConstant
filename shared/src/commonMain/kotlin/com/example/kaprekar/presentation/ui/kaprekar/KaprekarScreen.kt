@@ -199,14 +199,6 @@ fun KaprekarContent(
             onDismiss = { onIntent(KaprekarUiIntent.OnToggleInfoDialog(false)) }
         )
     }
-
-    if (state.showLanguageDialog) {
-        LanguageSelectionDialog(
-            state = state,
-            onSelect = { onIntent(KaprekarUiIntent.OnSelectLanguage(it)) },
-            onDismiss = { onIntent(KaprekarUiIntent.OnToggleLanguageDialog(false)) }
-        )
-    }
 }
 
 @Preview

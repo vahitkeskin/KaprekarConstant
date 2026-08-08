@@ -30,6 +30,7 @@ fun NimGameScreen(
         listOf(heap1.toInt(), heap2.toInt(), heap3.toInt())
     }
     val result = remember(heaps) { useCase(heaps) }
+    val strings = state.strings
 
     Scaffold(
         topBar = {
@@ -62,13 +63,13 @@ fun NimGameScreen(
                         )
                         Spacer(modifier = Modifier.height(12.dp))
 
-                        Text("Yığın 1: ${heap1.toInt()}", fontWeight = FontWeight.Bold)
+                        Text("${strings.labelValue} 1: ${heap1.toInt()}", fontWeight = FontWeight.Bold)
                         Slider(value = heap1, onValueChange = { heap1 = it }, valueRange = 1f..10f)
 
-                        Text("Yığın 2: ${heap2.toInt()}", fontWeight = FontWeight.Bold)
+                        Text("${strings.labelValue} 2: ${heap2.toInt()}", fontWeight = FontWeight.Bold)
                         Slider(value = heap2, onValueChange = { heap2 = it }, valueRange = 1f..10f)
 
-                        Text("Yığın 3: ${heap3.toInt()}", fontWeight = FontWeight.Bold)
+                        Text("${strings.labelValue} 3: ${heap3.toInt()}", fontWeight = FontWeight.Bold)
                         Slider(value = heap3, onValueChange = { heap3 = it }, valueRange = 1f..10f)
                     }
                 }
@@ -86,15 +87,15 @@ fun NimGameScreen(
                         modifier = Modifier.padding(16.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Text("Nim-Sum (XOR Toplamı): ⊕ = ${result.nimSum}", fontSize = 22.sp, fontWeight = FontWeight.Bold)
+                        Text("Nim-Sum: ⊕ = ${result.nimSum}", fontSize = 22.sp, fontWeight = FontWeight.Bold)
                         Text(
-                            text = if (result.isWinningPosition) "Kazanan Pozisyon! En iyi hamle stratejisi mevcut." else "Kaybeden Pozisyon! Rakipten hata beklemeniz gerekir.",
+                            text = if (result.isWinningPosition) "⊕ ≠ 0 (Winning)" else "⊕ = 0 (Losing)",
                             fontWeight = FontWeight.SemiBold
                         )
                         result.recommendedMove?.let { move ->
                             Divider()
                             Text(
-                                text = "Tavsiye Edilen Hamle: Yığın ${move.heapIndex + 1}'den ${move.removeAmount} nesne çıkarın.",
+                                text = "H${move.heapIndex + 1} ➜ -${move.removeAmount}",
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.primary
                             )

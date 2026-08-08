@@ -43,10 +43,12 @@ fun ThalesScreen(
         animationSpec = infiniteRepeatable(tween(1500, easing = FastOutSlowInEasing), RepeatMode.Reverse)
     )
 
+    val strings = state.strings
+
     Scaffold(
         topBar = {
             TopGradientAppBar(
-                title = "Thales Teoremi & Gölge Hesabı",
+                title = strings.topicThalesTitle,
                 state = state,
                 onIntent = onIntent,
                 showBackButton = true
@@ -67,7 +69,7 @@ fun ThalesScreen(
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f))
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text("📐 Mısır Piramit Yüksekliği (Thales Yöntemi)", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text("📐 ${strings.labelHeight} (H)", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = "H = ${round(result.calculatedPyramidHeight)} m",
@@ -77,7 +79,7 @@ fun ThalesScreen(
                             color = BrandPink
                         )
                         Spacer(modifier = Modifier.height(4.dp))
-                        Text("Oran (Çubuk Yükseklik / Gölge): ${round(result.ratio)}")
+                        Text("${round(result.ratio)}")
                     }
                 }
             }
@@ -85,7 +87,7 @@ fun ThalesScreen(
             item {
                 Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text("☀️ Güneş Işınları & Dik Üçgen Benzerliği", fontWeight = FontWeight.Bold)
+                        Text("☀️ ${strings.labelGraph}", fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Box(modifier = Modifier.fillMaxWidth().height(180.dp)) {
                             Canvas(modifier = Modifier.fillMaxSize()) {
@@ -120,13 +122,13 @@ fun ThalesScreen(
             }
 
             item {
-                Text("Çubuk Yüksekliği: ${round(stickH.toDouble())} m", fontWeight = FontWeight.Bold)
+                Text("${strings.labelHeight}: ${round(stickH.toDouble())} m", fontWeight = FontWeight.Bold)
                 Slider(value = stickH, onValueChange = { stickH = it }, valueRange = 0.5f..5f)
 
-                Text("Çubuk Gölgesi: ${round(stickS.toDouble())} m", fontWeight = FontWeight.Bold)
+                Text("${strings.labelDistance}: ${round(stickS.toDouble())} m", fontWeight = FontWeight.Bold)
                 Slider(value = stickS, onValueChange = { stickS = it }, valueRange = 0.5f..10f)
 
-                Text("Piramit Gölge Taban Mesafesi: ${pyrS.toInt()} m", fontWeight = FontWeight.Bold)
+                Text("${strings.labelDistance}: ${pyrS.toInt()} m", fontWeight = FontWeight.Bold)
                 Slider(value = pyrS, onValueChange = { pyrS = it }, valueRange = 10f..400f)
             }
         }

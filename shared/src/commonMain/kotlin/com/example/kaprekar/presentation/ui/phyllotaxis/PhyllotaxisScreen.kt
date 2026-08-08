@@ -28,6 +28,7 @@ fun PhyllotaxisScreen(
 ) {
     var seedCount by remember { mutableStateOf(250f) }
     val result = remember(seedCount) { useCase(seedCount.toInt()) }
+    val strings = state.strings
 
     Scaffold(
         topBar = {
@@ -54,7 +55,7 @@ fun PhyllotaxisScreen(
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
-                            text = "Ayçiçeği Altın Açı Dizilimi (137.5°)",
+                            text = strings.topicPhyllotaxisTitle,
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.primary
@@ -90,7 +91,7 @@ fun PhyllotaxisScreen(
                         }
 
                         Spacer(modifier = Modifier.height(12.dp))
-                        Text("Tohum Sayısı: ${seedCount.toInt()}", fontWeight = FontWeight.Bold)
+                        Text("${strings.labelCount}: ${seedCount.toInt()}", fontWeight = FontWeight.Bold)
                         Slider(
                             value = seedCount,
                             onValueChange = { seedCount = it },

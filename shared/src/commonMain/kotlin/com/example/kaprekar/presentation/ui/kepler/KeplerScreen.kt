@@ -45,10 +45,12 @@ fun KeplerScreen(
         animationSpec = infiniteRepeatable(tween(4000, easing = LinearEasing), RepeatMode.Restart)
     )
 
+    val strings = state.strings
+
     Scaffold(
         topBar = {
             TopGradientAppBar(
-                title = "Kepler Yörünge Yasaları",
+                title = strings.topicKeplerTitle,
                 state = state,
                 onIntent = onIntent,
                 showBackButton = true
@@ -69,17 +71,17 @@ fun KeplerScreen(
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f))
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text("🪐 3. Yasa: Yörünge Periyodu (T² = a³)", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text("🪐 T² = a³ (${strings.labelResult})", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = "T = ${round(result.orbitalPeriodYears)} Yıl",
+                            text = "T = ${round(result.orbitalPeriodYears)} T",
                             fontSize = 32.sp,
                             fontWeight = FontWeight.ExtraBold,
                             fontFamily = FontFamily.Monospace,
                             color = BrandPink
                         )
                         Spacer(modifier = Modifier.height(4.dp))
-                        Text("Günberı (Perihelion): ${round(result.perihelionDistance)} AU | Günöte (Aphelion): ${round(result.aphelionDistance)} AU")
+                        Text("${round(result.perihelionDistance)} AU | ${round(result.aphelionDistance)} AU")
                     }
                 }
             }
@@ -87,7 +89,7 @@ fun KeplerScreen(
             item {
                 Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text("🌌 Gezegen Yörünge & Hız Simülasyonu", fontWeight = FontWeight.Bold)
+                        Text("🌌 ${strings.labelSimulation}", fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Box(
                             modifier = Modifier
@@ -138,10 +140,10 @@ fun KeplerScreen(
             }
 
             item {
-                Text("Yarı Büyük Eksen (a): ${round(aAU.toDouble())} AU", fontWeight = FontWeight.Bold)
+                Text("(a): ${round(aAU.toDouble())} AU", fontWeight = FontWeight.Bold)
                 Slider(value = aAU, onValueChange = { aAU = it }, valueRange = 0.5f..5f)
 
-                Text("Basıklık / Eksantriklik (e): ${round(eccentricity.toDouble())}", fontWeight = FontWeight.Bold)
+                Text("(e): ${round(eccentricity.toDouble())}", fontWeight = FontWeight.Bold)
                 Slider(value = eccentricity, onValueChange = { eccentricity = it }, valueRange = 0.0f..0.8f)
             }
         }

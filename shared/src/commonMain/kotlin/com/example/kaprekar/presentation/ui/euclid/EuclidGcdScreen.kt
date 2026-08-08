@@ -31,6 +31,7 @@ fun EuclidGcdScreen(
     val n1 = num1Input.toLongOrNull() ?: 252L
     val n2 = num2Input.toLongOrNull() ?: 105L
     val result = remember(n1, n2) { useCase(n1, n2) }
+    val strings = state.strings
 
     Scaffold(
         topBar = {
@@ -69,7 +70,7 @@ fun EuclidGcdScreen(
                             OutlinedTextField(
                                 value = num1Input,
                                 onValueChange = { num1Input = it.take(8) },
-                                label = { Text("Sayı A") },
+                                label = { Text("A") },
                                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                 modifier = Modifier.weight(1f),
                                 singleLine = true
@@ -77,7 +78,7 @@ fun EuclidGcdScreen(
                             OutlinedTextField(
                                 value = num2Input,
                                 onValueChange = { num2Input = it.take(8) },
-                                label = { Text("Sayı B") },
+                                label = { Text("B") },
                                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                 modifier = Modifier.weight(1f),
                                 singleLine = true
@@ -124,7 +125,7 @@ fun EuclidGcdScreen(
 
             item {
                 Text(
-                    text = "Öklid Bölme Adımları",
+                    text = strings.stepBreakdownTitle,
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold
                 )
@@ -142,7 +143,7 @@ fun EuclidGcdScreen(
                             .padding(12.dp),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text("Adım ${step.stepNumber}:", fontWeight = FontWeight.Bold)
+                        Text("${strings.labelStep} ${step.stepNumber}:", fontWeight = FontWeight.Bold)
                         Text(
                             text = "${step.dividend} = ${step.divisor} × ${step.quotient} + ${step.remainder}",
                             fontWeight = FontWeight.SemiBold,

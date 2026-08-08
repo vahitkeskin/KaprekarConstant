@@ -40,10 +40,12 @@ fun CubicScreen(
         useCase(coeffA.toDouble(), coeffB.toDouble(), coeffC.toDouble(), coeffD.toDouble())
     }
 
+    val strings = state.strings
+
     Scaffold(
         topBar = {
             TopGradientAppBar(
-                title = "3. Derece Denklem (Cardano - Tartaglia)",
+                title = strings.topicCubicTitle,
                 state = state,
                 onIntent = onIntent,
                 showBackButton = true
@@ -74,8 +76,8 @@ fun CubicScreen(
                             color = BrandPink
                         )
                         Spacer(modifier = Modifier.height(8.dp))
-                        Text("İndirgenmiş Kübik: t³ + (${round(result.p)})t + (${round(result.q)}) = 0")
-                        Text("Diskriminant Δ = ${round(result.discriminant)}")
+                        Text("t³ + (${round(result.p)})t + (${round(result.q)}) = 0")
+                        Text("Δ = ${round(result.discriminant)}")
                     }
                 }
             }
@@ -83,7 +85,7 @@ fun CubicScreen(
             item {
                 Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text("📈 Canlı Kübik Eğri Grafiği", fontWeight = FontWeight.Bold)
+                        Text("📈 ${strings.labelGraph}", fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Box(modifier = Modifier.fillMaxWidth().height(160.dp)) {
                             Canvas(modifier = Modifier.fillMaxSize()) {
@@ -113,7 +115,7 @@ fun CubicScreen(
             }
 
             item {
-                Text("Denklem Kökleri (Cardano Formülü):", fontWeight = FontWeight.Bold)
+                Text("${strings.labelRoots}:", fontWeight = FontWeight.Bold)
             }
 
             items(result.roots) { rootStr ->
@@ -130,7 +132,7 @@ fun CubicScreen(
             }
 
             item {
-                Text("Katsayı Ayarları:", fontWeight = FontWeight.Bold)
+                Text("${strings.labelCoefficient}:", fontWeight = FontWeight.Bold)
                 Text("a = ${coeffA.toInt()}")
                 Slider(value = coeffA, onValueChange = { coeffA = it }, valueRange = -5f..5f)
                 Text("b = ${coeffB.toInt()}")

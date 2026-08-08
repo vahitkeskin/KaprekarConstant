@@ -44,10 +44,12 @@ fun LogarithmScreen(
         animationSpec = infiniteRepeatable(tween(1200, easing = LinearEasing), RepeatMode.Reverse)
     )
 
+    val strings = state.strings
+
     Scaffold(
         topBar = {
             TopGradientAppBar(
-                title = "Logaritma & Logaritmik Ölçekler",
+                title = strings.topicLogarithmTitle,
                 state = state,
                 onIntent = onIntent,
                 showBackButton = true
@@ -68,7 +70,7 @@ fun LogarithmScreen(
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f))
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text("log_b(x) Hesabı", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text("log_b(x) ${strings.labelResult}", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = "log_${base.toInt()}(${valX.toInt()}) = ${round(result.baseLog)}",
@@ -78,7 +80,7 @@ fun LogarithmScreen(
                             color = BrandPink
                         )
                         Spacer(modifier = Modifier.height(4.dp))
-                        Text("Doğal Logaritma ln(x) = ${round(result.naturalLog)}  |  log10(x) = ${round(result.log10Value)}")
+                        Text("ln(x) = ${round(result.naturalLog)}  |  log10(x) = ${round(result.log10Value)}")
                     }
                 }
             }
@@ -86,7 +88,7 @@ fun LogarithmScreen(
             item {
                 Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text("📈 Canlı y = log_b(x) Fonksiyon Grafiği", fontWeight = FontWeight.Bold)
+                        Text("📈 y = log_b(x) ${strings.labelGraph}", fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Box(modifier = Modifier.fillMaxWidth().height(180.dp)) {
                             Canvas(modifier = Modifier.fillMaxSize()) {
@@ -131,20 +133,20 @@ fun LogarithmScreen(
             }
 
             item {
-                Text("x Değeri: ${valX.toInt()}", fontWeight = FontWeight.Bold)
+                Text("${strings.labelValue} (x): ${valX.toInt()}", fontWeight = FontWeight.Bold)
                 Slider(value = valX, onValueChange = { valX = it }, valueRange = 1f..1000f)
-                Text("Taban (b): ${base.toInt()}", fontWeight = FontWeight.Bold)
+                Text("${strings.labelBase} (b): ${base.toInt()}", fontWeight = FontWeight.Bold)
                 Slider(value = base, onValueChange = { base = it }, valueRange = 2f..10f, steps = 7)
             }
 
             item {
                 Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) {
                     Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text("Gerçek Dünya Logaritmik Ölçekleri", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text(strings.topicLogarithmTitle, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                         HorizontalDivider()
-                        Text("🌋 Richter Deprem Şiddeti: M = ${round(result.richterMagnitude)} Ms")
-                        Text("🔊 Ses Şiddeti (Desibel): ${round(result.decibelSound)} dB")
-                        Text("🧪 Kimyasal pH Değeri: pH = ${round(result.phValue)}")
+                        Text("🌋 Richter M = ${round(result.richterMagnitude)} Ms")
+                        Text("🔊 ${round(result.decibelSound)} dB")
+                        Text("🧪 pH = ${round(result.phValue)}")
                     }
                 }
             }

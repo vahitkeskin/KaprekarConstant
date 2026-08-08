@@ -48,6 +48,7 @@ fun PrimeScreen(
             MaterialTheme.colorScheme.surface
         )
     )
+    val strings = state.strings
 
     Box(
         modifier = Modifier
@@ -99,7 +100,7 @@ fun PrimeScreen(
                             OutlinedTextField(
                                 value = inputStr,
                                 onValueChange = { inputStr = it.filter { c -> c.isDigit() }.take(8) },
-                                label = { Text("Sayı Girin") },
+                                label = { Text(strings.labelNumberInput) },
                                 singleLine = true,
                                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                 modifier = Modifier.fillMaxWidth(),

@@ -96,14 +96,14 @@ fun SuperNumberScreen(
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             Text(
-                                text = "Sayı Analizörü",
+                                text = state.strings.topicSuperNumberTitle,
                                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                             )
 
                             OutlinedTextField(
                                 value = inputStr,
                                 onValueChange = { inputStr = it.filter { c -> c.isDigit() }.take(7) },
-                                label = { Text("İncelenecek Sayı") },
+                                label = { Text(state.strings.labelNumberInput) },
                                 singleLine = true,
                                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                 modifier = Modifier.fillMaxWidth(),

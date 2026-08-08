@@ -77,7 +77,7 @@ fun LanguageSelectionDialog(
         },
         confirmButton = {
             TextButton(onClick = onDismiss) {
-                Text(strings.resetButton)
+                Text(strings.closeButton)
             }
         }
     )

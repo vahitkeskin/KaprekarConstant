@@ -31,10 +31,12 @@ fun CantorScreen(
     var maxStep by remember { mutableStateOf(5f) }
     val result = remember(maxStep) { useCase(maxStep.toInt()) }
 
+    val strings = state.strings
+
     Scaffold(
         topBar = {
             TopGradientAppBar(
-                title = "Cantor Kümesi & Sonsuzluk (Georg Cantor)",
+                title = strings.topicCantorTitle,
                 state = state,
                 onIntent = onIntent,
                 showBackButton = true
@@ -55,30 +57,28 @@ fun CantorScreen(
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f))
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text("♾️ Hausdorff Fraktal Boyutu", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text("♾️ D = ln(2)/ln(3)", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = "D = ln(2)/ln(3) ≈ ${round(result.hausdorffDimension)}",
+                            text = "D ≈ ${round(result.hausdorffDimension)}",
                             fontSize = 28.sp,
                             fontWeight = FontWeight.ExtraBold,
                             fontFamily = FontFamily.Monospace,
                             color = BrandPink
                         )
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Text("Sonsuz adımda toplam uzunluğu 0 olan ama sayılamaz sonsuzlukta nokta içeren küme!")
                     }
                 }
             }
 
             item {
-                Text("Adım Sayısı (n = ${maxStep.toInt()}):", fontWeight = FontWeight.Bold)
+                Text("${strings.labelStep} (n = ${maxStep.toInt()}):", fontWeight = FontWeight.Bold)
                 Slider(value = maxStep, onValueChange = { maxStep = it }, valueRange = 1f..6f, steps = 4)
             }
 
             items(result.steps) { step ->
                 Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(12.dp)) {
                     Column(modifier = Modifier.padding(12.dp)) {
-                        Text("Adım ${step.step}: Parça Sayısı = ${step.segmentCount} | Kalan Uzunluk = ${round(step.totalRemainingLength)}", fontWeight = FontWeight.Bold)
+                        Text("${strings.labelStep} ${step.step}: ${strings.labelCount} = ${step.segmentCount} | L = ${round(step.totalRemainingLength)}", fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Box(modifier = Modifier.fillMaxWidth().height(24.dp)) {
                             Canvas(modifier = Modifier.fillMaxSize()) {

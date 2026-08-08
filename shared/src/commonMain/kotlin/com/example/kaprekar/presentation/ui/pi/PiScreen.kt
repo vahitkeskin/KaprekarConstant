@@ -56,14 +56,14 @@ fun PiScreen(
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
-                            text = "Monte Carlo π Görselleştirmesi",
+                            text = state.strings.topicPiTitle,
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.primary
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = "Kare içine rasgele nokta atarak çemberin içine düşen oran: π ≈ 4 × (İçteki / Toplam)",
+                            text = "π ≈ 4 × (Inside / Total)",
                             style = MaterialTheme.typography.bodyMedium
                         )
 
@@ -115,7 +115,7 @@ fun PiScreen(
                         Spacer(modifier = Modifier.height(16.dp))
 
                         Text(
-                            text = "Nokta Sayısı: ${pointCount.toInt()}",
+                            text = "${state.strings.labelCount}: ${pointCount.toInt()}",
                             style = MaterialTheme.typography.labelLarge,
                             fontWeight = FontWeight.Bold
                         )
@@ -137,7 +137,7 @@ fun PiScreen(
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
-                            text = "Tahmini π Değeri",
+                            text = state.strings.labelResult,
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold
                         )

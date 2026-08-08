@@ -31,6 +31,7 @@ fun FourierScreen(
 ) {
     var harmonicsCount by remember { mutableStateOf(5f) }
     val result = remember(harmonicsCount) { useCase(harmonicsCount.toInt(), "SQUARE") }
+    val strings = state.strings
 
     Scaffold(
         topBar = {
@@ -57,7 +58,7 @@ fun FourierScreen(
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
-                            text = "Fourier Kare Dalga Harmonikleri",
+                            text = strings.topicFourierTitle,
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.primary
@@ -107,7 +108,7 @@ fun FourierScreen(
                         }
 
                         Spacer(modifier = Modifier.height(12.dp))
-                        Text("Harmonik Sayısı (n): ${harmonicsCount.toInt()}", fontWeight = FontWeight.Bold)
+                        Text("${strings.labelCount} (N = ${harmonicsCount.toInt()}):", fontWeight = FontWeight.Bold)
                         Slider(
                             value = harmonicsCount,
                             onValueChange = { harmonicsCount = it },

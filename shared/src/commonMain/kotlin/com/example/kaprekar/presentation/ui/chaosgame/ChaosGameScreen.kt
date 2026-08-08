@@ -28,6 +28,7 @@ fun ChaosGameScreen(
 ) {
     var pointCount by remember { mutableStateOf(1500f) }
     val result = remember(pointCount) { useCase(pointCount.toInt()) }
+    val strings = state.strings
 
     Scaffold(
         topBar = {
@@ -83,7 +84,7 @@ fun ChaosGameScreen(
                         }
 
                         Spacer(modifier = Modifier.height(12.dp))
-                        Text("Simülasyon Nokta Sayısı: ${pointCount.toInt()}", fontWeight = FontWeight.Bold)
+                        Text("${strings.labelSimulation}: ${pointCount.toInt()}", fontWeight = FontWeight.Bold)
                         Slider(
                             value = pointCount,
                             onValueChange = { pointCount = it },

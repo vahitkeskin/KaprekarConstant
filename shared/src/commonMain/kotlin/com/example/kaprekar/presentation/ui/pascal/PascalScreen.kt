@@ -94,7 +94,7 @@ fun PascalScreen(
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
                             Text(
-                                text = "Kombinasyon & Permütasyon Hesabı",
+                                text = state.strings.topicPascalTitle,
                                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                             )
 
@@ -105,7 +105,7 @@ fun PascalScreen(
                                 OutlinedTextField(
                                     value = nInputStr,
                                     onValueChange = { nInputStr = it.filter { c -> c.isDigit() }.take(2) },
-                                    label = { Text("n küme büyüklüğü") },
+                                    label = { Text("n") },
                                     singleLine = true,
                                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                     modifier = Modifier.weight(1f)
@@ -113,7 +113,7 @@ fun PascalScreen(
                                 OutlinedTextField(
                                     value = kInputStr,
                                     onValueChange = { kInputStr = it.filter { c -> c.isDigit() }.take(2) },
-                                    label = { Text("k seçim adedi") },
+                                    label = { Text("k") },
                                     singleLine = true,
                                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                     modifier = Modifier.weight(1f)

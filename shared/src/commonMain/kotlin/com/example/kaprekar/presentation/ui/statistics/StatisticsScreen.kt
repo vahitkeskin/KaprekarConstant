@@ -66,7 +66,7 @@ fun StatisticsScreen(
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
-                            text = "Veri Seti Girin (Virgülle veya boşlukla ayırın)",
+                            text = state.strings.labelNumberInput,
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold
                         )
@@ -74,7 +74,7 @@ fun StatisticsScreen(
                         OutlinedTextField(
                             value = rawInput,
                             onValueChange = { rawInput = it },
-                            label = { Text("Saylar") },
+                            label = { Text("X") },
                             modifier = Modifier.fillMaxWidth(),
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                         )
@@ -92,19 +92,19 @@ fun StatisticsScreen(
                         modifier = Modifier.padding(16.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Text("İstatistiksik Metrikler", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
+                        Text(state.strings.labelResult, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
                         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                            Text("Veri Adedi (N): ${result.count}")
-                            Text("Toplam (Σx): ${result.sum}")
+                            Text("N: ${result.count}")
+                            Text("Σx: ${result.sum}")
                         }
                         Divider()
                         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                            Text("Ortalama (x̄): ${(result.mean * 100).toInt() / 100.0}", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
-                            Text("Medyan: ${result.median}", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.secondary)
+                            Text("x̄: ${(result.mean * 100).toInt() / 100.0}", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+                            Text("Median: ${result.median}", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.secondary)
                         }
                         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                            Text("Varyans (σ²): ${(result.variance * 100).toInt() / 100.0}")
-                            Text("Standart Sapma (σ): ${(result.stdDev * 100).toInt() / 100.0}", fontWeight = FontWeight.Bold)
+                            Text("σ²: ${(result.variance * 100).toInt() / 100.0}")
+                            Text("σ: ${(result.stdDev * 100).toInt() / 100.0}", fontWeight = FontWeight.Bold)
                         }
                         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                             Text("Min: ${result.min}")

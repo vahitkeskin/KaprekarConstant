@@ -61,12 +61,12 @@ fun FractalScreen(
                             FilterChip(
                                 selected = isMandelbrot,
                                 onClick = { isMandelbrot = true },
-                                label = { Text("Mandelbrot Set") }
+                                label = { Text("Mandelbrot") }
                             )
                             FilterChip(
                                 selected = !isMandelbrot,
                                 onClick = { isMandelbrot = false },
-                                label = { Text("Julia Set") }
+                                label = { Text("Julia") }
                             )
                         }
 
@@ -113,7 +113,7 @@ fun FractalScreen(
                         }
 
                         Spacer(modifier = Modifier.height(12.dp))
-                        Text("Yineleme Sınırı: ${maxIter.toInt()}", fontWeight = FontWeight.Bold)
+                        Text("${state.strings.labelStep}: ${maxIter.toInt()}", fontWeight = FontWeight.Bold)
                         Slider(
                             value = maxIter,
                             onValueChange = { maxIter = it },

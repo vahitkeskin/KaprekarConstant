@@ -24,6 +24,7 @@ fun EulerScreen(
 ) {
     var termsCount by remember { mutableStateOf(10f) }
     val result = remember(termsCount) { useCase(termsCount.toInt()) }
+    val strings = state.strings
 
     Scaffold(
         topBar = {
@@ -50,14 +51,14 @@ fun EulerScreen(
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
-                            text = "Euler Sayısı (e ≈ 2.71828)",
+                            text = strings.topicEulerTitle,
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.primary
                         )
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = "e = 1/0! + 1/1! + 1/2! + 1/3! + ... Taylor serisi açılımı",
+                            text = "e = 1/0! + 1/1! + 1/2! + 1/3! + ...",
                             style = MaterialTheme.typography.bodyMedium
                         )
                         Spacer(modifier = Modifier.height(12.dp))
@@ -73,7 +74,7 @@ fun EulerScreen(
 
             item {
                 Text(
-                    text = "Terim Sayısı: ${termsCount.toInt()}",
+                    text = "${strings.labelCount}: ${termsCount.toInt()}",
                     style = MaterialTheme.typography.labelLarge,
                     fontWeight = FontWeight.Bold
                 )
@@ -87,7 +88,7 @@ fun EulerScreen(
 
             item {
                 Text(
-                    text = "Taylor Serisi Adımları (1/k!)",
+                    text = strings.stepBreakdownTitle,
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold
                 )

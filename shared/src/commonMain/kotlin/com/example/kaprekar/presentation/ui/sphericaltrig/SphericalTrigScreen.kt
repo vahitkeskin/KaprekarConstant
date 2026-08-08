@@ -46,10 +46,12 @@ fun SphericalTrigScreen(
         animationSpec = infiniteRepeatable(tween(2000, easing = LinearEasing), RepeatMode.Reverse)
     )
 
+    val strings = state.strings
+
     Scaffold(
         topBar = {
             TopGradientAppBar(
-                title = "Küresel Trigonometri (El-Battani)",
+                title = strings.topicSphericalTrigTitle,
                 state = state,
                 onIntent = onIntent,
                 showBackButton = true
@@ -70,17 +72,17 @@ fun SphericalTrigScreen(
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f))
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text("✈️ Haversine & Küresel Kosinüs Yasası", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text("✈️ ${strings.labelDistance}", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "En Kısa Uçuş Mesafesi: ${round(result.distanceKm)} km",
+                            text = "d = ${round(result.distanceKm)} km",
                             fontSize = 24.sp,
                             fontWeight = FontWeight.ExtraBold,
                             fontFamily = FontFamily.Monospace,
                             color = BrandPink
                         )
                         Spacer(modifier = Modifier.height(4.dp))
-                        Text("Başlangıç Rotası (Açı): ${round(result.initialBearingDeg)}°")
+                        Text("${strings.labelAngle}: ${round(result.initialBearingDeg)}°")
                     }
                 }
             }
@@ -88,7 +90,7 @@ fun SphericalTrigScreen(
             item {
                 Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text("🌐 Küre Üzerinde Büyük Daire Rota Çizimi", fontWeight = FontWeight.Bold)
+                        Text("🌐 ${strings.labelGraph}", fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Box(modifier = Modifier.fillMaxWidth().height(180.dp)) {
                             Canvas(modifier = Modifier.fillMaxSize()) {
@@ -121,7 +123,7 @@ fun SphericalTrigScreen(
             item {
                 Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(12.dp)) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text("Şehir 1 Koordinatı (Enlem: ${round(lat1.toDouble())}°, Boylam: ${round(lon1.toDouble())}°)", fontWeight = FontWeight.Bold)
+                        Text("(${round(lat1.toDouble())}°, ${round(lon1.toDouble())}°)", fontWeight = FontWeight.Bold)
                         Slider(value = lat1, onValueChange = { lat1 = it }, valueRange = -90f..90f)
                         Slider(value = lon1, onValueChange = { lon1 = it }, valueRange = -180f..180f)
                     }
