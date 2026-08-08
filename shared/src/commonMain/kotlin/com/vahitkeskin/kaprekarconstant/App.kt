@@ -1,12 +1,9 @@
 package com.vahitkeskin.kaprekarconstant
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -17,7 +14,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.IntOffset
 import com.example.kaprekar.di.initKoin
 import com.example.kaprekar.domain.model.MathScreen
 import com.example.kaprekar.domain.model.ThemeMode
@@ -114,21 +110,12 @@ fun KaprekarAppContent(
     val colorScheme = if (useDarkTheme) DarkColorScheme else LightColorScheme
 
     MaterialTheme(colorScheme = colorScheme) {
-        val animationSpec = tween<IntOffset>(durationMillis = 550, easing = FastOutSlowInEasing)
-        val fadeSpec = tween<Float>(durationMillis = 550)
+        val fadeSpec = tween<Float>(durationMillis = 300)
 
         AnimatedContent(
             targetState = state.currentScreen,
             transitionSpec = {
-                if (state.isNavigatingBack) {
-                    // Geriye Dönüş: Ekran Yavaşça Soldan Sağa Kayarak Kapanır
-                    (slideInHorizontally(animationSpec = animationSpec, initialOffsetX = { fullWidth -> -fullWidth / 3 }) + fadeIn(fadeSpec))
-                        .togetherWith(slideOutHorizontally(animationSpec = animationSpec, targetOffsetX = { fullWidth -> fullWidth }) + fadeOut(fadeSpec))
-                } else {
-                    // İleri Açılış: Ekran Yavaşça Sağdan Sola Kayarak Açılır
-                    (slideInHorizontally(animationSpec = animationSpec, initialOffsetX = { fullWidth -> fullWidth }) + fadeIn(fadeSpec))
-                        .togetherWith(slideOutHorizontally(animationSpec = animationSpec, targetOffsetX = { fullWidth -> -fullWidth / 3 }) + fadeOut(fadeSpec))
-                }
+                fadeIn(animationSpec = fadeSpec) togetherWith fadeOut(animationSpec = fadeSpec)
             }
         ) { targetScreen ->
             saveableStateHolder.SaveableStateProvider(targetScreen) {

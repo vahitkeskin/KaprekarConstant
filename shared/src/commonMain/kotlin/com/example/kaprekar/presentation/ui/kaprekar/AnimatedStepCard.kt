@@ -28,9 +28,9 @@ fun AnimatedStepCard(
     val strings = state.strings
     AnimatedVisibility(
         visible = true,
-        enter = fadeIn(animationSpec = tween(600)) + slideInVertically(
+        enter = fadeIn(animationSpec = tween(300)) + slideInVertically(
             initialOffsetY = { it / 2 },
-            animationSpec = tween(600)
+            animationSpec = tween(300)
         )
     ) {
         Card(
