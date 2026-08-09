@@ -128,5 +128,9 @@ val NlStrings = AppStrings(
     labelGraph = "Grafiek",
     labelCoefficient = "Coëfficiënt",
     labelSimulation = "Simulatie",
-    labelRoots = "Wortels"
+    labelRoots = "Wortels",
+    settingsTitle = "Instellingen",
+    settingsThemeSection = "Vormgevingsthema",
+    settingsLanguageSection = "App-taal",
+    settingsLanguageSubtitle = "Taal die in de app wordt gebruikt"
 )

@@ -128,5 +128,9 @@ val AzStrings = AppStrings(
     labelGraph = "Qrafik",
     labelCoefficient = "Əmsal",
     labelSimulation = "Simulyasiya",
-    labelRoots = "Köklər"
+    labelRoots = "Köklər",
+    settingsTitle = "Ayarlar",
+    settingsThemeSection = "Görünüş Mövzusu",
+    settingsLanguageSection = "Tətbiq Dili",
+    settingsLanguageSubtitle = "Tətbiq daxilində istifadə olunacaq dil"
 )

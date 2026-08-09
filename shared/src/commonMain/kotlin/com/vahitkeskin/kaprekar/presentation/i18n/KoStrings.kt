@@ -128,5 +128,9 @@ val KoStrings = AppStrings(
     labelGraph = "그래프",
     labelCoefficient = "계수",
     labelSimulation = "시뮬레이션",
-    labelRoots = "근 (Roots)"
+    labelRoots = "근 (Roots)",
+    settingsTitle = "설정",
+    settingsThemeSection = "화면 테마",
+    settingsLanguageSection = "앱 언어",
+    settingsLanguageSubtitle = "앱 전체에서 사용할 언어"
 )

@@ -128,5 +128,9 @@ val ZhStrings = AppStrings(
     labelGraph = "图表",
     labelCoefficient = "系数",
     labelSimulation = "模拟",
-    labelRoots = "方程的根"
+    labelRoots = "方程的根",
+    settingsTitle = "设置",
+    settingsThemeSection = "外观主题",
+    settingsLanguageSection = "应用语言",
+    settingsLanguageSubtitle = "整个应用中使用的语言"
 )

@@ -128,5 +128,9 @@ val RuStrings = AppStrings(
     labelGraph = "График",
     labelCoefficient = "Коэффициент",
     labelSimulation = "Симуляция",
-    labelRoots = "Корни"
+    labelRoots = "Корни",
+    settingsTitle = "Настройки",
+    settingsThemeSection = "Тема оформления",
+    settingsLanguageSection = "Язык приложения",
+    settingsLanguageSubtitle = "Выберите язык интерфейса"
 )

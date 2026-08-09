@@ -128,5 +128,9 @@ val IdStrings = AppStrings(
     labelGraph = "Grafik",
     labelCoefficient = "Koefisien",
     labelSimulation = "Simulasi",
-    labelRoots = "Akar"
+    labelRoots = "Akar",
+    settingsTitle = "Pengaturan",
+    settingsThemeSection = "Tema Tampilan",
+    settingsLanguageSection = "Bahasa Aplikasi",
+    settingsLanguageSubtitle = "Bahasa yang digunakan di seluruh aplikasi"
 )

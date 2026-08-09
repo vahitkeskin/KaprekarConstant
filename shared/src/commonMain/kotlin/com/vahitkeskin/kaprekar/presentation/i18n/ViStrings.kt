@@ -128,5 +128,9 @@ val ViStrings = AppStrings(
     labelGraph = "Đồ thị",
     labelCoefficient = "Hệ số",
     labelSimulation = "Mô phỏng",
-    labelRoots = "Nghiệm"
+    labelRoots = "Nghiệm",
+    settingsTitle = "Cài đặt",
+    settingsThemeSection = "Giao diện",
+    settingsLanguageSection = "Ngôn ngữ ứng dụng",
+    settingsLanguageSubtitle = "Ngôn ngữ sử dụng trong ứng dụng"
 )

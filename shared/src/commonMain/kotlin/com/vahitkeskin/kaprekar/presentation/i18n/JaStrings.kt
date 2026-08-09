@@ -128,5 +128,9 @@ val JaStrings = AppStrings(
     labelGraph = "グラフ",
     labelCoefficient = "係数",
     labelSimulation = "シミュレーション",
-    labelRoots = "解 (Kökler)"
+    labelRoots = "解 (Kökler)",
+    settingsTitle = "設定",
+    settingsThemeSection = "外観テーマ",
+    settingsLanguageSection = "アプリの言語",
+    settingsLanguageSubtitle = "アプリ全体で使用される言語"
 )

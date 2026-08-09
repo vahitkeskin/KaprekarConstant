@@ -128,5 +128,9 @@ val PtStrings = AppStrings(
     labelGraph = "Gráfico",
     labelCoefficient = "Coeficiente",
     labelSimulation = "Simulação",
-    labelRoots = "Raízes"
+    labelRoots = "Raízes",
+    settingsTitle = "Configurações",
+    settingsThemeSection = "Tema de Aparência",
+    settingsLanguageSection = "Idioma do App",
+    settingsLanguageSubtitle = "Idioma usado em todo o aplicativo"
 )

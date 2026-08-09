@@ -140,5 +140,9 @@ data class AppStrings(
     val labelGraph: String,
     val labelCoefficient: String,
     val labelSimulation: String,
-    val labelRoots: String
+    val labelRoots: String,
+    val settingsTitle: String,
+    val settingsThemeSection: String,
+    val settingsLanguageSection: String,
+    val settingsLanguageSubtitle: String
 )

@@ -128,5 +128,9 @@ val ArStrings = AppStrings(
     labelGraph = "الرسم البياني",
     labelCoefficient = "المعامل",
     labelSimulation = "المحاكاة",
-    labelRoots = "الجذور"
+    labelRoots = "الجذور",
+    settingsTitle = "الإعدادات",
+    settingsThemeSection = "سمة المظهر",
+    settingsLanguageSection = "لغة التطبيق",
+    settingsLanguageSubtitle = "اللغة المستخدمة في التطبيق"
 )

@@ -128,5 +128,9 @@ val ThStrings = AppStrings(
     labelGraph = "กราฟ",
     labelCoefficient = "สัมประสิทธิ์",
     labelSimulation = "การจำลอง",
-    labelRoots = "ราก"
+    labelRoots = "ราก",
+    settingsTitle = "การตั้งค่า",
+    settingsThemeSection = "ธีมลักษณะที่ปรากฏ",
+    settingsLanguageSection = "ภาษาของแอป",
+    settingsLanguageSubtitle = "ภาษาที่ใช้ทั่วทั้งแอป"
 )

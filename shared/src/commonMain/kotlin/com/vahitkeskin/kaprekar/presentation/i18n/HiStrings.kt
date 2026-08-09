@@ -128,5 +128,9 @@ val HiStrings = AppStrings(
     labelGraph = "ग्राफ",
     labelCoefficient = "गुणांक",
     labelSimulation = "अनुकरण",
-    labelRoots = "मूल"
+    labelRoots = "मूल",
+    settingsTitle = "सेटिंग्स",
+    settingsThemeSection = "थीม",
+    settingsLanguageSection = "ऐप की भाषा",
+    settingsLanguageSubtitle = "पूरे ऐप में उपयोग की जाने वाली भाषा"
 )

@@ -128,5 +128,9 @@ val EsStrings = AppStrings(
     labelGraph = "Gráfica",
     labelCoefficient = "Coeficiente",
     labelSimulation = "Simulación",
-    labelRoots = "Raíces"
+    labelRoots = "Raíces",
+    settingsTitle = "Ajustes",
+    settingsThemeSection = "Tema",
+    settingsLanguageSection = "Idioma",
+    settingsLanguageSubtitle = "Idioma general de la aplicación"
 )

@@ -128,5 +128,9 @@ val ItStrings = AppStrings(
     labelGraph = "Grafico",
     labelCoefficient = "Coefficiente",
     labelSimulation = "Simulazione",
-    labelRoots = "Radici"
+    labelRoots = "Radici",
+    settingsTitle = "Impostazioni",
+    settingsThemeSection = "Tema Aspetto",
+    settingsLanguageSection = "Lingua dell'app",
+    settingsLanguageSubtitle = "Lingua utilizzata in tutta l'app"
 )

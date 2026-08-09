@@ -128,5 +128,9 @@ val TrStrings = AppStrings(
     labelGraph = "Grafik",
     labelCoefficient = "Katsayı",
     labelSimulation = "Simülasyon",
-    labelRoots = "Kökler"
+    labelRoots = "Kökler",
+    settingsTitle = "Ayarlar",
+    settingsThemeSection = "Görünüm Teması",
+    settingsLanguageSection = "Uygulama Dili",
+    settingsLanguageSubtitle = "Uygulama genelinde kullanılacak dil"
 )

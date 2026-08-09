@@ -128,5 +128,9 @@ val FrStrings = AppStrings(
     labelGraph = "Graphe",
     labelCoefficient = "Coefficient",
     labelSimulation = "Simulation",
-    labelRoots = "Racines"
+    labelRoots = "Racines",
+    settingsTitle = "Paramètres",
+    settingsThemeSection = "Thème de l'application",
+    settingsLanguageSection = "Langue",
+    settingsLanguageSubtitle = "Langue générale de l'application"
 )

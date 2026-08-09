@@ -128,5 +128,9 @@ val PlStrings = AppStrings(
     labelGraph = "Wykres",
     labelCoefficient = "Współczynnik",
     labelSimulation = "Symulacja",
-    labelRoots = "Pierwiastki"
+    labelRoots = "Pierwiastki",
+    settingsTitle = "Ustawienia",
+    settingsThemeSection = "Motyw wyglądu",
+    settingsLanguageSection = "Język aplikacji",
+    settingsLanguageSubtitle = "Język używany w całej aplikacji"
 )

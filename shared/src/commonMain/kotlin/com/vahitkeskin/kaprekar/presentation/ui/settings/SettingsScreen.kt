@@ -30,81 +30,12 @@ import com.vahitkeskin.kaprekar.presentation.ui.common.BrandCyan
 import com.vahitkeskin.kaprekar.presentation.ui.common.BrandPink
 import com.vahitkeskin.kaprekar.presentation.ui.common.TopGradientAppBar
 
-private data class SettingsStrings(
-    val title: String,
-    val themeSection: String,
-    val systemTheme: String,
-    val lightTheme: String,
-    val darkTheme: String,
-    val languageSection: String,
-    val languageSubtitle: String
-)
-
-private fun getSettingsStrings(language: AppLanguage): SettingsStrings {
-    return when (language) {
-        AppLanguage.TR -> SettingsStrings(
-            title = "Ayarlar",
-            themeSection = "Görünüm Teması",
-            systemTheme = "Sistem Varsayılanı",
-            lightTheme = "Açık Tema",
-            darkTheme = "Karanlık Tema",
-            languageSection = "Uygulama Dili",
-            languageSubtitle = "Uygulama genelinde kullanılacak dil"
-        )
-        AppLanguage.DE -> SettingsStrings(
-            title = "Einstellungen",
-            themeSection = "Thema",
-            systemTheme = "Systemstandard",
-            lightTheme = "Helles Thema",
-            darkTheme = "Dunkles Thema",
-            languageSection = "App-Sprache",
-            languageSubtitle = "Wählen Sie Ihre bevorzugte Sprache"
-        )
-        AppLanguage.FR -> SettingsStrings(
-            title = "Paramètres",
-            themeSection = "Thème de l'application",
-            systemTheme = "Système",
-            lightTheme = "Thème clair",
-            darkTheme = "Thème sombre",
-            languageSection = "Langue",
-            languageSubtitle = "Langue générale de l'application"
-        )
-        AppLanguage.ES -> SettingsStrings(
-            title = "Ajustes",
-            themeSection = "Tema",
-            systemTheme = "Predeterminado del sistema",
-            lightTheme = "Tema claro",
-            darkTheme = "Tema oscuro",
-            languageSection = "Idioma",
-            languageSubtitle = "Idioma general de la aplicación"
-        )
-        AppLanguage.RU -> SettingsStrings(
-            title = "Настройки",
-            themeSection = "Тема оформления",
-            systemTheme = "Системная тема",
-            lightTheme = "Светлая тема",
-            darkTheme = "Темная тема",
-            languageSection = "Язык приложения",
-            languageSubtitle = "Выберите язык интерфейса"
-        )
-        else -> SettingsStrings(
-            title = "Settings",
-            themeSection = "Appearance Theme",
-            systemTheme = "System Default",
-            lightTheme = "Light Theme",
-            darkTheme = "Dark Theme",
-            languageSection = "App Language",
-            languageSubtitle = "Language used throughout the app"
-        )
-    }
-}
 
 @Composable
 fun SettingsScreen(
     state: KaprekarUiState,
     onIntent: (KaprekarUiIntent) -> Unit
 ) {
-    val settingsStrings = getSettingsStrings(state.appLanguage)
     val backgroundGradient = Brush.verticalGradient(
         colors = listOf(
             BrandCyan.copy(alpha = 0.15f),
@@ -122,7 +53,7 @@ fun SettingsScreen(
             containerColor = Color.Transparent,
             topBar = {
                 TopGradientAppBar(
-                    title = settingsStrings.title,
+                    title = state.strings.settingsTitle,
                     state = state,
                     onIntent = onIntent,
                     showBackButton = true
@@ -150,28 +81,28 @@ fun SettingsScreen(
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         Text(
-                            text = settingsStrings.themeSection,
+                            text = state.strings.settingsThemeSection,
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.primary
                         )
 
                         ThemeOptionRow(
-                            label = settingsStrings.systemTheme,
+                            label = state.strings.systemTheme,
                             isSelected = state.themeMode == ThemeMode.SYSTEM,
                             icon = Icons.Default.SettingsBrightness,
                             onClick = { onIntent(KaprekarUiIntent.OnSelectThemeMode(ThemeMode.SYSTEM)) }
                         )
 
                         ThemeOptionRow(
-                            label = settingsStrings.lightTheme,
+                            label = state.strings.lightTheme,
                             isSelected = state.themeMode == ThemeMode.LIGHT,
                             icon = Icons.Default.LightMode,
                             onClick = { onIntent(KaprekarUiIntent.OnSelectThemeMode(ThemeMode.LIGHT)) }
                         )
 
                         ThemeOptionRow(
-                            label = settingsStrings.darkTheme,
+                            label = state.strings.darkTheme,
                             isSelected = state.themeMode == ThemeMode.DARK,
                             icon = Icons.Default.DarkMode,
                             onClick = { onIntent(KaprekarUiIntent.OnSelectThemeMode(ThemeMode.DARK)) }
@@ -193,7 +124,7 @@ fun SettingsScreen(
                         verticalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         Text(
-                            text = settingsStrings.languageSection,
+                            text = state.strings.settingsLanguageSection,
                             fontSize = 16.sp,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.primary
@@ -228,7 +159,7 @@ fun SettingsScreen(
                                             fontSize = 15.sp
                                         )
                                         Text(
-                                            text = settingsStrings.languageSubtitle,
+                                            text = state.strings.settingsLanguageSubtitle,
                                             fontSize = 11.sp,
                                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                                         )

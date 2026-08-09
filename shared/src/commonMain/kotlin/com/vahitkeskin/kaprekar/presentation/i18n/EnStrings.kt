@@ -128,5 +128,9 @@ val EnStrings = AppStrings(
     labelGraph = "Graph",
     labelCoefficient = "Coefficient",
     labelSimulation = "Simulation",
-    labelRoots = "Roots"
+    labelRoots = "Roots",
+    settingsTitle = "Settings",
+    settingsThemeSection = "Appearance Theme",
+    settingsLanguageSection = "App Language",
+    settingsLanguageSubtitle = "Language used throughout the app"
 )

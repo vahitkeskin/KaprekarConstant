@@ -128,5 +128,9 @@ val DeStrings = AppStrings(
     labelGraph = "Diagramm",
     labelCoefficient = "Koeffizient",
     labelSimulation = "Simulation",
-    labelRoots = "Wurzeln"
+    labelRoots = "Wurzeln",
+    settingsTitle = "Einstellungen",
+    settingsThemeSection = "Thema",
+    settingsLanguageSection = "App-Sprache",
+    settingsLanguageSubtitle = "Wählen Sie Ihre bevorzugte Sprache"
 )
