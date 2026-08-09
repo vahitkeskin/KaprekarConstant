@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import com.vahitkeskin.kaprekar.domain.model.ThemeMode
+import com.vahitkeskin.kaprekar.domain.model.MathScreen
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiIntent
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiState
 
@@ -123,7 +124,7 @@ fun TopGradientAppBar(
             ) {
                 // Settings Button
                 Surface(
-                    onClick = { onIntent(KaprekarUiIntent.OnNavigateToScreen(com.vahitkeskin.kaprekar.domain.model.MathScreen.SETTINGS)) },
+                    onClick = { onIntent(KaprekarUiIntent.OnNavigateToScreen(MathScreen.SETTINGS)) },
                     shape = CircleShape,
                     color = MaterialTheme.colorScheme.surface.copy(alpha = 0.85f),
                     border = BorderStroke(

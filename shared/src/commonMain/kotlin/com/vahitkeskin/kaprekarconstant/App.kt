@@ -43,6 +43,16 @@ import com.vahitkeskin.kaprekar.presentation.ui.supernumber.SuperNumberScreen
 import com.vahitkeskin.kaprekar.presentation.ui.transformation.TransformationScreen
 import com.vahitkeskin.kaprekar.presentation.ui.trigonometry.TrigonometryScreen
 import com.vahitkeskin.kaprekar.presentation.ui.settings.SettingsScreen
+import com.vahitkeskin.kaprekar.presentation.ui.logarithm.LogarithmScreen
+import com.vahitkeskin.kaprekar.presentation.ui.arf.ArfInvariantScreen
+import com.vahitkeskin.kaprekar.presentation.ui.thales.ThalesScreen
+import com.vahitkeskin.kaprekar.presentation.ui.kepler.KeplerScreen
+import com.vahitkeskin.kaprekar.presentation.ui.brachistochrone.BrachistochroneScreen
+import com.vahitkeskin.kaprekar.presentation.ui.cantor.CantorScreen
+import com.vahitkeskin.kaprekar.presentation.ui.eratosthenes.EratosthenesScreen
+import com.vahitkeskin.kaprekar.presentation.ui.cubic.CubicScreen
+import com.vahitkeskin.kaprekar.presentation.ui.sphericaltrig.SphericalTrigScreen
+import com.vahitkeskin.kaprekar.presentation.ui.godel.GodelScreen
 import org.koin.compose.KoinContext
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -151,16 +161,16 @@ fun KaprekarAppContent(
                     MathScreen.FOURIER -> FourierScreen(state = state, onIntent = viewModel::onIntent)
                     MathScreen.CHAOS_GAME -> ChaosGameScreen(state = state, onIntent = viewModel::onIntent)
                     MathScreen.NIM_GAME -> NimGameScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.LOGARITHM -> com.vahitkeskin.kaprekar.presentation.ui.logarithm.LogarithmScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.ARF_INVARIANT -> com.vahitkeskin.kaprekar.presentation.ui.arf.ArfInvariantScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.THALES -> com.vahitkeskin.kaprekar.presentation.ui.thales.ThalesScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.KEPLER_LAWS -> com.vahitkeskin.kaprekar.presentation.ui.kepler.KeplerScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.BRACHISTOCHRONE -> com.vahitkeskin.kaprekar.presentation.ui.brachistochrone.BrachistochroneScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.CANTOR_SET -> com.vahitkeskin.kaprekar.presentation.ui.cantor.CantorScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.ERATOSTHENES -> com.vahitkeskin.kaprekar.presentation.ui.eratosthenes.EratosthenesScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.CUBIC_EQUATION -> com.vahitkeskin.kaprekar.presentation.ui.cubic.CubicScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.SPHERICAL_TRIG -> com.vahitkeskin.kaprekar.presentation.ui.sphericaltrig.SphericalTrigScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.GODEL_NUMBERING -> com.vahitkeskin.kaprekar.presentation.ui.godel.GodelScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.LOGARITHM -> LogarithmScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.ARF_INVARIANT -> ArfInvariantScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.THALES -> ThalesScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.KEPLER_LAWS -> KeplerScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.BRACHISTOCHRONE -> BrachistochroneScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.CANTOR_SET -> CantorScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.ERATOSTHENES -> EratosthenesScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.CUBIC_EQUATION -> CubicScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.SPHERICAL_TRIG -> SphericalTrigScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.GODEL_NUMBERING -> GodelScreen(state = state, onIntent = viewModel::onIntent)
                     MathScreen.SETTINGS -> SettingsScreen(state = state, onIntent = viewModel::onIntent)
                 }
             }

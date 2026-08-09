@@ -30,6 +30,7 @@ import com.vahitkeskin.kaprekar.domain.model.ThemeMode
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiIntent
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiState
 import com.vahitkeskin.kaprekar.presentation.KaprekarViewModel
+import com.vahitkeskin.kaprekar.presentation.ui.common.TopGradientAppBar
 import kotlinx.coroutines.delay
 
 val BrandPink = Color(0xFFFF2E93)
@@ -104,7 +105,7 @@ fun KaprekarContent(
             Scaffold(
                 containerColor = Color.Transparent,
                 topBar = {
-                    com.vahitkeskin.kaprekar.presentation.ui.common.TopGradientAppBar(
+                    TopGradientAppBar(
                         title = strings.appTitle,
                         state = state,
                         onIntent = onIntent,

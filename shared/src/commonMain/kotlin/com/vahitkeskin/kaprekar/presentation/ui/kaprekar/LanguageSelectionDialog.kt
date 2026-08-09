@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import com.vahitkeskin.kaprekar.domain.model.AppLanguage
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiState
+import com.vahitkeskin.kaprekar.presentation.ui.common.ThemePreview
 
 @Composable
 fun LanguageSelectionDialog(
@@ -92,7 +93,7 @@ fun LanguageSelectionDialog(
 @Preview
 @Composable
 fun LanguageSelectionDialogPreview() {
-    com.vahitkeskin.kaprekar.presentation.ui.common.ThemePreview {
+    ThemePreview {
         LanguageSelectionDialog(
             state = KaprekarUiState(),
             onSelect = {},
