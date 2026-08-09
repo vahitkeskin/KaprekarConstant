@@ -52,5 +52,6 @@ sealed interface KaprekarUiIntent {
     data class OnToggleInfoDialog(val show: Boolean) : KaprekarUiIntent
     data class OnToggleLanguageDialog(val show: Boolean) : KaprekarUiIntent
     data object OnToggleThemeMode : KaprekarUiIntent
+    data class OnSelectThemeMode(val themeMode: ThemeMode) : KaprekarUiIntent
     data class OnSelectLanguage(val language: AppLanguage) : KaprekarUiIntent
 }
