@@ -42,6 +42,7 @@ import com.example.kaprekar.presentation.ui.statistics.StatisticsScreen
 import com.example.kaprekar.presentation.ui.supernumber.SuperNumberScreen
 import com.example.kaprekar.presentation.ui.transformation.TransformationScreen
 import com.example.kaprekar.presentation.ui.trigonometry.TrigonometryScreen
+import com.example.kaprekar.presentation.ui.settings.SettingsScreen
 import org.koin.compose.KoinContext
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -160,6 +161,7 @@ fun KaprekarAppContent(
                     MathScreen.CUBIC_EQUATION -> com.example.kaprekar.presentation.ui.cubic.CubicScreen(state = state, onIntent = viewModel::onIntent)
                     MathScreen.SPHERICAL_TRIG -> com.example.kaprekar.presentation.ui.sphericaltrig.SphericalTrigScreen(state = state, onIntent = viewModel::onIntent)
                     MathScreen.GODEL_NUMBERING -> com.example.kaprekar.presentation.ui.godel.GodelScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.SETTINGS -> SettingsScreen(state = state, onIntent = viewModel::onIntent)
                 }
             }
         }
