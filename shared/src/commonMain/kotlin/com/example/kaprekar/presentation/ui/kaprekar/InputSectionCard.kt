@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.kaprekar.presentation.KaprekarUiIntent
@@ -54,8 +55,20 @@ fun InputSectionCard(
                 value = state.inputNumber,
                 onValueChange = { onIntent(KaprekarUiIntent.OnInputChanged(it)) },
                 modifier = Modifier.fillMaxWidth(),
-                label = { Text(strings.inputLabel) },
-                placeholder = { Text(strings.inputPlaceholder) },
+                label = {
+                    Text(
+                        text = strings.inputLabel,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
+                placeholder = {
+                    Text(
+                        text = strings.inputPlaceholder,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
                 singleLine = true,
                 isError = state.validationError != null,
                 keyboardOptions = KeyboardOptions(
