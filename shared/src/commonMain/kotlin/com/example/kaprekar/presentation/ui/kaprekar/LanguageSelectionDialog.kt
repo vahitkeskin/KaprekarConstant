@@ -2,6 +2,7 @@ package com.example.kaprekar.presentation.ui.kaprekar
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -25,6 +26,10 @@ fun LanguageSelectionDialog(
     onDismiss: () -> Unit
 ) {
     val strings = state.strings
+    val selectedIndex = AppLanguage.entries.indexOf(state.appLanguage)
+    val initialIndex = (selectedIndex - 2).coerceAtLeast(0)
+    val listState = rememberLazyListState(initialFirstVisibleItemIndex = initialIndex)
+
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
@@ -35,6 +40,7 @@ fun LanguageSelectionDialog(
         },
         text = {
             LazyColumn(
+                state = listState,
                 modifier = Modifier.fillMaxWidth().heightIn(max = 360.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
