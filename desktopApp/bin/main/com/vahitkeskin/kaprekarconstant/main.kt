@@ -3,7 +3,7 @@ package com.vahitkeskin.kaprekarconstant
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import com.example.kaprekar.di.initKoin
+import com.vahitkeskin.kaprekar.di.initKoin
 
 fun main() = application {
     initKoin()

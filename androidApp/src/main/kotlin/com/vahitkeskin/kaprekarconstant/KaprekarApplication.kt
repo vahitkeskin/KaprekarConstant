@@ -1,7 +1,7 @@
 package com.vahitkeskin.kaprekarconstant
 
 import android.app.Application
-import com.example.kaprekar.di.initKoin
+import com.vahitkeskin.kaprekar.di.initKoin
 import org.koin.android.ext.koin.androidContext
 
 class KaprekarApplication : Application() {

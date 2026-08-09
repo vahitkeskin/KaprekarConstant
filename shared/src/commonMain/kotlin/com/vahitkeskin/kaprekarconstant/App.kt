@@ -14,35 +14,35 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.kaprekar.di.initKoin
-import com.example.kaprekar.domain.model.MathScreen
-import com.example.kaprekar.domain.model.ThemeMode
-import com.example.kaprekar.presentation.KaprekarUiIntent
-import com.example.kaprekar.presentation.KaprekarViewModel
-import com.example.kaprekar.presentation.ui.chaosgame.ChaosGameScreen
-import com.example.kaprekar.presentation.ui.collatz.CollatzScreen
-import com.example.kaprekar.presentation.ui.common.BackHandler
-import com.example.kaprekar.presentation.ui.euclid.EuclidGcdScreen
-import com.example.kaprekar.presentation.ui.euler.EulerScreen
-import com.example.kaprekar.presentation.ui.fibonacci.FibonacciScreen
-import com.example.kaprekar.presentation.ui.fourier.FourierScreen
-import com.example.kaprekar.presentation.ui.fractal.FractalScreen
-import com.example.kaprekar.presentation.ui.goldenratio.GoldenRatioScreen
-import com.example.kaprekar.presentation.ui.home.HomeScreen
-import com.example.kaprekar.presentation.ui.kaprekar.LanguageSelectionDialog
-import com.example.kaprekar.presentation.ui.kaprekar.KaprekarScreen
-import com.example.kaprekar.presentation.ui.modular.ModularScreen
-import com.example.kaprekar.presentation.ui.nimgame.NimGameScreen
-import com.example.kaprekar.presentation.ui.pascal.PascalScreen
-import com.example.kaprekar.presentation.ui.phyllotaxis.PhyllotaxisScreen
-import com.example.kaprekar.presentation.ui.pi.PiScreen
-import com.example.kaprekar.presentation.ui.prime.PrimeScreen
-import com.example.kaprekar.presentation.ui.quadratic.QuadraticScreen
-import com.example.kaprekar.presentation.ui.statistics.StatisticsScreen
-import com.example.kaprekar.presentation.ui.supernumber.SuperNumberScreen
-import com.example.kaprekar.presentation.ui.transformation.TransformationScreen
-import com.example.kaprekar.presentation.ui.trigonometry.TrigonometryScreen
-import com.example.kaprekar.presentation.ui.settings.SettingsScreen
+import com.vahitkeskin.kaprekar.di.initKoin
+import com.vahitkeskin.kaprekar.domain.model.MathScreen
+import com.vahitkeskin.kaprekar.domain.model.ThemeMode
+import com.vahitkeskin.kaprekar.presentation.KaprekarUiIntent
+import com.vahitkeskin.kaprekar.presentation.KaprekarViewModel
+import com.vahitkeskin.kaprekar.presentation.ui.chaosgame.ChaosGameScreen
+import com.vahitkeskin.kaprekar.presentation.ui.collatz.CollatzScreen
+import com.vahitkeskin.kaprekar.presentation.ui.common.BackHandler
+import com.vahitkeskin.kaprekar.presentation.ui.euclid.EuclidGcdScreen
+import com.vahitkeskin.kaprekar.presentation.ui.euler.EulerScreen
+import com.vahitkeskin.kaprekar.presentation.ui.fibonacci.FibonacciScreen
+import com.vahitkeskin.kaprekar.presentation.ui.fourier.FourierScreen
+import com.vahitkeskin.kaprekar.presentation.ui.fractal.FractalScreen
+import com.vahitkeskin.kaprekar.presentation.ui.goldenratio.GoldenRatioScreen
+import com.vahitkeskin.kaprekar.presentation.ui.home.HomeScreen
+import com.vahitkeskin.kaprekar.presentation.ui.kaprekar.LanguageSelectionDialog
+import com.vahitkeskin.kaprekar.presentation.ui.kaprekar.KaprekarScreen
+import com.vahitkeskin.kaprekar.presentation.ui.modular.ModularScreen
+import com.vahitkeskin.kaprekar.presentation.ui.nimgame.NimGameScreen
+import com.vahitkeskin.kaprekar.presentation.ui.pascal.PascalScreen
+import com.vahitkeskin.kaprekar.presentation.ui.phyllotaxis.PhyllotaxisScreen
+import com.vahitkeskin.kaprekar.presentation.ui.pi.PiScreen
+import com.vahitkeskin.kaprekar.presentation.ui.prime.PrimeScreen
+import com.vahitkeskin.kaprekar.presentation.ui.quadratic.QuadraticScreen
+import com.vahitkeskin.kaprekar.presentation.ui.statistics.StatisticsScreen
+import com.vahitkeskin.kaprekar.presentation.ui.supernumber.SuperNumberScreen
+import com.vahitkeskin.kaprekar.presentation.ui.transformation.TransformationScreen
+import com.vahitkeskin.kaprekar.presentation.ui.trigonometry.TrigonometryScreen
+import com.vahitkeskin.kaprekar.presentation.ui.settings.SettingsScreen
 import org.koin.compose.KoinContext
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -151,16 +151,16 @@ fun KaprekarAppContent(
                     MathScreen.FOURIER -> FourierScreen(state = state, onIntent = viewModel::onIntent)
                     MathScreen.CHAOS_GAME -> ChaosGameScreen(state = state, onIntent = viewModel::onIntent)
                     MathScreen.NIM_GAME -> NimGameScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.LOGARITHM -> com.example.kaprekar.presentation.ui.logarithm.LogarithmScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.ARF_INVARIANT -> com.example.kaprekar.presentation.ui.arf.ArfInvariantScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.THALES -> com.example.kaprekar.presentation.ui.thales.ThalesScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.KEPLER_LAWS -> com.example.kaprekar.presentation.ui.kepler.KeplerScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.BRACHISTOCHRONE -> com.example.kaprekar.presentation.ui.brachistochrone.BrachistochroneScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.CANTOR_SET -> com.example.kaprekar.presentation.ui.cantor.CantorScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.ERATOSTHENES -> com.example.kaprekar.presentation.ui.eratosthenes.EratosthenesScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.CUBIC_EQUATION -> com.example.kaprekar.presentation.ui.cubic.CubicScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.SPHERICAL_TRIG -> com.example.kaprekar.presentation.ui.sphericaltrig.SphericalTrigScreen(state = state, onIntent = viewModel::onIntent)
-                    MathScreen.GODEL_NUMBERING -> com.example.kaprekar.presentation.ui.godel.GodelScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.LOGARITHM -> com.vahitkeskin.kaprekar.presentation.ui.logarithm.LogarithmScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.ARF_INVARIANT -> com.vahitkeskin.kaprekar.presentation.ui.arf.ArfInvariantScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.THALES -> com.vahitkeskin.kaprekar.presentation.ui.thales.ThalesScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.KEPLER_LAWS -> com.vahitkeskin.kaprekar.presentation.ui.kepler.KeplerScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.BRACHISTOCHRONE -> com.vahitkeskin.kaprekar.presentation.ui.brachistochrone.BrachistochroneScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.CANTOR_SET -> com.vahitkeskin.kaprekar.presentation.ui.cantor.CantorScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.ERATOSTHENES -> com.vahitkeskin.kaprekar.presentation.ui.eratosthenes.EratosthenesScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.CUBIC_EQUATION -> com.vahitkeskin.kaprekar.presentation.ui.cubic.CubicScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.SPHERICAL_TRIG -> com.vahitkeskin.kaprekar.presentation.ui.sphericaltrig.SphericalTrigScreen(state = state, onIntent = viewModel::onIntent)
+                    MathScreen.GODEL_NUMBERING -> com.vahitkeskin.kaprekar.presentation.ui.godel.GodelScreen(state = state, onIntent = viewModel::onIntent)
                     MathScreen.SETTINGS -> SettingsScreen(state = state, onIntent = viewModel::onIntent)
                 }
             }
