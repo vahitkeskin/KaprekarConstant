@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kaprekar.domain.model.AppLanguage
 import com.example.kaprekar.domain.model.MathScreen
+import com.example.kaprekar.domain.model.ThemeMode
 import com.example.kaprekar.domain.repository.ThemeRepository
 import com.example.kaprekar.domain.usecase.CalculateKaprekarUseCase
 import com.example.kaprekar.domain.usecase.ValidationResult
@@ -53,6 +54,7 @@ class KaprekarViewModel(
             is KaprekarUiIntent.OnToggleInfoDialog -> handleToggleInfoDialog(intent.show)
             is KaprekarUiIntent.OnToggleLanguageDialog -> handleToggleLanguageDialog(intent.show)
             is KaprekarUiIntent.OnToggleThemeMode -> toggleThemeMode()
+            is KaprekarUiIntent.OnSelectThemeMode -> selectThemeMode(intent.themeMode)
             is KaprekarUiIntent.OnSelectLanguage -> selectLanguage(intent.language)
         }
     }
@@ -84,6 +86,12 @@ class KaprekarViewModel(
         viewModelScope.launch {
             val nextMode = _uiState.value.themeMode.next()
             themeRepository.setThemeMode(nextMode)
+        }
+    }
+
+    private fun selectThemeMode(mode: ThemeMode) {
+        viewModelScope.launch {
+            themeRepository.setThemeMode(mode)
         }
     }
 
