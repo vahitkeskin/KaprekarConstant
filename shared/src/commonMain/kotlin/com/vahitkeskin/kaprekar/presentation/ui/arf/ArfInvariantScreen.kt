@@ -22,6 +22,7 @@ import com.vahitkeskin.kaprekar.presentation.KaprekarUiIntent
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiState
 import com.vahitkeskin.kaprekar.presentation.ui.common.BrandCyan
 import com.vahitkeskin.kaprekar.presentation.ui.common.BrandPink
+import com.vahitkeskin.kaprekar.presentation.ui.common.Interactive3DCard
 import com.vahitkeskin.kaprekar.presentation.ui.common.TopGradientAppBar
 
 @Composable
@@ -77,8 +78,11 @@ fun ArfInvariantScreen(
             }
 
             item {
-                Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                Interactive3DCard(
+                    accentColor = BrandPink,
+                    badgeTitle = "3D ARF INVARIANT"
+                ) {
+                    Column(modifier = Modifier.fillMaxWidth().padding(4.dp)) {
                         Text("Q(x, y) = a·x² + b·x·y + c·y² (mod 2)", fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Text("Arf(Q) = ${result.arfValue}", fontSize = 36.sp, fontWeight = FontWeight.ExtraBold, fontFamily = FontFamily.Monospace, color = BrandPink)
