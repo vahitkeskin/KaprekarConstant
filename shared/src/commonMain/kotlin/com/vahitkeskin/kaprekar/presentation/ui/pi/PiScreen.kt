@@ -19,6 +19,8 @@ import com.vahitkeskin.kaprekar.domain.usecase.CalculatePiUseCase
 import com.vahitkeskin.kaprekar.domain.usecase.PiResult
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiIntent
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiState
+import com.vahitkeskin.kaprekar.presentation.ui.common.BrandPink
+import com.vahitkeskin.kaprekar.presentation.ui.common.Interactive3DCard
 import com.vahitkeskin.kaprekar.presentation.ui.common.TopGradientAppBar
 import androidx.compose.ui.tooling.preview.Preview
 
@@ -49,12 +51,11 @@ fun PiScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f))
+                Interactive3DCard(
+                    accentColor = BrandPink,
+                    badgeTitle = "3D MONTE CARLO"
                 ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                    Column(modifier = Modifier.fillMaxWidth().padding(4.dp)) {
                         Text(
                             text = state.strings.topicPiTitle,
                             style = MaterialTheme.typography.titleMedium,
@@ -130,12 +131,11 @@ fun PiScreen(
             }
 
             item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.4f))
+                Interactive3DCard(
+                    accentColor = Color(0xFF00E5FF),
+                    badgeTitle = "3D RESULT"
                 ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                    Column(modifier = Modifier.fillMaxWidth().padding(4.dp)) {
                         Text(
                             text = state.strings.labelResult,
                             style = MaterialTheme.typography.titleMedium,
@@ -143,7 +143,7 @@ fun PiScreen(
                         )
                         Text(
                             text = "π ≈ ${result.estimatedPi}",
-                            fontSize = 28.sp,
+                            fontSize = 32.sp,
                             fontWeight = FontWeight.ExtraBold,
                             color = MaterialTheme.colorScheme.primary
                         )
