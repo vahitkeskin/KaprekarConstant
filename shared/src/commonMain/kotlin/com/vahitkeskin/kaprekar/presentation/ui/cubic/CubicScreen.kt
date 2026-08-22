@@ -23,6 +23,7 @@ import com.vahitkeskin.kaprekar.presentation.KaprekarUiIntent
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiState
 import com.vahitkeskin.kaprekar.presentation.ui.common.BrandCyan
 import com.vahitkeskin.kaprekar.presentation.ui.common.BrandPink
+import com.vahitkeskin.kaprekar.presentation.ui.common.Interactive3DCard
 import com.vahitkeskin.kaprekar.presentation.ui.common.TopGradientAppBar
 
 @Composable
@@ -60,12 +61,11 @@ fun CubicScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f))
+                Interactive3DCard(
+                    accentColor = BrandPink,
+                    badgeTitle = "3D CUBIC"
                 ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                    Column(modifier = Modifier.fillMaxWidth().padding(4.dp)) {
                         Text("🧩 a·x³ + b·x² + c·x + d = 0", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
@@ -83,8 +83,11 @@ fun CubicScreen(
             }
 
             item {
-                Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                Interactive3DCard(
+                    accentColor = BrandCyan,
+                    badgeTitle = "3D GRAPH"
+                ) {
+                    Column(modifier = Modifier.fillMaxWidth().padding(4.dp)) {
                         Text("📈 ${strings.labelGraph}", fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Box(modifier = Modifier.fillMaxWidth().height(160.dp)) {

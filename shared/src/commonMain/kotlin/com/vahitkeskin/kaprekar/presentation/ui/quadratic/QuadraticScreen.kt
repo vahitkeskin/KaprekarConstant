@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.sp
 import com.vahitkeskin.kaprekar.domain.usecase.CalculateQuadraticUseCase
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiIntent
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiState
+import com.vahitkeskin.kaprekar.presentation.ui.common.Interactive3DCard
 import com.vahitkeskin.kaprekar.presentation.ui.common.TopGradientAppBar
 import androidx.compose.ui.tooling.preview.Preview
 
@@ -96,27 +97,26 @@ fun QuadraticScreen(
             }
 
             item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+                Interactive3DCard(
+                    accentColor = MaterialTheme.colorScheme.primary,
+                    badgeTitle = "3D FORMULA"
                 ) {
                     Column(
-                        modifier = Modifier.padding(16.dp),
+                        modifier = Modifier.fillMaxWidth().padding(4.dp),
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
                         Text(
                             text = "Δ = b² - 4ac",
-                            style = MaterialTheme.typography.titleSmall,
+                            style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold
                         )
                         Text(
                             text = "Δ = ${result.discriminant}",
-                            fontSize = 22.sp,
+                            fontSize = 26.sp,
                             fontWeight = FontWeight.ExtraBold,
                             color = if (result.discriminant > 0) MaterialTheme.colorScheme.primary else if (result.discriminant == 0.0) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.error
                         )
-                        Divider()
+                        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
                         Text(
                             text = "Kök 1 (x₁): ${result.root1Str}",
                             fontWeight = FontWeight.SemiBold
@@ -125,7 +125,7 @@ fun QuadraticScreen(
                             text = "Kök 2 (x₂): ${result.root2Str}",
                             fontWeight = FontWeight.SemiBold
                         )
-                        Divider()
+                        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f))
                         Text(
                             text = "Parabol Tepe Noktası T(r,k): (${(result.vertexX * 100).toInt() / 100.0}, ${(result.vertexY * 100).toInt() / 100.0})",
                             style = MaterialTheme.typography.bodyMedium,
