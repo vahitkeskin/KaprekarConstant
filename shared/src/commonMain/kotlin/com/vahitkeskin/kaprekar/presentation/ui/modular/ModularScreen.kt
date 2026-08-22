@@ -14,6 +14,8 @@ import androidx.compose.ui.unit.sp
 import com.vahitkeskin.kaprekar.domain.usecase.CalculateModularUseCase
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiIntent
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiState
+import com.vahitkeskin.kaprekar.presentation.ui.common.BrandPink
+import com.vahitkeskin.kaprekar.presentation.ui.common.Interactive3DCard
 import com.vahitkeskin.kaprekar.presentation.ui.common.TopGradientAppBar
 import androidx.compose.ui.tooling.preview.Preview
 
@@ -97,17 +99,16 @@ fun ModularScreen(
             }
 
             item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.4f))
+                Interactive3DCard(
+                    accentColor = BrandPink,
+                    badgeTitle = "3D MODULAR"
                 ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                    Column(modifier = Modifier.fillMaxWidth().padding(4.dp)) {
                         Text(text = "Sonuç:", style = MaterialTheme.typography.labelMedium)
                         Text(
                             text = "${result.base} ^ ${result.exponent} ≡ ${result.modPowResult} (mod ${result.modulus})",
-                            fontSize = 22.sp,
-                            fontWeight = FontWeight.Bold,
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.ExtraBold,
                             color = MaterialTheme.colorScheme.primary
                         )
                         Spacer(modifier = Modifier.height(12.dp))
