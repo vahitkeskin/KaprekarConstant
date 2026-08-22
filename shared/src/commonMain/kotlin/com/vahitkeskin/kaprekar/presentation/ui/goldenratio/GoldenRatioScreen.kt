@@ -23,6 +23,7 @@ import com.vahitkeskin.kaprekar.presentation.KaprekarUiIntent
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiState
 import com.vahitkeskin.kaprekar.presentation.ui.common.BrandCyan
 import com.vahitkeskin.kaprekar.presentation.ui.common.BrandPink
+import com.vahitkeskin.kaprekar.presentation.ui.common.Interactive3DCard
 import com.vahitkeskin.kaprekar.presentation.ui.common.TopGradientAppBar
 
 @Composable
@@ -154,18 +155,14 @@ fun GoldenRatioScreen(
 
                 // Visual Line Segment Division
                 item {
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(20.dp),
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
-                        ),
-                        border = BorderStroke(1.dp, BrandPink.copy(alpha = 0.3f))
+                    Interactive3DCard(
+                        accentColor = BrandPink,
+                        badgeTitle = "3D SECTION"
                     ) {
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(18.dp),
+                                .padding(4.dp),
                             verticalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
                             Text(
@@ -228,18 +225,14 @@ fun GoldenRatioScreen(
 
                 // Golden Rectangle Visualizer Card
                 item {
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(20.dp),
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
-                        ),
-                        border = BorderStroke(1.dp, BrandCyan.copy(alpha = 0.4f))
+                    Interactive3DCard(
+                        accentColor = Color(0xFFAB47BC),
+                        badgeTitle = "3D GOLDEN RECT"
                     ) {
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(18.dp),
+                                .padding(4.dp),
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
