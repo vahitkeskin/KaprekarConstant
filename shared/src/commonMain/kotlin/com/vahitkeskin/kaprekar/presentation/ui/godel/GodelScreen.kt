@@ -21,6 +21,7 @@ import com.vahitkeskin.kaprekar.presentation.KaprekarUiIntent
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiState
 import com.vahitkeskin.kaprekar.presentation.ui.common.BrandCyan
 import com.vahitkeskin.kaprekar.presentation.ui.common.BrandPink
+import com.vahitkeskin.kaprekar.presentation.ui.common.Interactive3DCard
 import com.vahitkeskin.kaprekar.presentation.ui.common.TopGradientAppBar
 
 @Composable
@@ -59,12 +60,11 @@ fun GodelScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f))
+                Interactive3DCard(
+                    accentColor = Color(0xFF388E3C),
+                    badgeTitle = "3D GÖDEL"
                 ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                    Column(modifier = Modifier.fillMaxWidth().padding(4.dp)) {
                         Text("🔒 G(s) ${strings.labelResult}", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
@@ -81,8 +81,11 @@ fun GodelScreen(
             }
 
             item {
-                Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                Interactive3DCard(
+                    accentColor = BrandCyan,
+                    badgeTitle = "3D PRIME MESH"
+                ) {
+                    Column(modifier = Modifier.fillMaxWidth().padding(4.dp)) {
                         Text("🌐 ${strings.labelExponent} ${strings.labelGraph}", fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Box(modifier = Modifier.fillMaxWidth().height(150.dp)) {
@@ -102,7 +105,7 @@ fun GodelScreen(
                                             drawLine(color = BrandCyan.copy(0.4f), start = Offset(prevX, cy), end = Offset(cx, cy), strokeWidth = 3f)
                                         }
 
-                                        val pulsingR = r + 4f * kotlin.math.sin(pulsePhase + i).toFloat()
+                                        val pulsingR = r + 4f * kotlin.math.sin((pulsePhase + i).toDouble()).toFloat()
                                         drawCircle(color = BrandPink.copy(0.3f), radius = pulsingR, center = Offset(cx, cy))
                                         drawCircle(color = BrandPink, radius = r, center = Offset(cx, cy))
                                     }
