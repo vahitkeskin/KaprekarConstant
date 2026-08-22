@@ -22,6 +22,7 @@ import com.vahitkeskin.kaprekar.presentation.KaprekarUiIntent
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiState
 import com.vahitkeskin.kaprekar.presentation.ui.common.BrandCyan
 import com.vahitkeskin.kaprekar.presentation.ui.common.BrandPink
+import com.vahitkeskin.kaprekar.presentation.ui.common.Interactive3DCard
 import com.vahitkeskin.kaprekar.presentation.ui.common.TopGradientAppBar
 import kotlin.math.cos
 import kotlin.math.sin
@@ -65,30 +66,32 @@ fun KeplerScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f))
+                Interactive3DCard(
+                    accentColor = Color(0xFF5E35B1),
+                    badgeTitle = "3D KEPLER"
                 ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                    Column(modifier = Modifier.fillMaxWidth().padding(4.dp)) {
                         Text("🪐 T² = a³ (${strings.labelResult})", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(
-                            text = "T = ${round(result.orbitalPeriodYears)} T",
+                            text = "T = ${round(result.orbitalPeriodYears)} Yıl",
                             fontSize = 32.sp,
                             fontWeight = FontWeight.ExtraBold,
                             fontFamily = FontFamily.Monospace,
                             color = BrandPink
                         )
                         Spacer(modifier = Modifier.height(4.dp))
-                        Text("${round(result.perihelionDistance)} AU | ${round(result.aphelionDistance)} AU")
+                        Text("Günberi: ${round(result.perihelionDistance)} AU | Günöte: ${round(result.aphelionDistance)} AU")
                     }
                 }
             }
 
             item {
-                Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                Interactive3DCard(
+                    accentColor = BrandCyan,
+                    badgeTitle = "3D ORBIT"
+                ) {
+                    Column(modifier = Modifier.fillMaxWidth().padding(4.dp)) {
                         Text("🌌 ${strings.labelSimulation}", fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Box(

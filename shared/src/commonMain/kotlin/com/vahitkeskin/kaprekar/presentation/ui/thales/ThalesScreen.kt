@@ -22,6 +22,7 @@ import com.vahitkeskin.kaprekar.presentation.KaprekarUiIntent
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiState
 import com.vahitkeskin.kaprekar.presentation.ui.common.BrandCyan
 import com.vahitkeskin.kaprekar.presentation.ui.common.BrandPink
+import com.vahitkeskin.kaprekar.presentation.ui.common.Interactive3DCard
 import com.vahitkeskin.kaprekar.presentation.ui.common.TopGradientAppBar
 
 @Composable
@@ -63,12 +64,11 @@ fun ThalesScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f))
+                Interactive3DCard(
+                    accentColor = Color(0xFFFFB74D),
+                    badgeTitle = "3D THALES"
                 ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                    Column(modifier = Modifier.fillMaxWidth().padding(4.dp)) {
                         Text("📐 ${strings.labelHeight} (H)", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
@@ -79,14 +79,17 @@ fun ThalesScreen(
                             color = BrandPink
                         )
                         Spacer(modifier = Modifier.height(4.dp))
-                        Text("${round(result.ratio)}")
+                        Text("Oran: ${round(result.ratio)}")
                     }
                 }
             }
 
             item {
-                Card(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp)) {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                Interactive3DCard(
+                    accentColor = BrandCyan,
+                    badgeTitle = "3D PYRAMID"
+                ) {
+                    Column(modifier = Modifier.fillMaxWidth().padding(4.dp)) {
                         Text("☀️ ${strings.labelGraph}", fontWeight = FontWeight.Bold)
                         Spacer(modifier = Modifier.height(8.dp))
                         Box(modifier = Modifier.fillMaxWidth().height(180.dp)) {
