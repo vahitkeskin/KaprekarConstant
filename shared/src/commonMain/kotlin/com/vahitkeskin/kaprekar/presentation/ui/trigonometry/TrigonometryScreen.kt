@@ -18,6 +18,8 @@ import androidx.compose.ui.unit.sp
 import com.vahitkeskin.kaprekar.domain.usecase.CalculateTrigonometryUseCase
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiIntent
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiState
+import com.vahitkeskin.kaprekar.presentation.ui.common.BrandPink
+import com.vahitkeskin.kaprekar.presentation.ui.common.Interactive3DCard
 import com.vahitkeskin.kaprekar.presentation.ui.common.TopGradientAppBar
 import androidx.compose.ui.tooling.preview.Preview
 
@@ -48,12 +50,11 @@ fun TrigonometryScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f))
+                Interactive3DCard(
+                    accentColor = MaterialTheme.colorScheme.primary,
+                    badgeTitle = "3D UNIT CIRCLE"
                 ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
+                    Column(modifier = Modifier.fillMaxWidth().padding(4.dp)) {
                         Text(
                             text = state.strings.topicTrigTitle,
                             style = MaterialTheme.typography.titleMedium,
@@ -119,13 +120,12 @@ fun TrigonometryScreen(
             }
 
             item {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+                Interactive3DCard(
+                    accentColor = Color(0xFF00E5FF),
+                    badgeTitle = "3D TRIG RESULTS"
                 ) {
                     Column(
-                        modifier = Modifier.padding(16.dp),
+                        modifier = Modifier.fillMaxWidth().padding(4.dp),
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Text(state.strings.labelResult, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
@@ -134,8 +134,8 @@ fun TrigonometryScreen(
                             Text("cos(θ) = ${(result.cosVal * 10000).toInt() / 10000.0}", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
                         }
                         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                            Text("tan(θ) = ${result.tanVal?.let { (it * 10000).toInt() / 10000.0 } ?: "∞"}")
-                            Text("cot(θ) = ${result.cotVal?.let { (it * 10000).toInt() / 10000.0 } ?: "∞"}")
+                            Text("tan(θ) = ${result.tanVal?.let { (it * 10000).toInt() / 10000.0 } ?: "∞"}", fontWeight = FontWeight.SemiBold)
+                            Text("cot(θ) = ${result.cotVal?.let { (it * 10000).toInt() / 10000.0 } ?: "∞"}", fontWeight = FontWeight.SemiBold)
                         }
                     }
                 }
