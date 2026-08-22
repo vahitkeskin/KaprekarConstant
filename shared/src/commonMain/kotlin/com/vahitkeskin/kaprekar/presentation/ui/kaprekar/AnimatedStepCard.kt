@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
 import com.vahitkeskin.kaprekar.domain.model.KaprekarStep
 import com.vahitkeskin.kaprekar.presentation.KaprekarUiState
+import com.vahitkeskin.kaprekar.presentation.ui.common.Interactive3DCard
 
 @Composable
 fun AnimatedStepCard(
@@ -33,20 +34,13 @@ fun AnimatedStepCard(
             animationSpec = tween(300)
         )
     ) {
-        Card(
-            modifier = Modifier.fillMaxWidth(),
-            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-            border = BorderStroke(
-                width = if (isLastStep) 2.dp else 1.dp,
-                color = if (isLastStep) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
-            ),
-            shape = RoundedCornerShape(16.dp),
-            colors = CardDefaults.cardColors(
-                containerColor = if (isLastStep)
-                    MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
-                else
-                    MaterialTheme.colorScheme.surface
-            )
+        Interactive3DCard(
+            accentColor = if (isLastStep) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary,
+            badgeTitle = if (isLastStep) "6174 3D" else "3D STEP",
+            containerColor = if (isLastStep)
+                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.55f)
+            else
+                MaterialTheme.colorScheme.surface
         ) {
             Column(
                 modifier = Modifier
